@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Artisans — AURELIA Premium Template</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    /* Smooth Scroll helper */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    /* Core Variable Overrides and Helpers */
+    :root {
+      --color-rose-gold: #B76E79;
+      --color-rose-gold-rgb: 183, 110, 121;
+      --color-navy: #0b1325;
+      --color-champagne: #e8d8c8;
+      --color-champagne-rgb: 232, 216, 200;
+    }
+
+    /* Premium Theme Adjustments */
+    [data-theme="dark"] {
+      --bg-light-soft: #111a2e;
+      --bg-card: #152238;
+      --text-muted: #a0aec0;
+    }
+
+    /* Category Filter Buttons Styling */
+    .team-filter-btn {
+      background: transparent;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.2);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border-radius: 0;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      font-weight: 500;
+    }
+    .team-filter-btn:hover, .team-filter-btn.active {
+      background: var(--color-rose-gold);
+      border-color: var(--color-rose-gold);
+      color: white !important;
+      box-shadow: 0 10px 25px -5px rgba(var(--color-rose-gold-rgb), 0.25);
+    }
+
+    /* Team Grid Layout */
+    .team-grid-lux {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      width: 100%;
+    }
+    @media (max-width: 1200px) {
+      .team-grid-lux {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+    @media (max-width: 576px) {
+      .team-grid-lux {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Filtering Transition Classes */
+    .team-item-lux {
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    .team-item-lux.filtered-out {
+      opacity: 0 !important;
+      transform: scale(0.9) translateY(20px) !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+    }
+
+    /* Premium Social Hover Card System */
+    .social-hover-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+      background: var(--bg-card);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 0;
+    }
+    .social-hover-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(var(--color-rose-gold-rgb), 0.5);
+    }
+
+    .social-card-img-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    .social-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .social-hover-card:hover .social-card-img {
+      transform: scale(1.06) translate(2px, -2px);
+    }
+
+    /* Inner Double Gold Frame that contracts on hover */
+    .social-hover-card::before {
+      content: '';
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(var(--color-champagne-rgb), 0);
+      z-index: 2;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .social-hover-card:hover::before {
+      inset: 15px;
+      border-color: rgba(var(--color-champagne-rgb), 0.4);
+    }
+
+    /* Hover Overlay */
+    .social-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11, 19, 37, 0.95) 0%, rgba(11, 19, 37, 0.5) 60%, rgba(11, 19, 37, 0.1) 100%);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      z-index: 3;
+    }
+    .social-hover-card:hover .social-card-overlay {
+      opacity: 1;
+    }
+
+    /* Card Details & Slide-Up Animation */
+    .social-card-details {
+      transform: translateY(20px);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+    }
+    .social-hover-card:hover .social-card-details {
+      transform: translateY(0);
+    }
+
+    /* Social Icons Stagger Entry */
+    .stagger-social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .stagger-social-links a {
+      color: rgba(255, 255, 255, 0.7);
+      transition: all 0.4s ease;
+      transform: translateY(15px);
+      opacity: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stagger-social-links a:hover {
+      color: var(--color-rose-gold);
+      border-color: var(--color-rose-gold);
+      background: rgba(255, 255, 255, 0.05);
+      transform: scale(1.1);
+    }
+
+    .social-hover-card:hover .stagger-social-links a:nth-child(1) {
+      transform: translateY(0);
+      opacity: 1;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+    }
+    .social-hover-card:hover .stagger-social-links a:nth-child(2) {
+      transform: translateY(0);
+      opacity: 1;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    }
+    .social-hover-card:hover .stagger-social-links a:nth-child(3) {
+      transform: translateY(0);
+      opacity: 1;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    }
+
+    /* Bespoke 3D Tilt Card */
+    .parallax-tilt-3d {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    .parallax-tilt-3d .social-hover-card {
+      transform: translateZ(0);
+      transition: transform 0.1s ease;
+    }
+    .parallax-tilt-3d:hover .social-card-img {
+      transform: scale(1.08) translateZ(30px);
+    }
+    .parallax-tilt-3d:hover .social-card-overlay {
+      transform: translateZ(15px);
+    }
+
+    /* Founder Note Signature */
+    .founder-signature {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      color: var(--color-rose-gold);
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Planner Stat Counters */
+    .planner-stat-item {
+      padding: 15px;
+      border-left: 2px solid var(--color-rose-gold);
+      background: rgba(var(--color-rose-gold-rgb), 0.02);
+    }
+
+    /* Photographer Beautiful Transitions Frame */
+    .photographer-lens-frame {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+      overflow: hidden;
+    }
+    .photographer-lens-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      filter: grayscale(30%) sepia(5%);
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 3s ease;
+      transform: scale(1.05);
+    }
+    .photographer-lens-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .photographer-slide-nav {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+    }
+    .photographer-nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid white;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      padding: 0;
+    }
+    .photographer-nav-dot.active {
+      background: var(--color-rose-gold);
+      border-color: var(--color-rose-gold);
+      transform: scale(1.2);
+    }
+
+    /* Interactive Palette Showcase Slider */
+    .palette-bullet {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .palette-bullet.active {
+      border-color: var(--color-rose-gold);
+      transform: scale(1.2);
+    }
+    .palette-display-img {
+      aspect-ratio: 1 / 1;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.12);
+      overflow: hidden;
+    }
+    .palette-display-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Quote Box Custom Frame */
+    .lux-quote-box {
+      border-left: 2px solid var(--color-rose-gold);
+      padding-left: 25px;
+      font-style: italic;
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/team.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/team.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, venues, packages...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html">Our Atelier</a></li>
+        <li><a href="services.html">Curation Services</a></li>
+        <li><a href="gallery.html">Inspiration Gallery</a></li>
+        <li><a href="event.html">Grand Events</a></li>
+        <li><a href="pricing.html">Investment</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Buttons in Nav -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Luxury Page Header -->
+  <header class="section-padding bg-navy text-white text-center" style="background-image: linear-gradient(rgba(11, 19, 37, 0.65), rgba(11, 19, 37, 0.82)), url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=1500'); background-size: cover; background-position: center; padding-top: 170px; padding-bottom: 110px;">
+    <div class="container hero-content">
+      <span class="subtitle-sans text-white mb-2 d-block text-uppercase tracking-widest reveal-fade-in">The Tastemakers</span>
+      <h1 class="serif-font text-white mb-3 reveal-fade-in reveal-delay-1" style="font-weight: 300;">Our Creative Artisans</h1>
+      <div class="divider-luxury my-2 justify-content-center">
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+      </div>
+      <p class="sans-font text-white opacity-75 max-width-600 mx-auto mt-2 fs-7 text-uppercase tracking-widest reveal-fade-in reveal-delay-2" style="font-size: 0.8rem;">
+        Directors &bull; Planners &bull; Photographers &bull; Designers
+      </p>
+    </div>
+  </header>
+
+  <!-- Section 1: Dynamic Team Grid & Filters -->
+  <section class="section-padding bg-light-soft" id="teamGridSection">
+    <div class="container">
+      
+      <!-- Section Header & Category Filters -->
+      <div class="text-center mb-5">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">The Collective</span>
+        <h2 class="serif-font mb-4" style="font-weight: 300;">Meet Our Core Visionaries</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        
+        <!-- Filter Bar -->
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-4 reveal-slide-up" id="filterContainer">
+          <button class="team-filter-btn active" data-filter="all" id="filterAllBtn">All Artisans</button>
+          <button class="team-filter-btn" data-filter="leadership" id="filterLeadershipBtn">Leadership</button>
+          <button class="team-filter-btn" data-filter="logistics" id="filterLogisticsBtn">Planning & Logistics</button>
+          <button class="team-filter-btn" data-filter="design" id="filterDesignBtn">Designers</button>
+          <button class="team-filter-btn" data-filter="media" id="filterMediaBtn">Media Crew</button>
+        </div>
+      </div>
+
+      <!-- Team Grid with Social Hover Cards -->
+      <div class="team-grid-lux" id="teamGrid">
+        
+        <!-- Team 1: Founder -->
+        <div class="team-item-lux" data-category="leadership">
+          <div class="social-hover-card">
+            <div class="social-card-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800" alt="Sophia Laurent" class="social-card-img">
+            </div>
+            <div class="social-card-overlay">
+              <div class="social-card-details">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="color: var(--color-champagne) !important;">Milan Flagship</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.25rem; font-weight: 300;">Sophia Laurent</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem; line-height: 1.4;">
+                  Founder & Principal Creative Director shaping global high-end visions.
+                </p>
+                <!-- Staggered Social Links -->
+                <div class="stagger-social-links">
+                  <a href="https://instagram.com" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                  </a>
+                  <a href="https://pinterest.com" aria-label="Pinterest">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 22a10 10 0 1 1 10-10C18 16.5 15.5 18 13.5 18s-3.5-1.5-3.5-3.5c0-2 1.5-4 4.5-4 2 0 3.5 1 3.5 3s-1.5 3-3 3c-.8 0-1.5-.5-1.5-1.2 0-.8.5-2.5 1.2-4.5.3-.8.2-1.8-.3-2.5C14 8 12.5 8 11.5 9.5s-1.2 3.5-.5 4.5c.3.5.2 1.2.2 1.2s-1.5 6-2 7.8c-.2.8-.7 2-1.2 2.5Z"></path></svg>
+                  </a>
+                  <a href="https://linkedin.com" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem;">Founder & Director</span>
+            <h5 class="serif-font" style="font-weight: 300;">Sophia Laurent</h5>
+          </div>
+        </div>
+
+        <!-- Team 2: Planner -->
+        <div class="team-item-lux" data-category="logistics">
+          <div class="social-hover-card">
+            <div class="social-card-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" alt="Marcus Vance" class="social-card-img">
+            </div>
+            <div class="social-card-overlay">
+              <div class="social-card-details">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="color: var(--color-champagne) !important;">London Operations</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.25rem; font-weight: 300;">Marcus Vance</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem; line-height: 1.4;">
+                  Technical Planner translating grand design structures into precise physical realities.
+                </p>
+                <!-- Staggered Social Links -->
+                <div class="stagger-social-links">
+                  <a href="https://instagram.com" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                  </a>
+                  <a href="https://pinterest.com" aria-label="Pinterest">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 22a10 10 0 1 1 10-10C18 16.5 15.5 18 13.5 18s-3.5-1.5-3.5-3.5c0-2 1.5-4 4.5-4 2 0 3.5 1 3.5 3s-1.5 3-3 3c-.8 0-1.5-.5-1.5-1.2 0-.8.5-2.5 1.2-4.5.3-.8.2-1.8-.3-2.5C14 8 12.5 8 11.5 9.5s-1.2 3.5-.5 4.5c.3.5.2 1.2.2 1.2s-1.5 6-2 7.8c-.2.8-.7 2-1.2 2.5Z"></path></svg>
+                  </a>
+                  <a href="https://linkedin.com" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem;">Lead Event Planner</span>
+            <h5 class="serif-font" style="font-weight: 300;">Marcus Vance</h5>
+          </div>
+        </div>
+
+        <!-- Team 3: Photographer -->
+        <div class="team-item-lux" data-category="media">
+          <div class="social-hover-card">
+            <div class="social-card-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" alt="Elena Rostova" class="social-card-img">
+            </div>
+            <div class="social-card-overlay">
+              <div class="social-card-details">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="color: var(--color-champagne) !important;">Paris Atelier</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.25rem; font-weight: 300;">Elena Rostova</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem; line-height: 1.4;">
+                  Award-winning Editorial Photographer translating authentic details into static poetry.
+                </p>
+                <!-- Staggered Social Links -->
+                <div class="stagger-social-links">
+                  <a href="https://instagram.com" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                  </a>
+                  <a href="https://pinterest.com" aria-label="Pinterest">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 22a10 10 0 1 1 10-10C18 16.5 15.5 18 13.5 18s-3.5-1.5-3.5-3.5c0-2 1.5-4 4.5-4 2 0 3.5 1 3.5 3s-1.5 3-3 3c-.8 0-1.5-.5-1.5-1.2 0-.8.5-2.5 1.2-4.5.3-.8.2-1.8-.3-2.5C14 8 12.5 8 11.5 9.5s-1.2 3.5-.5 4.5c.3.5.2 1.2.2 1.2s-1.5 6-2 7.8c-.2.8-.7 2-1.2 2.5Z"></path></svg>
+                  </a>
+                  <a href="https://linkedin.com" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem;">Master Photographer</span>
+            <h5 class="serif-font" style="font-weight: 300;">Elena Rostova</h5>
+          </div>
+        </div>
+
+        <!-- Team 4: Designer -->
+        <div class="team-item-lux" data-category="design">
+          <div class="social-hover-card">
+            <div class="social-card-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&q=80&w=800" alt="Isabella Reed" class="social-card-img">
+            </div>
+            <div class="social-card-overlay">
+              <div class="social-card-details">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="color: var(--color-champagne) !important;">Milan Atelier</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.25rem; font-weight: 300;">Isabella Reed</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem; line-height: 1.4;">
+                  Lead Scenographer crafting immersive floristry and botanical architectures.
+                </p>
+                <!-- Staggered Social Links -->
+                <div class="stagger-social-links">
+                  <a href="https://instagram.com" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                  </a>
+                  <a href="https://pinterest.com" aria-label="Pinterest">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 22a10 10 0 1 1 10-10C18 16.5 15.5 18 13.5 18s-3.5-1.5-3.5-3.5c0-2 1.5-4 4.5-4 2 0 3.5 1 3.5 3s-1.5 3-3 3c-.8 0-1.5-.5-1.5-1.2 0-.8.5-2.5 1.2-4.5.3-.8.2-1.8-.3-2.5C14 8 12.5 8 11.5 9.5s-1.2 3.5-.5 4.5c.3.5.2 1.2.2 1.2s-1.5 6-2 7.8c-.2.8-.7 2-1.2 2.5Z"></path></svg>
+                  </a>
+                  <a href="https://linkedin.com" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem;">Floral & Scenography Designer</span>
+            <h5 class="serif-font" style="font-weight: 300;">Isabella Reed</h5>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 2: Founder Spotlight -->
+  <section class="section-padding bg-white border-top" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;" id="founderSection">
+    <div class="container">
+      
+      <div class="row align-items-center g-5">
+        
+        <!-- Founder Portrait with 3D Tilt Parallax -->
+        <div class="col-lg-5 parallax-tilt-3d reveal-fade-in">
+          <div class="social-hover-card shadow-lg">
+            <div class="social-card-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=900" alt="Sophia Laurent Editorial" class="social-card-img">
+            </div>
+            <div class="social-card-overlay">
+              <div class="social-card-details">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="color: var(--color-champagne) !important;">Milan flagship</span>
+                <h4 class="serif-font text-white mb-2" style="font-weight: 300;">Sophia Laurent</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  "A luxury event is not simply planned — it is composed. Like an opera, every sensory frequency must coordinate in harmonious silence before the grand entry."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Founder Story & Editorial Content -->
+        <div class="col-lg-7 reveal-fade-in reveal-delay-1">
+          <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">The Founder</span>
+          <h2 class="serif-font mb-4" style="font-weight: 300; font-size: calc(1.8rem + 1vw);">Sophia Laurent</h2>
+          
+          <div class="divider-luxury my-3">
+            <span class="line"></span>
+            <span class="crest">❈</span>
+            <span class="line"></span>
+          </div>
+
+          <p class="sans-font text-secondary mb-4 leading-relaxed" style="line-height: 1.8;">
+            With over fifteen years of bespoke event composition across Italy, France, and Switzerland, Sophia Laurent has established herself as a leading visionary of the experiential luxury movement. Her design philosophy revolves around spatial poetics—mapping how natural sunset rays stream through historic columns and aligning linen coordinates to frame ancient limestone walls.
+          </p>
+
+          <div class="lux-quote-box my-4">
+            <p class="serif-font text-dark fs-5" style="line-height: 1.6;">
+              "True luxury is found in absolute stillness. When a client walks into a grand ballroom, their breathing should ease, guided by a sensory landscape that feels entirely natural yet flawlessly structured."
+            </p>
+          </div>
+
+          <p class="sans-font text-secondary mb-4" style="line-height: 1.7;">
+            Sophia scouts every destination personally, vetting Michelin-starred culinary partnerships and coordinating acoustic engineers to verify the decibel propagation of classical string quartets inside historical cathedral vaults.
+          </p>
+
+          <div class="mt-5 pt-3 border-top d-flex justify-content-between align-items-center flex-wrap gap-4" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;">
+            <div>
+              <span class="subtitle-sans text-muted d-block" style="font-size: 0.65rem;">Principal Director</span>
+              <span class="founder-signature">Sophia Laurent</span>
+            </div>
+            <a href="contact.html" class="btn btn-luxury btn-luxury-outline py-2 px-4">Request Consultation</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 3: Planner Profile & Timeline -->
+  <section class="section-padding bg-light-soft border-top" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;" id="plannerSection">
+    <div class="container">
+      
+      <div class="row align-items-center g-5">
+        
+        <!-- Planner Story / Logistics Timelines -->
+        <div class="col-lg-7 order-2 order-lg-1 reveal-fade-in">
+          <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">The Lead Planner</span>
+          <h2 class="serif-font mb-4" style="font-weight: 300; font-size: calc(1.8rem + 1vw);">Marcus Vance</h2>
+          
+          <div class="divider-luxury my-3">
+            <span class="line"></span>
+            <span class="crest">❈</span>
+            <span class="line"></span>
+          </div>
+
+          <p class="sans-font text-secondary mb-4" style="line-height: 1.8;">
+            If Sophia Laurent is our creative composer, Marcus Vance is the technical orchestrator. Backed by a master's degree in architectural operations and years of large-scale staging, Marcus ensures our visual masterpieces exist securely in physical reality. He manages multi-currency custom budgets, international customs approvals for exotic botanical shipments, and strict 72-hour installation blueprints.
+          </p>
+
+          <!-- Timeline structure illustration emphasizing logistics -->
+          <h5 class="serif-font text-dark mb-3 mt-4" style="font-weight: 400;">The 72-Hour Orchestration Process</h5>
+          <div class="d-flex flex-column gap-3 mb-4">
+            <div class="planner-stat-item">
+              <span class="font-mono text-luxury d-block fw-bold" style="font-size: 0.75rem; letter-spacing: 0.05em;">T-MINUS 48 HOURS &bull; INFRASTRUCTURE</span>
+              <p class="sans-font text-secondary m-0 fs-7">Custom flooring overlays are anchored, power distribution is tested for silent hum, and major floral armatures are rigged securely in vaulted rafters.</p>
+            </div>
+            <div class="planner-stat-item">
+              <span class="font-mono text-luxury d-block fw-bold" style="font-size: 0.75rem; letter-spacing: 0.05em;">T-MINUS 24 HOURS &bull; SENSORY SEEDING</span>
+              <p class="sans-font text-secondary m-0 fs-7">Table glassware is hand-polished, acoustics are mapped relative to crowd-density expectations, and dynamic lighting presets are locked relative to hourly sun forecasts.</p>
+            </div>
+            <div class="planner-stat-item">
+              <span class="font-mono text-luxury d-block fw-bold" style="font-size: 0.75rem; letter-spacing: 0.05em;">T-MINUS 2 HOURS &bull; CHOREOGRAPHY RUNS</span>
+              <p class="sans-font text-secondary m-0 fs-7">Full technical dry-runs with audio engineering, catering cues, and pyrotechnic crews are synchronized to sub-second precision.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Planner Card (Marcus Vance) -->
+        <div class="col-lg-5 order-1 order-lg-2 reveal-fade-in reveal-delay-1">
+          <div class="social-hover-card shadow-lg">
+            <div class="social-card-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=900" alt="Marcus Vance Logistics" class="social-card-img">
+            </div>
+            <div class="social-card-overlay">
+              <div class="social-card-details">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="color: var(--color-champagne) !important;">London operations</span>
+                <h4 class="serif-font text-white mb-2" style="font-weight: 300;">Marcus Vance</h4>
+                <div class="d-flex gap-4 mt-3 pt-3 border-top" style="border-color: rgba(255,255,255,0.15);">
+                  <div>
+                    <span class="d-block font-mono text-white fw-bold" style="font-size: 1.1rem;">140+</span>
+                    <span class="d-block text-white opacity-50" style="font-size: 0.65rem; text-transform: uppercase;">Commissions</span>
+                  </div>
+                  <div>
+                    <span class="d-block font-mono text-white fw-bold" style="font-size: 1.1rem;">100%</span>
+                    <span class="d-block text-white opacity-50" style="font-size: 0.65rem; text-transform: uppercase;">Execution Rate</span>
+                  </div>
+                  <div>
+                    <span class="d-block font-mono text-white fw-bold" style="font-size: 1.1rem;">12</span>
+                    <span class="d-block text-white opacity-50" style="font-size: 0.65rem; text-transform: uppercase;">Countries</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 4: Photographer Showcase & Transitions -->
+  <section class="section-padding bg-white border-top" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;" id="photographerSection">
+    <div class="container">
+      
+      <div class="row align-items-center g-5">
+        
+        <!-- Photographer Profile Card -->
+        <div class="col-lg-5 reveal-fade-in">
+          <div class="social-hover-card shadow-lg">
+            <div class="social-card-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=900" alt="Elena Rostova Portfolio" class="social-card-img">
+            </div>
+            <div class="social-card-overlay">
+              <div class="social-card-details">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="color: var(--color-champagne) !important;">Parisian Studio</span>
+                <h4 class="serif-font text-white mb-2" style="font-weight: 300;">Elena Rostova</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  "My lens doesn't capture events; it archives legacy. I search for high-contrast shadows, authentic emotional curves, and the quiet spaces between movements."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photographer Story & Auto-Transitioning Slider Frame -->
+        <div class="col-lg-7 reveal-fade-in reveal-delay-1">
+          <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">The Master Photographer</span>
+          <h2 class="serif-font mb-4" style="font-weight: 300; font-size: calc(1.8rem + 1vw);">Elena Rostova</h2>
+          
+          <div class="divider-luxury my-3">
+            <span class="line"></span>
+            <span class="crest">❈</span>
+            <span class="line"></span>
+          </div>
+
+          <p class="sans-font text-secondary mb-4" style="line-height: 1.8;">
+            A graduate of École Nationale Supérieure de la Photographie in Arles, Elena Rostova captures our commissions with an editorial, haute-couture eye. Her shots are regularly featured in international luxury bridal journals, praised for their high-contrast depth, classical composition lines, and organic, non-staged emotional weight.
+          </p>
+
+          <!-- Interactive beautiful image transitions frame -->
+          <div class="my-4">
+            <span class="subtitle-sans text-luxury mb-2 d-block" style="font-size: 0.65rem;">Behind The Lens: Recent Captures (Hover / Idle Transitions)</span>
+            <div class="photographer-lens-frame shadow-md" id="lensTransitionFrame">
+              
+              <!-- Slide 1 (Active) -->
+              <div class="photographer-lens-slide active" style="background-image: url('https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=1000');"></div>
+              
+              <!-- Slide 2 -->
+              <div class="photographer-lens-slide" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000');"></div>
+              
+              <!-- Slide 3 -->
+              <div class="photographer-lens-slide" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1000');"></div>
+
+              <!-- Photographer Dots Navigation -->
+              <div class="photographer-slide-nav">
+                <button class="photographer-nav-dot active" data-slide="0" aria-label="Slide 1"></button>
+                <button class="photographer-nav-dot" data-slide="1" aria-label="Slide 2"></button>
+                <button class="photographer-nav-dot" data-slide="2" aria-label="Slide 3"></button>
+              </div>
+
+            </div>
+          </div>
+
+          <p class="sans-font text-secondary m-0 fs-7" style="line-height: 1.6;">
+            Elena exclusively handles 35mm physical film cameras and high-precision medium format Leica systems, capturing color depth and shadow textures that digital sensors fail to resolve natively.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 5: Designer Feature & Interactive Color Palette -->
+  <section class="section-padding bg-light-soft border-top" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;" id="designerSection">
+    <div class="container">
+      
+      <div class="row align-items-center g-5">
+        
+        <!-- Designer Narrative & Interactive Palette Showcase -->
+        <div class="col-lg-7 order-2 order-lg-1 reveal-fade-in">
+          <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">The Floral & Scenography Designer</span>
+          <h2 class="serif-font mb-4" style="font-weight: 300; font-size: calc(1.8rem + 1vw);">Isabella Reed</h2>
+          
+          <div class="divider-luxury my-3">
+            <span class="line"></span>
+            <span class="crest">❈</span>
+            <span class="line"></span>
+          </div>
+
+          <p class="sans-font text-secondary mb-4" style="line-height: 1.8;">
+            Isabella Reed converts physical architectural layouts into lush botanical stories. Believing that floral design must relate to the history of the site, she references local flora of each destination—pairing wild olive boughs and heavy garden roses in Tuscany, or structural lavender lines and dry stone elements in southern France.
+          </p>
+
+          <!-- Interactive Palette Selector -->
+          <div class="p-4 bg-white border border-light shadow-sm my-4">
+            <span class="subtitle-sans text-luxury mb-3 d-block" style="font-size: 0.65rem;">Interact: Map Botanical Curation Color Palettes</span>
+            
+            <div class="d-flex gap-3 align-items-center mb-4">
+              <!-- Palette 1 -->
+              <button class="palette-bullet active" style="background: #F4E8E1;" data-palette="amalfi" id="paletteAmalfiBtn" title="Amalfi Citrus & Ivory"></button>
+              <!-- Palette 2 -->
+              <button class="palette-bullet" style="background: #E8C8C8;" data-palette="chateau" id="paletteChateauBtn" title="Château Dusk Rose"></button>
+              <!-- Palette 3 -->
+              <button class="palette-bullet" style="background: #E5C387;" data-palette="imperial" id="paletteImperialBtn" title="Imperial Gold & Marble"></button>
+              
+              <span class="subtitle-sans text-secondary m-0 text-uppercase tracking-wider font-mono fw-bold" id="paletteSelectedName" style="font-size: 0.7rem;">Amalfi Citrus & Ivory</span>
+            </div>
+
+            <p class="sans-font text-secondary fs-7 mb-0" id="paletteSelectedDesc">
+              A vibrant pairing of fresh lemon branches, wild ivy, and heavy cream hydrangeas that coordinate with cliffside oceans.
+            </p>
+          </div>
+        </div>
+
+        <!-- Designer Display and Linked Palette Photo -->
+        <div class="col-lg-5 order-1 order-lg-2 reveal-fade-in reveal-delay-1">
+          <div class="social-hover-card shadow-lg">
+            <div class="social-card-img-wrapper" id="paletteImageContainer">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80&w=900" alt="Isabella Reed Palette Amalfi" class="social-card-img" id="paletteMainImage">
+            </div>
+            <div class="social-card-overlay">
+              <div class="social-card-details">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="color: var(--color-champagne) !important;">Milan Atelier</span>
+                <h4 class="serif-font text-white mb-2" style="font-weight: 300;">Isabella Reed</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  "A flower should never feel forced into a vase. It should look as if it climbed the ancient masonry itself over a hundred romantic summers."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Premium Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-fade-in">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering wedding planners and romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Team page dynamic interactions script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      // 1. Interactive Team Grid Filtering Logics
+      const filterButtons = document.querySelectorAll(".team-filter-btn");
+      const teamItems = document.querySelectorAll(".team-item-lux");
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener("click", function() {
+          // Update active button state
+          filterButtons.forEach(b => b.classList.remove("active"));
+          this.classList.add("active");
+
+          const filterValue = this.getAttribute("data-filter");
+
+          // Transition and filter items
+          teamItems.forEach(item => {
+            const category = item.getAttribute("data-category");
+            
+            if (filterValue === "all" || category === filterValue || (filterValue === "leadership" && category === "leadership")) {
+              item.classList.remove("filtered-out");
+            } else {
+              item.classList.add("filtered-out");
+            }
+          });
+        });
+      });
+
+      // 2. Photographer Lens Frame Image Transitions Logics (Auto-Rotation & Click support)
+      const photographerSlides = document.querySelectorAll(".photographer-lens-slide");
+      const photographerDots = document.querySelectorAll(".photographer-nav-dot");
+      let activeSlideIndex = 0;
+      let slideInterval;
+
+      function showPhotographerSlide(index) {
+        photographerSlides.forEach(slide => slide.classList.remove("active"));
+        photographerDots.forEach(dot => dot.classList.remove("active"));
+
+        photographerSlides[index].classList.add("active");
+        photographerDots[index].classList.add("active");
+        activeSlideIndex = index;
+      }
+
+      function nextPhotographerSlide() {
+        let nextIndex = (activeSlideIndex + 1) % photographerSlides.length;
+        showPhotographerSlide(nextIndex);
+      }
+
+      function startSlideShow() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextPhotographerSlide, 5000);
+      }
+
+      photographerDots.forEach(dot => {
+        dot.addEventListener("click", function() {
+          const slideIndex = parseInt(this.getAttribute("data-slide"));
+          showPhotographerSlide(slideIndex);
+          startSlideShow(); // Reset timer on click
+        });
+      });
+
+      // Start the slideshow automatically
+      startSlideShow();
+
+      // 3. Floral Scenography Palette Slider Logics
+      const paletteBullets = document.querySelectorAll(".palette-bullet");
+      const paletteMainImage = document.getElementById("paletteMainImage");
+      const paletteNameEl = document.getElementById("paletteSelectedName");
+      const paletteDescEl = document.getElementById("paletteSelectedDesc");
+
+      const paletteData = {
+        amalfi: {
+          src: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80&w=900",
+          name: "Amalfi Citrus & Ivory",
+          desc: "A vibrant pairing of fresh lemon branches, wild ivy, and heavy cream hydrangeas that coordinate with cliffside oceans."
+        },
+        chateau: {
+          src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=900",
+          name: "Château Dusk Rose",
+          desc: "A soft watercolor pairing of dusty pink roses, lavender stems, and grey eucalyptus that mirrors Parisian romantic twilights."
+        },
+        imperial: {
+          src: "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=900",
+          name: "Imperial Gold & Marble",
+          desc: "A stately structure featuring pure ivory orchids, heavy gold-gilded palm foliage, and cascading white wisteria strands."
+        }
+      };
+
+      paletteBullets.forEach(bullet => {
+        bullet.addEventListener("click", function() {
+          paletteBullets.forEach(b => b.classList.remove("active"));
+          this.classList.add("active");
+
+          const paletteKey = this.getAttribute("data-palette");
+          const targetData = paletteData[paletteKey];
+
+          if (targetData) {
+            // Apply quick elegant fadeout transition
+            paletteMainImage.style.opacity = "0.3";
+            paletteMainImage.style.transform = "scale(0.97)";
+
+            setTimeout(() => {
+              paletteMainImage.src = targetData.src;
+              paletteNameEl.textContent = targetData.name;
+              paletteDescEl.textContent = targetData.desc;
+
+              paletteMainImage.style.opacity = "1";
+              paletteMainImage.style.transform = "scale(1)";
+            }, 300);
+          }
+        });
+      });
+
+      // 4. Parallax Mouse Tilt interactive effect for elements with "parallax-tilt-3d"
+      const tiltContainers = document.querySelectorAll(".parallax-tilt-3d");
+
+      tiltContainers.forEach(container => {
+        const innerCard = container.querySelector(".social-hover-card");
+
+        container.addEventListener("mousemove", function(e) {
+          const rect = container.getBoundingClientRect();
+          const x = e.clientX - rect.left; // x position within element
+          const y = e.clientY - rect.top;  // y position within element
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = ((centerY - y) / centerY) * 10; // max 10 degrees tilt
+          const rotateY = ((x - centerX) / centerX) * 10;
+
+          innerCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+
+        container.addEventListener("mouseleave", function() {
+          innerCard.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+        });
+      });
+
+    });
+  </script>
+
+</body>
+</html>

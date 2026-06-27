@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Deep Dive — AURELIA | Luxury Wedding & Bespoke Event Planners</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    /* Smooth Scroll helper */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    /* Luxury Sidebar Switching styles */
+    .service-tab-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      border-left: 3px solid transparent;
+      text-align: left;
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--text-primary);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 4px;
+    }
+    
+    .service-tab-btn:hover {
+      background-color: rgba(var(--color-rose-gold-rgb), 0.04);
+      border-left-color: rgba(var(--color-rose-gold-rgb), 0.4);
+      padding-left: 24px;
+    }
+    
+    .service-tab-btn.active {
+      background-color: rgba(var(--color-rose-gold-rgb), 0.08);
+      border-left-color: var(--color-rose-gold);
+      color: var(--color-rose-gold);
+      font-weight: 600;
+      padding-left: 24px;
+    }
+
+    .service-tab-number {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--color-rose-gold);
+      opacity: 0.7;
+      letter-spacing: 0.05em;
+    }
+
+    /* Transition-fade utility for content swap */
+    .transition-fade {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .transition-fade.is-switching {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    /* Price Cards */
+    .price-card-lux {
+      background: var(--bg-card);
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+      border-radius: 4px;
+      padding: 40px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      height: 100%;
+      position: relative;
+    }
+    
+    .price-card-lux:hover {
+      transform: translateY(-8px);
+      border-color: var(--color-rose-gold);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .price-card-lux.featured {
+      border: 2px solid var(--color-rose-gold);
+      background: linear-gradient(to bottom, var(--bg-card), rgba(var(--color-rose-gold-rgb), 0.02));
+    }
+    
+    .price-badge-lux {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--color-rose-gold);
+      color: white;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: var(--font-sans);
+    }
+
+    /* FAQ Custom Accordion */
+    .faq-accordion-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.12);
+      border-radius: 4px !important;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+    
+    .faq-accordion-button {
+      background: transparent !important;
+      color: var(--text-primary) !important;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      padding: 22px 24px;
+      box-shadow: none !important;
+      border: none;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+    
+    .faq-accordion-button:not(.collapsed) {
+      color: var(--color-rose-gold) !important;
+      border-bottom: 1px solid rgba(var(--color-rose-gold-rgb), 0.08);
+    }
+    
+    .faq-accordion-body {
+      padding: 24px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.72;
+      background-color: rgba(var(--color-rose-gold-rgb), 0.01);
+    }
+
+    /* Premium Gallery Grid */
+    .gallery-grid-lux {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .gallery-item-lux-1 {
+      grid-column: span 8;
+    }
+    .gallery-item-lux-2 {
+      grid-column: span 4;
+    }
+    .gallery-item-lux-3 {
+      grid-column: span 12;
+    }
+    @media (max-width: 768px) {
+      .gallery-item-lux-1, .gallery-item-lux-2, .gallery-item-lux-3 {
+        grid-column: span 12;
+      }
+    }
+
+    .gallery-card-lux {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+      height: 320px;
+    }
+    .gallery-card-lux.tall {
+      height: 656px;
+    }
+    @media (max-width: 768px) {
+      .gallery-card-lux.tall {
+        height: 320px;
+      }
+    }
+
+    .gallery-card-lux img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .gallery-card-lux:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery-overlay-lux {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(var(--color-navy-rgb), 0.6) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+    .gallery-card-lux:hover .gallery-overlay-lux {
+      opacity: 1;
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/service-details.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/service-details.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, venues, packages...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html">Our Atelier</a></li>
+        <li><a href="services.html" class="active">Curation Services</a></li>
+        <li><a href="gallery.html">Inspiration Gallery</a></li>
+        <li><a href="event.html">Grand Events</a></li>
+        <li><a href="pricing.html">Investment</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Buttons in Nav -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3 fs-7" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+     Section 1: Banner (Dynamic)
+     ========================================================================== -->
+  <section class="about-hero-banner" id="serviceBanner" style="background-image: url('https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=2000');">
+    <div class="about-hero-content reveal-zoom-in">
+      <span class="subtitle-sans text-uppercase text-white tracking-widest d-block mb-3" id="serviceSub" style="color: var(--color-rose-gold) !important;">COMPLETE SERVICE SPHERE</span>
+      <h1 class="about-hero-title" id="serviceTitle">Bespoke Curation Details</h1>
+      <p class="sans-font text-white opacity-90 max-width-600 mx-auto" style="letter-spacing: 0.05em; font-size: 1.1rem;">
+        An intimate review of our design frameworks, structural execution, and custom investment packages.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 2: Service Details & Selection Sidebar
+     ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="row g-5">
+        
+        <!-- Left Sidebar: Interactive List of all 11 Services -->
+        <div class="col-lg-4 reveal-slide-up">
+          <div class="p-4 bg-light-soft border" style="border-radius: 4px; border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;">
+            <h5 class="serif-font mb-3 pb-2 text-uppercase tracking-wider" style="font-size: 0.9rem; border-bottom: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">Our Curation Spheres</h5>
+            <div class="d-flex flex-column" id="sidebarList">
+              <button class="service-tab-btn active" data-service="wedding-planning">
+                <span>Wedding Planning</span>
+                <span class="service-tab-number">01</span>
+              </button>
+              <button class="service-tab-btn" data-service="destination-wedding">
+                <span>Destination Weddings</span>
+                <span class="service-tab-number">02</span>
+              </button>
+              <button class="service-tab-btn" data-service="photography">
+                <span>Photography & Film</span>
+                <span class="service-tab-number">03</span>
+              </button>
+              <button class="service-tab-btn" data-service="decoration">
+                <span>Floral & Decoration</span>
+                <span class="service-tab-number">04</span>
+              </button>
+              <button class="service-tab-btn" data-service="venue-selection">
+                <span>Venue Selection</span>
+                <span class="service-tab-number">05</span>
+              </button>
+              <button class="service-tab-btn" data-service="styling">
+                <span>Bespoke Styling</span>
+                <span class="service-tab-number">06</span>
+              </button>
+              <button class="service-tab-btn" data-service="entertainment">
+                <span>Grand Entertainment</span>
+                <span class="service-tab-number">07</span>
+              </button>
+              <button class="service-tab-btn" data-service="catering">
+                <span>Fine Gastronomy</span>
+                <span class="service-tab-number">08</span>
+              </button>
+              <button class="service-tab-btn" data-service="corporate">
+                <span>Corporate Galas</span>
+                <span class="service-tab-number">09</span>
+              </button>
+              <button class="service-tab-btn" data-service="birthday">
+                <span>Birthday Soirées</span>
+                <span class="service-tab-number">10</span>
+              </button>
+              <button class="service-tab-btn" data-service="anniversary">
+                <span>Anniversary Tributes</span>
+                <span class="service-tab-number">11</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Main Column: Dynamic Content -->
+        <div class="col-lg-8">
+          <div class="transition-fade" id="dynamicContentBlock">
+            
+            <!-- Service Intro -->
+            <div class="mb-5">
+              <span class="subtitle-classic text-uppercase tracking-widest text-luxury mb-2 d-block" id="detailBadge">Atelier Core Sphere</span>
+              <h2 class="serif-font mb-4" id="detailTitle" style="font-weight: 300;">Wedding Planning & Complete Orchestration</h2>
+              
+              <blockquote class="serif-font italic text-muted p-3 border-start border-3 mb-4" style="border-color: var(--color-rose-gold) !important; font-size: 1.15rem; background-color: rgba(var(--color-rose-gold-rgb), 0.02);" id="detailQuote">
+                "Luxury is in each detail, executed with silent grace and perfect timing."
+              </blockquote>
+              
+              <p class="sans-font text-secondary leading-relaxed mb-4" id="detailDesc1" style="font-size: 1.05rem;">
+                An uncompromising approach to total wedding design and logistical coordination. We construct a secure architecture for your dream, managing timelines, budgets, and vendors with absolute precision.
+              </p>
+            </div>
+
+            <!-- ==========================================================================
+               Section 3: Image Gallery (Dynamic)
+               ========================================================================== -->
+            <div class="mb-5 pt-2">
+              <h4 class="serif-font mb-4">Atmospheric Visual Story</h4>
+              <div class="gallery-grid-lux">
+                <div class="gallery-item-lux-1">
+                  <div class="gallery-card-lux">
+                    <img loading="lazy" id="galleryImg1" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Bespoke luxury celebration 1">
+                    <div class="gallery-overlay-lux">
+                      <span class="sans-font text-white text-uppercase tracking-widest fs-8">Atmosphere Inspiration</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="gallery-item-lux-2">
+                  <div class="gallery-card-lux">
+                    <img loading="lazy" id="galleryImg2" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=800" alt="Bespoke luxury celebration 2">
+                    <div class="gallery-overlay-lux">
+                      <span class="sans-font text-white text-uppercase tracking-widest fs-8">Artisanal Details</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="gallery-item-lux-3">
+                  <div class="gallery-card-lux">
+                    <img loading="lazy" id="galleryImg3" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200" alt="Bespoke luxury celebration 3">
+                    <div class="gallery-overlay-lux">
+                      <span class="sans-font text-white text-uppercase tracking-widest fs-8">The Grand Vision</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================================================================
+               Section 4: Features List (Dynamic)
+               ========================================================================== -->
+            <div class="mb-5 pt-4">
+              <h4 class="serif-font mb-4">Core Deliverables & Standards</h4>
+              <div class="row g-4" id="featuresContainer">
+                <!-- Will be dynamically populated via JS -->
+              </div>
+            </div>
+
+            <!-- ==========================================================================
+               Section 5: Pricing (Dynamic)
+               ========================================================================== -->
+            <div class="mb-5 pt-4">
+              <h4 class="serif-font mb-1">Curation Packages</h4>
+              <p class="text-muted mb-4" style="font-size: 0.9rem;">Review our transparent, baseline levels of service investment.</p>
+              
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="price-card-lux">
+                    <span class="price-badge-lux">SIGNATURE</span>
+                    <h5 class="serif-font mb-1 text-luxury">The Signature</h5>
+                    <p class="sans-font text-muted fs-8 mb-4">Elite orchestration tailored to your primary celebration venue.</p>
+                    <div class="mb-4">
+                      <span class="serif-font text-primary fs-3" id="sigPrice">$12,500</span>
+                      <span class="fs-8 text-muted">/ starting at</span>
+                    </div>
+                    <ul class="list-unstyled d-flex flex-column gap-3 mb-4 fs-8 text-secondary">
+                      <li class="d-flex align-items-center gap-2">
+                        <span class="text-luxury">❈</span>
+                        <span>Complete coordinator match & legal review</span>
+                      </li>
+                      <li class="d-flex align-items-center gap-2">
+                        <span class="text-luxury">❈</span>
+                        <span>Up to 150 guests integrated seamlessly</span>
+                      </li>
+                      <li class="d-flex align-items-center gap-2">
+                        <span class="text-luxury">❈</span>
+                        <span>Full day-of on-site team management</span>
+                      </li>
+                      <li class="d-flex align-items-center gap-2">
+                        <span class="text-luxury">❈</span>
+                        <span>12 Months planning timeline matrix</span>
+                      </li>
+                    </ul>
+                    <button class="btn btn-luxury btn-luxury-primary w-100 fs-8 py-2 px-3 hover-gold-text cursor-pointer" onclick="selectPackage('Signature')">Inquire Package</button>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <div class="price-card-lux featured">
+                    <span class="price-badge-lux" style="background-color: var(--color-rose-gold);">ROYAL ATELIER</span>
+                    <h5 class="serif-font mb-1 text-luxury">The Royal Elite</h5>
+                    <p class="sans-font text-muted fs-8 mb-4">Uncompromising multi-day planning and total designer exclusivity.</p>
+                    <div class="mb-4">
+                      <span class="serif-font text-primary fs-3" id="royPrice">$22,000</span>
+                      <span class="fs-8 text-muted">/ starting at</span>
+                    </div>
+                    <ul class="list-unstyled d-flex flex-column gap-3 mb-4 fs-8 text-secondary">
+                      <li class="d-flex align-items-center gap-2">
+                        <span class="text-luxury">❈</span>
+                        <strong class="text-primary">Fully exclusive planner director assigned</strong>
+                      </li>
+                      <li class="d-flex align-items-center gap-2">
+                        <span class="text-luxury">❈</span>
+                        <span>Multi-day events, brunch & yacht excursions</span>
+                      </li>
+                      <li class="d-flex align-items-center gap-2">
+                        <span class="text-luxury">❈</span>
+                        <span>Unlimited guest integration & bespoke transfers</span>
+                      </li>
+                      <li class="d-flex align-items-center gap-2">
+                        <span class="text-luxury">❈</span>
+                        <span>Extended 24-hour on-site physical support</span>
+                      </li>
+                    </ul>
+                    <button class="btn btn-luxury btn-luxury-primary w-100 fs-8 py-2 px-3 cursor-pointer" onclick="selectPackage('Royal Elite')">Inquire Package</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================================================================
+               Section 6: FAQ (Dynamic)
+               ========================================================================== -->
+            <div class="mb-5 pt-4">
+              <h4 class="serif-font mb-1">Frequently Asked Questions</h4>
+              <p class="text-muted mb-4" style="font-size: 0.9rem;">Clarify our service standards, payment maps, and scheduling clearances.</p>
+              
+              <div class="accordion" id="faqAccordion">
+                <!-- Dynamically Populated via JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 7: Booking Form & Section 8: CTA
+     ========================================================================== -->
+  <section class="section-padding bg-light-soft" id="booking-consultation">
+    <div class="container">
+      <div class="row g-5">
+        
+        <!-- Booking Form Column -->
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="subtitle-sans text-luxury mb-2 d-block">Start Your Journey</span>
+          <h2 class="serif-font mb-4" style="font-weight: 300;">Secure Your Private Consultation</h2>
+          <p class="sans-font text-secondary mb-5">
+            Our planning directors accept only a strictly limited volume of bespoke coordinates each calendar season. Share your parameters below, and our concierge team will respond within 24 hours with custom itinerary models.
+          </p>
+          
+          <form id="consultationBookingForm" class="form-luxury" onsubmit="event.preventDefault(); alert('Your consultation booking request has been received. Our concierge team will reach out to you within 24 hours with secure appointment times.'); this.reset();">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formName" required>
+                  <label for="formName">Your Full Name</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="email" class="form-luxury-control" id="formEmail" required>
+                  <label for="formEmail">Your Email Address</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <select class="form-luxury-control pt-0" id="formServiceSelect" style="border-radius: 0; border: none; border-bottom: 1px solid var(--border-color); background: transparent; color: var(--text-primary); outline: none;">
+                    <option value="wedding-planning">Wedding Planning</option>
+                    <option value="destination-wedding">Destination Weddings</option>
+                    <option value="photography">Photography & Film</option>
+                    <option value="decoration">Floral & Decoration</option>
+                    <option value="venue-selection">Venue Selection</option>
+                    <option value="styling">Bespoke Styling</option>
+                    <option value="entertainment">Grand Entertainment</option>
+                    <option value="catering">Fine Gastronomy</option>
+                    <option value="corporate">Corporate Galas</option>
+                    <option value="birthday">Birthday Soirées</option>
+                    <option value="anniversary">Anniversary Tributes</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formPackageInput" placeholder="Selected Package (Optional)">
+                  <label for="formPackageInput">Selected Package</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formDesiredDate" placeholder="Desired Celebration Date">
+                  <label for="formDesiredDate">Desired Celebration Date</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formDesiredVenue" placeholder="Desired Venue/Location">
+                  <label for="formDesiredVenue">Desired Venue / Location</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-luxury-group form-luxury-floating">
+              <textarea class="form-luxury-control" id="formDetails" style="height: 100px; resize: none;" required></textarea>
+              <label for="formDetails">Brief details on your vision, target guest volume, and core expectations...</label>
+            </div>
+            <button type="submit" class="btn btn-luxury btn-luxury-primary w-100 magnetic-target cursor-pointer">Schedule Curation Call</button>
+          </form>
+        </div>
+
+        <!-- Atelier Contact / Side CTA Details -->
+        <div class="col-lg-6 reveal-slide-up reveal-delay-1">
+          <span class="subtitle-sans text-luxury mb-2 d-block">Contact Atelier</span>
+          <h3 class="serif-font mb-4">Immediate Concierge Access</h3>
+          <p class="sans-font text-secondary mb-5">
+            Prefer immediate high-end liaison? Establish a direct secure connection with our international offices in Milan or Greece for urgent queries or private inspections.
+          </p>
+          
+          <ul class="list-unstyled d-flex flex-column gap-4 mb-5">
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">MILAN</div>
+              <span class="sans-font text-secondary">Via Monte Napoleone, 12, 20121 Milano MI, Italy</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">GREECE</div>
+              <span class="sans-font text-secondary">Oia Cliffside Street 45, Santorini, Greece</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">CALL</div>
+              <span class="sans-font text-secondary">+39 02 8872 901</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">EMAIL</div>
+              <span class="sans-font text-secondary">concierge@aurelia-atelier.com</span>
+            </li>
+          </ul>
+
+          <div class="p-4 bg-white border border-dashed text-center" style="border-radius: 4px; border-color: var(--color-rose-gold);">
+            <span class="crest d-block text-luxury mb-2 fs-4">❈</span>
+            <h5 class="serif-font text-luxury mb-2">Private Atelier Meetings</h5>
+            <p class="sans-font text-secondary fs-8 m-0">In-person consultations are available strictly by appointment at our Milan showroom or Santorini terrace coordinates.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-slide-up">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Dynamic Content database & rendering logic -->
+  <script>
+    const SERVICES_DATABASE = {
+      "wedding-planning": {
+        title: "Wedding Planning & Complete Orchestration",
+        sub: "COMPLETE DESIGN & COORDINATION",
+        bannerImage: "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=2000",
+        badge: "Atelier Core Sphere",
+        quote: "Luxury is in each detail, executed with silent grace and perfect timing.",
+        desc1: "Our flagship complete planning service takes you on an stress-free journey from initial design parameters to your grand send-off. We manage the complex web of vendors, agreements, budgets, and guest registrations so you remain present to enjoy every milestone moment.",
+        gallery: [
+          "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "12-Month Checklists", desc: "Structured progress checks and vendor integration blueprints." },
+          { name: "Financial Safeguard", desc: "Contract analysis and strict allocation checks." },
+          { name: "On-Site Management", desc: "Up to 24 hours of live production coordination." },
+          { name: "Complete Offboarding", desc: "supplier wrap-ups and post-event logistics cleanup." }
+        ],
+        prices: { sig: "$12,500", roy: "$22,000" },
+        faqs: [
+          { q: "How far in advance should we start planning?", a: "We recommend engaging our planners 10 to 14 months before your target date, especially for popular seasons." },
+          { q: "Do you work with our preferred vendors?", a: "Absolutely. We review and coordinate with any high-caliber vendor of your choosing, establishing clear standards." },
+          { q: "What is your day-of coordination scope?", a: "Our team provides on-site production directors for up to 24 hours of live milestone management." }
+        ]
+      },
+      "destination-wedding": {
+        title: "Destination Weddings & Global Escapes",
+        sub: "INTERNATIONAL LUXURY PLANNING",
+        bannerImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2000",
+        badge: "Global Escapes",
+        quote: "Celebrate in world-class sanctuaries where the sky marries the sea.",
+        desc1: "From private Amalfi Coast villas and historic châteaux in southern France to the iconic whitewashed cliffs of Santorini, our international planning division secures exclusive destination access worldwide.",
+        gallery: [
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1520854221256-174b1ec358ef?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "Scouting Surveys", desc: "Rigorous site walkthroughs and municipal licensing review." },
+          { name: "Foreign Legal Filings", desc: "Translation management and registry coordinator contact." },
+          { name: "Guest Concierge", desc: "Bespoke travel, luxury lodging, and local transfer mapping." },
+          { name: "Multi-Day Itinerary", desc: "Welcome sunset cocktails, brunches, and private yacht sails." }
+        ],
+        prices: { sig: "$16,500", roy: "$28,500" },
+        faqs: [
+          { q: "Do you handle travel arrangements for our guests?", a: "Yes, our luxury concierge team handles hotel blocks, custom villa bookings, and ground/sea transfers." },
+          { q: "Can you coordinate legal ceremonies overseas?", a: "Yes, we work with local consular contacts to translate and file registry documents accurately." },
+          { q: "How many site visits are included?", a: "Our Signature package includes two virtual site walkthroughs; our Royal package includes one in-person director visit." }
+        ]
+      },
+      "photography": {
+        title: "Fine Art Photography & Legacy Cinema",
+        sub: "VISUAL PRESERVATION",
+        bannerImage: "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&q=80&w=2000",
+        badge: "Visual Preservation",
+        quote: "Capturing moments that gracefully evolve into immortal visual poetry.",
+        desc1: "We collaborate with award-winning editorial film photographers and cinematic directors to capture your celebration with visual poetry. Rather than standard snapshots, we prioritize light balance, romantic angles, and raw emotion.",
+        gallery: [
+          "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "Fine Art Film", desc: "Digital and high-grain analogue film formatting for perfect grain." },
+          { name: "Aerial Drone Logs", desc: "High-definition aerial capture and scenic layout modeling." },
+          { name: "Custom Album Craft", desc: "Hand-stitched leather bindings and boutique gallery delivery." },
+          { name: "Couture Rehearsals", desc: "Pre-wedding engagements and styling rehearsals." }
+        ],
+        prices: { sig: "$8,000", roy: "$15,000" },
+        faqs: [
+          { q: "Do you shoot both film and digital formats?", a: "Yes, we utilize medium-format film for its timeless grain and high-resolution digital for low-light speed." },
+          { q: "When will we receive our gallery?", a: "A curated teaser gallery is delivered within 7 days, and your complete high-resolution collection within 8 weeks." },
+          { q: "Are raw files or video footage provided?", a: "Yes, our Royal package includes edited video logs and optional archival high-definition files." }
+        ]
+      },
+      "decoration": {
+        title: "Custom Decoration & Botanical Styling",
+        sub: "CREATIVE STYLING",
+        bannerImage: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=2000",
+        badge: "Creative Styling",
+        quote: "Sculpting space with delicate blossoms, fine textiles, and soft lighting.",
+        desc1: "Led by our master stylists, we outline a unique, couture aesthetic DNA for your event. We draft specialized color stories, select linen textures, and model asymmetrical botanical arches that complement your venue's inherent architecture.",
+        gallery: [
+          "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "3D Spatial Layout", desc: "High-fidelity rendering maps and physical modeling." },
+          { name: "Premium Imports", desc: "Direct flower imports from Dutch farms and elite suppliers." },
+          { name: "Couture Tableware", desc: "Curated dinnerware, charger plates, and customized linens." },
+          { name: "Atmospheric Uplighting", desc: "Programmed lighting sequences for seamless sunset shifts." }
+        ],
+        prices: { sig: "$9,500", roy: "$18,000" },
+        faqs: [
+          { q: "Can you match specific rare flower varieties?", a: "Yes, we import elite florals directly from international farms in Holland and South America." },
+          { q: "Do you provide 3D mockups of our layout?", a: "Yes, our designers render custom spatial blueprints so you can visualize the tablescapes beforehand." },
+          { q: "Is teardown and removal included?", a: "Of course. Full logistical teardown, salvage, and clean-up are managed by our staff." }
+        ]
+      },
+      "venue-selection": {
+        title: "Exclusive Venue Selection & Scouting",
+        sub: "ESTATE SCOUTING",
+        bannerImage: "https://images.unsplash.com/photo-1544078751-58fed2b84d57?auto=format&fit=crop&q=80&w=2000",
+        badge: "Estate Scouting",
+        quote: "Securing the perfect stage is the foundation of unforgettable magic.",
+        desc1: "Finding the ideal stage is half the magic. Aurelia holds proprietary access partnerships with elite global estates, historical landmarks, private islands, and luxury villas that are generally inaccessible to the public.",
+        gallery: [
+          "https://images.unsplash.com/photo-1544078751-58fed2b84d57?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "Proprietary Catalogs", desc: "Exclusive leases on unlisted private islands and estates." },
+          { name: "Technical Surveys", desc: "Acoustics checks and golden-hour shadow metrics logs." },
+          { name: "Lease Sourcing", desc: "Rigorous contract checks, licensing, and insurance security." },
+          { name: "Residency Planning", desc: "Layout mapping for multi-day private residency takeovers." }
+        ],
+        prices: { sig: "$5,000", roy: "$9,500" },
+        faqs: [
+          { q: "What kind of venues are in your proprietary network?", a: "Our catalog includes medieval Italian castles, private French châteaux, and modern beachfront villas." },
+          { q: "How do you evaluate sound and acoustics?", a: "Our technicians perform physical audits to determine sound echo parameters for string quartets and speeches." },
+          { q: "Do you handle city permits for historic sites?", a: "Yes, we handle all administrative requirements, security clearances, and event insurance." }
+        ]
+      },
+      "styling": {
+        title: "Bride & Groom Styling Concierge",
+        sub: "COUTURE FASHION",
+        bannerImage: "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=2000",
+        badge: "Couture Fashion",
+        quote: "Dressing your milestone with high-fashion, custom-fitted grace.",
+        desc1: "Ensure your attire is as timeless as your vows. Our elite fashion consultants assist with dress scouting, luxury tailor bookings, and bespoke designer fittings in Milan, Paris, and London.",
+        gallery: [
+          "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1591555200577-05f111a144aa?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "Trunk Show Access", desc: "Exclusive salon bookings and private designer sketching." },
+          { name: "Tailor Coordination", desc: "Direct contact with top Italian suit couturiers." },
+          { name: "Morning Logistics", desc: "Styling assistants and master steamers on celebration day." },
+          { name: "Party Lookbooks", desc: "Custom color styling sheets and trial cosmetic bookings." }
+        ],
+        prices: { sig: "$4,500", roy: "$8,500" },
+        faqs: [
+          { q: "Can you arrange meetings with specific designers?", a: "Yes, we coordinate private fittings and sketch consultations with premier couturiers in Paris and Milan." },
+          { q: "Is styling assistance present on our wedding morning?", a: "Absolutely. Our professional styling assistants steam, drape, and secure your gown and accessories." },
+          { q: "Do you help with family and bridal party fashion?", a: "Yes, our Royal package includes style design and lookbook creation for all immediate family and bridesmaids." }
+        ]
+      },
+      "entertainment": {
+        title: "Symphony Orchestra & Live Entertainment",
+        sub: "AUDIOVISUAL ARTS",
+        bannerImage: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=2000",
+        badge: "Audiovisual Arts",
+        quote: "Choreographing sound and light to create breathtaking sensory memories.",
+        desc1: "Evoke raw emotion through curated sound. We coordinate with elite classical string quartets, symphony orchestra directors, world-class jazz vocalists, and high-energy luxury reception bands.",
+        gallery: [
+          "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1484755560695-a4c7477ab9ea?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "Artist Contracts", desc: "Seamless booking of global singers, bands, and performance acts." },
+          { name: "Vow Compositions", desc: "Custom orchestra arrangements matching your walk." },
+          { name: "Acoustic Tuning", desc: "Advanced speaker mapping avoiding historic masonry echoes." },
+          { name: "Programmed FX", desc: "Coordinated fireworks, fairy installations, and safe sparklers." }
+        ],
+        prices: { sig: "$11,000", roy: "$25,000" },
+        faqs: [
+          { q: "How do you coordinate sound in historic, stone-built sites?", a: "We install specialized directional speakers and sound-absorbing textiles to reduce echo and preserve audio quality." },
+          { q: "Can we request custom music arrangements for our processional?", a: "Yes, we collaborate with orchestra directors to compose custom sheets specifically for your walk." },
+          { q: "Do you manage all power and generator logistics?", a: "Yes, our power directors calculate and distribute energy via silent mobile assets." }
+        ]
+      },
+      "catering": {
+        title: "Michelin-Caliber Catering & Gastronomy",
+        sub: "GASTRONOMICAL MASTERY",
+        bannerImage: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80&w=2000",
+        badge: "Gastronomical Mastery",
+        quote: "Dining that transcends flavor, designed as a sensory performance.",
+        desc1: "Treat your guests to a sensory culinary voyage. We partner with Michelin-rated executive chefs to draft custom gastronomic menus, elegant molecular dessert structures, and custom cocktail formulations.",
+        gallery: [
+          "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "Menu Prototyping", desc: "Private multi-course tastings with lead executive chefs." },
+          { name: "Dessert Sculptures", desc: "Tiered architectural cakes and custom confection bars." },
+          { name: "Sommelier Pairings", desc: "Aged vintage matchings and exclusive champagne sourcing." },
+          { name: "Choreographed Staff", desc: "Synchronized white-glove servers and high-ratio staffing." }
+        ],
+        prices: { sig: "$14,000", roy: "$26,000" },
+        faqs: [
+          { q: "Can we customize the menu for dietary requirements?", a: "Absolutely. We craft dedicated parallel menus for gluten-free, vegan, kosher, and allergen-sensitive guests." },
+          { q: "Is wine pairing included?", a: "Yes, our sommeliers hand-select vintage wines that elevate each individual course of your menu." },
+          { q: "How is the tasting conducted?", a: "We host a private, multi-course tasting salon for you and up to four guests before finalize the menu." }
+        ]
+      },
+      "corporate": {
+        title: "High-Profile Corporate Galas & Summits",
+        sub: "CORPORATE CURATION",
+        bannerImage: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000",
+        badge: "Corporate Curation",
+        quote: "We design flawless corporate stages where visionaries define tomorrow.",
+        desc1: "We translate brand narratives into high-end physical experiences. Whether organizing a luxury charity banquet, an architectural product launch, or a private executive board dinner, we enforce strict logistical precision.",
+        gallery: [
+          "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "Brand Mapping", desc: "High-contrast press backdrops and spatial theme layouting." },
+          { name: "VIP Transfers", desc: "Executive limousine logs and secure arrival grids." },
+          { name: "Couture Banquets", desc: "Michelin-rated large-scale banquets and customized details." },
+          { name: "Summit Equipment", desc: "Live-broadcast displays, translation setups, and stage lights." }
+        ],
+        prices: { sig: "$18,000", roy: "$35,000" },
+        faqs: [
+          { q: "Do you handle security and VIP transport?", a: "Yes, we partner with premier security firms and luxury fleets to coordinate secure arrivals for executives." },
+          { q: "Can you integrate complex audio-visual setups?", a: "We install live broadcast screens, translation booths, and state-of-the-art stage lighting." },
+          { q: "Do you handle sponsor placements?", a: "Yes, we design elegant, high-contrast branding integration points that align with your aesthetic." }
+        ]
+      },
+      "birthday": {
+        title: "Milestone Birthday Celebrations",
+        sub: "MILESTONE SOIRÉES",
+        bannerImage: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&q=80&w=2000",
+        badge: "Milestone Soirées",
+        quote: "Life is a spectacular show. Celebrate each milestone with grand luxury.",
+        desc1: "Celebrate another solar orbit with unrivaled grandeur. We plan multi-day weekend experiences, secluded luxury beach club takeovers, private charter voyages, and immersive theme soirées.",
+        gallery: [
+          "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "Theme Masterminds", desc: "Bespoke graphics, custom print menus, and digital systems." },
+          { name: "Elite Talent Booking", desc: "Direct contact with international DJs and global performers." },
+          { name: "Exclusive Leasing", desc: "Beach club takeovers and private mega-yacht booking." },
+          { name: "Luxury Mixology", desc: "Themed bars with personalized cocktail recipes." }
+        ],
+        prices: { sig: "$10,500", roy: "$20,000" },
+        faqs: [
+          { q: "Can you handle international themed soirées?", a: "Yes, we coordinate themes globally, creating immersive environments from Moroccan nights to retro Gatsby galas." },
+          { q: "What celebrity bookings are possible?", a: "We have direct relationships with elite booking agencies to secure global DJs, pop artists, and performers." },
+          { q: "Is custom invitations branding included?", a: "Yes, we design and produce physical gold-foil invitations and custom digital portals for your guests." }
+        ]
+      },
+      "anniversary": {
+        title: "Custom Anniversary & Vow Renewals",
+        sub: "LEGACY TRIBUTES",
+        bannerImage: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=2000",
+        badge: "Legacy Tributes",
+        quote: "Legacy is a story told over decades, celebrated in gold and diamond.",
+        desc1: "Commemorate decades of devotion. We design intimate fine-dining tributes, legacy archival corridors, and beautiful vow renewal ceremonies reflecting your unique journey.",
+        gallery: [
+          "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1523251343397-9225e4cb6319?auto=format&fit=crop&q=80&w=1200"
+        ],
+        features: [
+          { name: "Memory Corridors", desc: "Beautiful physical and projected photo/letter installations." },
+          { name: "Vow Site Scouting", desc: "Cliffsides, botanical gardens, and historic private chapels." },
+          { name: "Legacy Documentaries", desc: "Professional videographers editing personal history reels." },
+          { name: "Chamber Music", desc: "Live string quartets and elite classical soundscapes." }
+        ],
+        prices: { sig: "$7,500", roy: "$14,000" },
+        faqs: [
+          { q: "What is an archival memory exhibit?", a: "We curate, clean, and beautifully project physical photos, letter letters, and historical assets from your marriage history." },
+          { q: "Can we invite extended family members?", a: "Of course. We design spaces that offer both romantic intimacy for couples and welcoming spaces for family." },
+          { q: "Do you provide video documentary services?", a: "Yes, we capture high-definition legacy interviews with the couple and family members as a permanent heirloom." }
+        ]
+      }
+    };
+
+    /**
+     * Update Content of active service
+     */
+    function updateServiceContent(serviceId, runImmediate = false) {
+      const data = SERVICES_DATABASE[serviceId];
+      if (!data) return;
+
+      const block = document.getElementById('dynamicContentBlock');
+      const banner = document.getElementById('serviceBanner');
+      
+      const applyUpdates = () => {
+        // Banner updates
+        if (banner) banner.style.backgroundImage = `url('${data.bannerImage}')`;
+        document.getElementById('serviceTitle').textContent = data.title;
+        document.getElementById('serviceSub').textContent = data.sub;
+
+        // Details updates
+        document.getElementById('detailBadge').textContent = data.badge;
+        document.getElementById('detailTitle').textContent = data.title;
+        document.getElementById('detailQuote').innerHTML = `"${data.quote}"`;
+        document.getElementById('detailDesc1').textContent = data.desc1;
+
+        // Gallery updates
+        document.getElementById('galleryImg1').src = data.gallery[0];
+        document.getElementById('galleryImg2').src = data.gallery[1];
+        document.getElementById('galleryImg3').src = data.gallery[2];
+
+        // Features updates
+        const featContainer = document.getElementById('featuresContainer');
+        featContainer.innerHTML = '';
+        data.features.forEach(f => {
+          const col = document.createElement('div');
+          col.className = 'col-md-6';
+          col.innerHTML = `
+            <div class="p-4 border" style="border-radius: 4px; background: var(--bg-card); border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;">
+              <span class="text-luxury d-block mb-2 font-serif" style="font-size: 1.15rem;">❈ ${f.name}</span>
+              <p class="sans-font text-secondary fs-8 m-0">${f.desc}</p>
+            </div>
+          `;
+          featContainer.appendChild(col);
+        });
+
+        // Price tags
+        document.getElementById('sigPrice').textContent = data.prices.sig;
+        document.getElementById('royPrice').textContent = data.prices.roy;
+
+        // FAQ accordion
+        const faqContainer = document.getElementById('faqAccordion');
+        faqContainer.innerHTML = '';
+        data.faqs.forEach((faq, index) => {
+          const item = document.createElement('div');
+          item.className = 'faq-accordion-item';
+          item.innerHTML = `
+            <button class="faq-accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse-${index}" aria-expanded="false" aria-controls="faqCollapse-${index}">
+              <span>${faq.q}</span>
+              <svg class="accordion-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s ease; transform: rotate(0deg); color: var(--color-rose-gold);">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faqCollapse-${index}" class="collapse" data-bs-parent="#faqAccordion">
+              <div class="faq-accordion-body">
+                ${faq.a}
+              </div>
+            </div>
+          `;
+          faqContainer.appendChild(item);
+        });
+
+        // Setup arrow rotation listener
+        const buttons = faqContainer.querySelectorAll('.faq-accordion-button');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const arrow = btn.querySelector('.accordion-arrow-icon');
+            const isCollapsed = btn.classList.contains('collapsed');
+            
+            // reset all other arrows first
+            faqContainer.querySelectorAll('.accordion-arrow-icon').forEach(a => a.style.transform = 'rotate(0deg)');
+            
+            if (!isCollapsed) {
+              arrow.style.transform = 'rotate(180deg)';
+            } else {
+              arrow.style.transform = 'rotate(0deg)';
+            }
+          });
+        });
+
+        // Sync form service select dropdown
+        const selectEl = document.getElementById('formServiceSelect');
+        if (selectEl) selectEl.value = serviceId;
+      };
+
+      if (runImmediate) {
+        applyUpdates();
+      } else {
+        // Run fancy fade transition
+        block.classList.add('is-switching');
+        setTimeout(() => {
+          applyUpdates();
+          block.classList.remove('is-switching');
+          // Dispatch scroll reveal update check
+          if (typeof initScrollReveal === 'function') initScrollReveal();
+        }, 350);
+      }
+    }
+
+    /**
+     * Inquire a specific package
+     */
+    function selectPackage(packageName) {
+      const pkgInput = document.getElementById('formPackageInput');
+      if (pkgInput) {
+        pkgInput.value = packageName;
+        pkgInput.focus();
+        // highlight field briefly
+        pkgInput.parentElement.classList.add('active');
+      }
+      
+      const formSection = document.getElementById('booking-consultation');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Initialize Switcher
+    document.addEventListener('DOMContentLoaded', () => {
+      const sidebarBtns = document.querySelectorAll('.service-tab-btn');
+      
+      sidebarBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetSrv = btn.getAttribute('data-service');
+          
+          sidebarBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          updateServiceContent(targetSrv);
+        });
+      });
+
+      // Parse Query string if ?service=... exists
+      const urlParams = new URLSearchParams(window.location.search);
+      const querySrv = urlParams.get('service');
+      if (querySrv && SERVICES_DATABASE[querySrv]) {
+        sidebarBtns.forEach(b => {
+          if (b.getAttribute('data-service') === querySrv) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+        updateServiceContent(querySrv, true);
+      } else {
+        // Default init
+        updateServiceContent('wedding-planning', true);
+      }
+    });
+  </script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

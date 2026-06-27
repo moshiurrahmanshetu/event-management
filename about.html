@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Atelier — AURELIA | Premium Wedding & Event Planners</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/about.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/about.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, venues, packages...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html" class="active">Our Atelier</a></li>
+        <li><a href="services.html">Curation Services</a></li>
+        <li><a href="gallery.html">Inspiration Gallery</a></li>
+        <li><a href="event.html">Grand Events</a></li>
+        <li><a href="pricing.html">Investment</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Buttons in Nav -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3 fs-7" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+     Section 1: Hero Banner
+     ========================================================================== -->
+  <section class="about-hero-banner" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=2000');">
+    <div class="about-hero-content reveal-zoom-in">
+      <span class="subtitle-sans text-uppercase text-white tracking-widest d-block mb-3" style="color: var(--color-champagne) !important;">ABOUT AURELIA</span>
+      <h1 class="about-hero-title">The Master Artisans Behind the Magic</h1>
+      <p class="sans-font text-white opacity-90 max-width-600 mx-auto" style="letter-spacing: 0.05em; font-size: 1.1rem;">
+        Discover the delicate choreography, history, and couture design principles that define our global events atelier.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 2: Our Story
+     ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <!-- Editorial Left Column -->
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="subtitle-sans mb-3 d-block text-luxury text-uppercase tracking-widest">Our Story</span>
+          <h2 class="decorated-left mb-4 serif-font" style="font-weight: 300;">An Unwavering Pursuit of Pure Aesthetic Perfection</h2>
+          <p class="sans-font text-secondary mb-4 leading-relaxed">
+            Aurelia was born from a singular, uncompromising vision: that weddings should be treated with the same meticulous curation and architectural rigor as high-fashion runway shows or grand institutional galas. Founded by lead designer Sophia Laurent, the atelier began as a small boutique planning service in Milan.
+          </p>
+          <p class="sans-font text-secondary mb-4 leading-relaxed">
+            We recognized early on that luxury is not simply about grandeur — it is in the absolute precision of choreography. The exact timing of the sunset vows, the perfect balance of asymmetrical botanical installations, and the smooth flow of guest transport are the details that separate an event from a masterpiece.
+          </p>
+          <p class="sans-font text-secondary mb-0 leading-relaxed">
+            Today, our multi-disciplinary team operates from flagship offices in Milan and Santorini, designing, planning, and executing unparalleled celebrations across the Amalfi Coast, southern France, and exclusive island destinations worldwide.
+          </p>
+        </div>
+
+        <!-- Overlapping Editorial Right Column -->
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="about-story-overlapping">
+            <div class="parallax-tilt">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1519225495810-7517c296517a?auto=format&fit=crop&q=80&w=800" alt="Master flower installation" class="about-story-img-main">
+            </div>
+            <img loading="lazy" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600" alt="Champagne celebration setup" class="about-story-img-sub">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 3: Company History & Section 4 & 5: Mission, Vision, Achievements
+     ========================================================================== -->
+  <section class="section-padding bg-light-soft" style="border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.08); border-bottom: 1px solid rgba(var(--color-rose-gold-rgb), 0.08);">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Company History Timeline Left -->
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="subtitle-sans mb-3 d-block text-luxury text-uppercase tracking-widest">Our Roots</span>
+          <h2 class="serif-font mb-5" style="font-weight: 300;">Company History & Milestones</h2>
+          
+          <div class="history-milestone-wrap">
+            <div class="history-milestone">
+              <span class="history-year">2018 — The Inception in Milan</span>
+              <p class="sans-font text-secondary fs-8 m-0">Sophia Laurent establishes Aurelia with a focus on luxury Northern Italian weddings, integrating custom 3D spatial render drafts into the planning process.</p>
+            </div>
+            <div class="history-milestone">
+              <span class="history-year">2020 — European Expansion</span>
+              <p class="sans-font text-secondary fs-8 m-0">Aurelia begins orchestrating high-end châteaux weddings in Provence, France, establishing an exclusive local network of premium vendors and culinary designers.</p>
+            </div>
+            <div class="history-milestone">
+              <span class="history-year">2022 — Flagship Santorini Opening</span>
+              <p class="sans-font text-secondary fs-8 m-0">Opening of our spectacular second headquarters overlooking Oia, specializing in golden-hour cliffside vows and private Mediterranean yacht receptions.</p>
+            </div>
+            <div class="history-milestone">
+              <span class="history-year">2025 — Vogue & Elite Features</span>
+              <p class="sans-font text-secondary fs-8 m-0">Aurelia is celebrated in major international luxury design publications, recognized as one of the world's premier destination planners.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mission, Vision, Achievements Right -->
+        <div class="col-lg-6">
+          <div class="row g-4 h-100 flex-column justify-content-between">
+            <!-- Mission -->
+            <div class="col-12 reveal-slide-up">
+              <div class="mission-vision-card">
+                <div class="mission-vision-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="12 8 8 12 12 16 16 12 12 8"></polygon>
+                  </svg>
+                </div>
+                <h4 class="serif-font mb-2">Our Mission</h4>
+                <p class="sans-font text-secondary fs-8 m-0">To alleviate all complexity from your grandest milestone events, orchestrating luxury celebration journeys with unparalleled technical precision and couture design integrity.</p>
+              </div>
+            </div>
+
+            <!-- Vision -->
+            <div class="col-12 reveal-slide-up reveal-delay-1">
+              <div class="mission-vision-card">
+                <div class="mission-vision-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </div>
+                <h4 class="serif-font mb-2">Our Vision</h4>
+                <p class="sans-font text-secondary fs-8 m-0">To define the global gold standard for luxury destination weddings, blending local artisan tradition with high-concept architectural and horticultural styling.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 6: Achievements
+     ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-title-wrapper text-center reveal-slide-up">
+        <span class="subtitle-sans">Our Accolades</span>
+        <h2 class="decorated mb-2">Honorable Achievements & Features</h2>
+        <p class="text-muted">Recognized globally for spatial design integrity, logistic management, and bespoke styling.</p>
+      </div>
+
+      <div class="row g-4 mt-2">
+        <!-- Achievement 1 -->
+        <div class="col-md-3 col-6 reveal-slide-up">
+          <div class="achievement-card">
+            <span class="achievement-year">2025</span>
+            <h5 class="serif-font mb-2" style="font-size: 1.05rem;">Vogue Weddings</h5>
+            <p class="sans-font text-muted fs-8 m-0">Best Destination Curation Award</p>
+          </div>
+        </div>
+        <!-- Achievement 2 -->
+        <div class="col-md-3 col-6 reveal-slide-up reveal-delay-1">
+          <div class="achievement-card">
+            <span class="achievement-year">2024</span>
+            <h5 class="serif-font mb-2" style="font-size: 1.05rem;">Grace Ormonde</h5>
+            <p class="sans-font text-muted fs-8 m-0">Elite Planner Selection</p>
+          </div>
+        </div>
+        <!-- Achievement 3 -->
+        <div class="col-md-3 col-6 reveal-slide-up reveal-delay-2">
+          <div class="achievement-card">
+            <span class="achievement-year">2023</span>
+            <h5 class="serif-font mb-2" style="font-size: 1.05rem;">Milan Design Week</h5>
+            <p class="sans-font text-muted fs-8 m-0">Botanical Installation Winner</p>
+          </div>
+        </div>
+        <!-- Achievement 4 -->
+        <div class="col-md-3 col-6 reveal-slide-up reveal-delay-3">
+          <div class="achievement-card">
+            <span class="achievement-year">2021</span>
+            <h5 class="serif-font mb-2" style="font-size: 1.05rem;">Destination Luxury</h5>
+            <p class="sans-font text-muted fs-8 m-0">Top Mediterranean Designer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 7: Wedding Process (The Choreography Workflow)
+     ========================================================================== -->
+  <section class="section-padding bg-secondary-light" style="background-color: rgba(var(--color-champagne-rgb), 0.12);">
+    <div class="container">
+      <div class="section-title-wrapper text-center reveal-slide-up">
+        <span class="subtitle-sans">The Atelier Workflow</span>
+        <h2 class="decorated mb-2">Our Wedding Planning Process</h2>
+        <p class="text-muted">A deep dive into how we systematically manifest your perfect celebration day.</p>
+      </div>
+
+      <div class="row g-4 mt-5">
+        <!-- Process 1 -->
+        <div class="col-lg-3 col-md-6 reveal-slide-up">
+          <div class="process-step-card">
+            <span class="process-step-num">01</span>
+            <span class="subtitle-sans text-luxury mb-2 d-block">Phase One</span>
+            <h4 class="serif-font mb-3">Conception & Location</h4>
+            <p class="sans-font text-secondary fs-8 m-0">We outline budget matrices, establish destination logistics, and scout private villas, islands, and architectural estates native to your wishes.</p>
+          </div>
+        </div>
+        <!-- Process 2 -->
+        <div class="col-lg-3 col-md-6 reveal-slide-up reveal-delay-1">
+          <div class="process-step-card">
+            <span class="process-step-num">02</span>
+            <span class="subtitle-sans text-luxury mb-2 d-block">Phase Two</span>
+            <h4 class="serif-font mb-3">Custom 3D Rendering</h4>
+            <p class="sans-font text-secondary fs-8 m-0">We generate custom digital 3D spatial visualizations of your ceremony site, ensuring perfect height, scale, and shade transitions.</p>
+          </div>
+        </div>
+        <!-- Process 3 -->
+        <div class="col-lg-3 col-md-6 reveal-slide-up reveal-delay-2">
+          <div class="process-step-card">
+            <span class="process-step-num">03</span>
+            <span class="subtitle-sans text-luxury mb-2 d-block">Phase Three</span>
+            <h4 class="serif-font mb-3">Artisan Casting</h4>
+            <p class="sans-font text-secondary fs-8 m-0">Our directors book Michelin-rated catering chefs, contract master string quartets, and design customized couture botanical backdrops.</p>
+          </div>
+        </div>
+        <!-- Process 4 -->
+        <div class="col-lg-3 col-md-6 reveal-slide-up reveal-delay-3">
+          <div class="process-step-card">
+            <span class="process-step-num">04</span>
+            <span class="subtitle-sans text-luxury mb-2 d-block">Phase Four</span>
+            <h4 class="serif-font mb-3">The Day-of Direction</h4>
+            <p class="sans-font text-secondary fs-8 m-0">Complete production on-site. We manage every supplier, coordinate timelines down to the second, and ensure flawless spatial execution.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 8: Our Journey Timeline
+     ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-title-wrapper text-center reveal-slide-up">
+        <span class="subtitle-sans">The Milestones</span>
+        <h2 class="decorated mb-2">Our Historic Journey</h2>
+        <p class="text-muted">A timeline celebrating our organic expansion and the love stories we have designed globally.</p>
+      </div>
+
+      <div class="timeline-luxury-wrap mt-5">
+        <!-- Milestone 1 -->
+        <div class="timeline-luxury-step d-flex align-items-center">
+          <div class="timeline-node"></div>
+          <div class="timeline-luxury-content">
+            <span class="timeline-number">Step 01 / 2018</span>
+            <h4 class="serif-font mb-2">Founded in Milan, Italy</h4>
+            <p class="sans-font text-secondary fs-8 m-0">Sophia Laurent designs her first private Lake Como wedding reception, introducing high-fashion design principles to destination coordination.</p>
+          </div>
+        </div>
+        <!-- Milestone 2 -->
+        <div class="timeline-luxury-step d-flex align-items-center">
+          <div class="timeline-node"></div>
+          <div class="timeline-luxury-content">
+            <span class="timeline-number">Step 02 / 2020</span>
+            <h4 class="serif-font mb-2">Provence & Riviera Expansion</h4>
+            <p class="sans-font text-secondary fs-8 m-0">Establishing a full French team, we begin managing grand estate châteaux weddings and cliffside coastal soirées in Monaco and Nice.</p>
+          </div>
+        </div>
+        <!-- Milestone 3 -->
+        <div class="timeline-luxury-step d-flex align-items-center">
+          <div class="timeline-node"></div>
+          <div class="timeline-luxury-content">
+            <span class="timeline-number">Step 03 / 2022</span>
+            <h4 class="serif-font mb-2">Santorini Flagship Launch</h4>
+            <p class="sans-font text-secondary fs-8 m-0">Aurelia opens its stunning second office in Greece. We specialize in bespoke island logistics, private charter clearances, and cliffside designs.</p>
+          </div>
+        </div>
+        <!-- Milestone 4 -->
+        <div class="timeline-luxury-step d-flex align-items-center">
+          <div class="timeline-node"></div>
+          <div class="timeline-luxury-content">
+            <span class="timeline-number">Step 04 / 2026</span>
+            <h4 class="serif-font mb-2">The Global Standard</h4>
+            <p class="sans-font text-secondary fs-8 m-0">Celebrating over 150 elite weddings and grand corporate events worldwide, backed by custom static client portals and real-time planning tracking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 9: Statistics
+     ========================================================================== -->
+  <section class="section-padding bg-navy text-white" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15); border-bottom: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+        <!-- Stat 1 -->
+        <div class="col-6 col-md-3">
+          <div class="counter-box">
+            <div class="counter-number text-white" data-target="8" data-suffix=" Years">0</div>
+            <span class="counter-title opacity-75">Designing Dreams</span>
+          </div>
+        </div>
+        <!-- Stat 2 -->
+        <div class="col-6 col-md-3">
+          <div class="counter-box">
+            <div class="counter-number text-white" data-target="150" data-suffix="+">0</div>
+            <span class="counter-title opacity-75">Elite Celebrations</span>
+          </div>
+        </div>
+        <!-- Stat 3 -->
+        <div class="col-6 col-md-3">
+          <div class="counter-box">
+            <div class="counter-number text-white" data-target="30" data-suffix="">0</div>
+            <span class="counter-title opacity-75">Global Destinations</span>
+          </div>
+        </div>
+        <!-- Stat 4 -->
+        <div class="col-6 col-md-3">
+          <div class="counter-box">
+            <div class="counter-number text-white" data-target="100" data-suffix="%">0</div>
+            <span class="counter-title opacity-75">Flawless Delivery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 10: Team Preview
+     ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-title-wrapper text-center reveal-slide-up">
+        <span class="subtitle-sans">The Planners</span>
+        <h2 class="decorated mb-2">Meet Our Elite Event Directors</h2>
+        <p class="text-muted">A dedicated group of logistical and design artisans committed to your celebration.</p>
+      </div>
+
+      <div class="row g-4 mt-2 justify-content-center">
+        <!-- Team 1 -->
+        <div class="col-md-4 reveal-slide-up">
+          <div class="team-profile-card">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800" alt="Sophia Laurent" class="team-profile-img">
+            <div class="team-profile-overlay">
+              <span class="subtitle-sans text-luxury mb-1">Founder</span>
+              <h4 class="serif-font text-white mb-1">Sophia Laurent</h4>
+              <p class="fs-8 text-white opacity-75 m-0">Oversees all creative design and international destination scouting.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Team 2 -->
+        <div class="col-md-4 reveal-slide-up reveal-delay-1">
+          <div class="team-profile-card">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" alt="Marcus Vance" class="team-profile-img">
+            <div class="team-profile-overlay">
+              <span class="subtitle-sans text-luxury mb-1">Logistics</span>
+              <h4 class="serif-font text-white mb-1">Marcus Vance</h4>
+              <p class="fs-8 text-white opacity-75 m-0">Manages full-scale event coordination and elite vendor contracts.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Team 3 -->
+        <div class="col-md-4 reveal-slide-up reveal-delay-2">
+          <div class="team-profile-card">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" alt="Isabella Reed" class="team-profile-img">
+            <div class="team-profile-overlay">
+              <span class="subtitle-sans text-luxury mb-1">Lead Stylist</span>
+              <h4 class="serif-font text-white mb-1">Isabella Reed</h4>
+              <p class="fs-8 text-white opacity-75 m-0">Master of botanical installations, color maps, and table styling scales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 11: Testimonials
+     ========================================================================== -->
+  <section class="section-padding bg-light-soft" style="border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.08); border-bottom: 1px solid rgba(var(--color-rose-gold-rgb), 0.08);">
+    <div class="container">
+      <div class="section-title-wrapper text-center reveal-slide-up">
+        <span class="subtitle-sans">Words of Devotion</span>
+        <h2 class="decorated mb-2">Client Testimonials</h2>
+        <p class="text-muted">Read authentic stories of love, peace, and perfection from our recent grand celebrations.</p>
+      </div>
+
+      <div class="testimonial-carousel-wrap mt-5 text-center reveal-zoom-in">
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+          <div class="carousel-inner">
+            <!-- Testimonial 1 -->
+            <div class="carousel-item active">
+              <div class="testimonial-quote-symbol">“</div>
+              <p class="testimonial-text">
+                "Our Lake Como ceremony was a dream beyond imagination. Every detail — from the floral arches to the grand timeline execution — was perfectly synchronized. We did not feel a single second of worry."
+              </p>
+              <div class="d-flex align-items-center justify-content-center gap-3">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" alt="Emilia & Julian" class="testimonial-author-img">
+                <div class="text-start">
+                  <h5 class="serif-font mb-0" style="font-size: 1.1rem;">Emilia & Julian</h5>
+                  <span class="fs-8 text-muted uppercase tracking-wider">Villa Balbiano, Lake Como</span>
+                </div>
+              </div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="carousel-item">
+              <div class="testimonial-quote-symbol">“</div>
+              <p class="testimonial-text">
+                "Aurelia planned our destination vow renewal in Santorini. Sophia Laurent oversaw the timeline natively, ensuring our guests had luxury transport, and our oceanward tabletop dinner looked cinematic."
+              </p>
+              <div class="d-flex align-items-center justify-content-center gap-3">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" alt="Isabelle & Liam" class="testimonial-author-img">
+                <div class="text-start">
+                  <h5 class="serif-font mb-0" style="font-size: 1.1rem;">Isabelle & Liam</h5>
+                  <span class="fs-8 text-muted uppercase tracking-wider">Canaves Oia, Greece</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Indicators/Toggles -->
+          <div class="mt-4">
+            <button class="btn btn-luxury btn-luxury-outline py-2 px-3 me-2" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev" aria-label="Previous testimonial">←</button>
+            <button class="btn btn-luxury btn-luxury-outline py-2 px-3" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next" aria-label="Next testimonial">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 12: CTA (The Consultation Inquiry Form)
+     ========================================================================== -->
+  <section class="section-padding bg-light-soft">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Left Side Form Column -->
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="subtitle-sans text-luxury mb-2 d-block">Start Your Journey</span>
+          <h2 class="serif-font mb-4" style="font-weight: 300;">Request A Luxury Consultation</h2>
+          <p class="sans-font text-secondary mb-5">Our planning spaces are strictly limited to coordinate high-end celebrations. Connect with our directors today to review venue scouting and budget matrices.</p>
+          
+          <form id="consultationInquiryForm" class="form-luxury" onsubmit="event.preventDefault(); alert('Your consultation request has been received. Our concierge will contact you shortly.'); this.reset();">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formName" required>
+                  <label for="formName">Your Full Name</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="email" class="form-luxury-control" id="formEmail" required>
+                  <label for="formEmail">Your Email Address</label>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formDesiredDate" placeholder="Desired Celebration Date">
+                  <label for="formDesiredDate">Desired Celebration Date</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formDesiredVenue" placeholder="Desired Venue/Location">
+                  <label for="formDesiredVenue">Desired Venue / Location</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-luxury-group form-luxury-floating">
+              <textarea class="form-luxury-control" id="formDetails" style="height: 100px; resize: none;" required></textarea>
+              <label for="formDetails">Brief details on your vision, date, and venue...</label>
+            </div>
+            <button type="submit" class="btn btn-luxury btn-luxury-primary w-100 magnetic-target">Send Inquiry</button>
+          </form>
+        </div>
+
+        <!-- Footer Form Right Column (Atelier Contact details) -->
+        <div class="col-lg-6 reveal-slide-up reveal-delay-1">
+          <span class="subtitle-sans text-luxury mb-2 d-block">Contact Atelier</span>
+          <h3 class="serif-font mb-4">Contact Details</h3>
+          <p class="sans-font text-secondary mb-5">Prefer to reach out directly? Connect with our global headquarters in Milan or Santorini for immediate support.</p>
+          
+          <ul class="list-unstyled d-flex flex-column gap-4">
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">MILAN</div>
+              <span class="sans-font text-secondary">Via Monte Napoleone, 12, 20121 Milano MI, Italy</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">GREECE</div>
+              <span class="sans-font text-secondary">Oia Cliffside Street 45, Santorini, Greece</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">CALL</div>
+              <span class="sans-font text-secondary">+39 02 8872 901</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">EMAIL</div>
+              <span class="sans-font text-secondary">concierge@aurelia-atelier.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-slide-up">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>True Love Endorsements — AURELIA Premium Template</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    /* Smooth Scroll helper */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    /* Core Variable Overrides and Helpers */
+    :root {
+      --color-rose-gold: #B76E79;
+      --color-rose-gold-rgb: 183, 110, 121;
+      --color-navy: #0b1325;
+      --color-champagne: #e8d8c8;
+      --color-champagne-rgb: 232, 216, 200;
+      --gold-glowing: #dfa85a;
+    }
+
+    /* Premium Theme Adjustments */
+    [data-theme="dark"] {
+      --bg-light-soft: #111a2e;
+      --bg-card: #152238;
+      --text-muted: #a0aec0;
+      --border-color-muted: rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="light"] {
+      --bg-light-soft: #faf6f0;
+      --border-color-muted: rgba(183, 110, 121, 0.12);
+    }
+
+    /* Section Header spacing helper */
+    .section-header-wrap {
+      max-width: 650px;
+      margin: 0 auto 55px auto;
+    }
+
+    /* Client Story Cards */
+    .story-card-luxury {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color-muted);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      border-radius: 4px;
+      height: 100%;
+    }
+    .story-card-luxury:hover {
+      transform: translateY(-8px);
+      border-color: rgba(var(--color-rose-gold-rgb), 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+    }
+    .story-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 11;
+      background-color: #0b1325;
+    }
+    .story-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .story-card-luxury:hover .story-img {
+      transform: scale(1.05);
+    }
+    .story-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(11, 19, 37, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+    }
+
+    /* Video Testimonial Overlay */
+    .video-card-luxury {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color-muted);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .video-card-luxury:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(var(--color-rose-gold-rgb), 0.2);
+    }
+    .video-thumbnail-container {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #000;
+    }
+    .video-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .video-card-luxury:hover .video-thumbnail {
+      transform: scale(1.04);
+      opacity: 0.65;
+    }
+    .play-btn-pulse {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65px;
+      height: 65px;
+      background: rgba(183, 110, 121, 0.9);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      outline: none;
+      transition: all 0.4s ease;
+      z-index: 2;
+      box-shadow: 0 0 0 0 rgba(183, 110, 121, 0.5);
+      animation: pulse-ring 2.5s infinite;
+    }
+    .play-btn-pulse svg {
+      margin-left: 3px; /* visual balancing of the triangle */
+      transition: transform 0.3s ease;
+    }
+    .video-card-luxury:hover .play-btn-pulse {
+      background: var(--color-rose-gold);
+      transform: translate(-50%, -50%) scale(1.08);
+      box-shadow: 0 0 20px rgba(183, 110, 121, 0.4);
+    }
+    
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(183, 110, 121, 0.6);
+      }
+      70% {
+        box-shadow: 0 0 0 16px rgba(183, 110, 121, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(183, 110, 121, 0);
+      }
+    }
+
+    /* Review Slider */
+    .slider-container-luxury {
+      position: relative;
+      max-width: 850px;
+      margin: 0 auto;
+      min-height: 290px;
+    }
+    .slide-luxury {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(12px);
+    }
+    .slide-luxury.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .slider-indicators-luxury {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 25px;
+    }
+    .slider-indicator-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--border-color-muted);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slider-indicator-dot.active {
+      background: var(--color-rose-gold);
+      transform: scale(1.4);
+      width: 18px;
+      border-radius: 4px;
+    }
+    .slider-nav-arrow {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--border-color-muted);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slider-nav-arrow:hover {
+      background: var(--color-rose-gold);
+      color: white;
+      border-color: var(--color-rose-gold);
+    }
+
+    /* Stars styling */
+    .star-rating-luxury {
+      color: var(--gold-glowing);
+      letter-spacing: 2px;
+      font-size: 1rem;
+    }
+
+    /* Counter Cards */
+    .counter-card-luxury {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color-muted);
+      padding: 45px 35px;
+      border-radius: 4px;
+      text-align: center;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      height: 100%;
+    }
+    .counter-card-luxury:hover {
+      border-color: rgba(var(--color-rose-gold-rgb), 0.3);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-sm);
+    }
+    .counter-value-luxury {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      color: var(--color-rose-gold);
+      font-size: 3.4rem;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    /* Modal Player Styling */
+    .video-modal-body-custom {
+      padding: 0 !important;
+      background: #000;
+    }
+    .video-container-embed {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+    }
+    .video-container-embed iframe,
+    .video-container-embed video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 10;
+      background: rgba(0,0,0,0.6);
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .video-modal-close:hover {
+      background: var(--color-rose-gold);
+      transform: scale(1.05);
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/testimonial.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/testimonial.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, packages, planners...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html">Our Atelier</a></li>
+        <li><a href="services.html">Curation Services</a></li>
+        <li><a href="gallery.html">Inspiration Gallery</a></li>
+        <li><a href="event.html">Grand Events</a></li>
+        <li><a href="pricing.html">Investment Guide</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Controls -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Luxury Page Header -->
+  <header class="section-padding bg-navy text-white text-center" style="background-image: linear-gradient(rgba(11, 19, 37, 0.65), rgba(11, 19, 37, 0.8)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1500'); background-size: cover; background-position: center; padding-top: 170px; padding-bottom: 110px;">
+    <div class="container hero-content">
+      <span class="subtitle-sans text-white mb-2 d-block text-uppercase tracking-widest reveal-fade-in">Praise & Legacy</span>
+      <h1 class="serif-font text-white mb-3 reveal-fade-in reveal-delay-1" style="font-weight: 300;">True Love Endorsements</h1>
+      <div class="divider-luxury my-2 justify-content-center">
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+      </div>
+      <p class="sans-font text-white opacity-75 max-width-600 mx-auto mt-2 fs-7 text-uppercase tracking-widest reveal-fade-in reveal-delay-2" style="font-size: 0.8rem;">
+        An archive of exquisite moments and heartfelt gratitude
+      </p>
+    </div>
+  </header>
+
+  <!-- Section 1: Rating Counter -->
+  <section class="section-padding bg-light-soft border-bottom" style="border-color: var(--border-color-muted);" id="statsSection">
+    <div class="container">
+      <div class="row g-4 justify-content-center reveal-fade-in">
+        
+        <!-- Stat 1 -->
+        <div class="col-6 col-lg-3">
+          <div class="counter-card-luxury">
+            <div class="counter-value-luxury counter-number" data-target="150" data-suffix="+">0</div>
+            <span class="subtitle-classic text-uppercase tracking-widest text-muted d-block" style="font-size: 0.65rem;">Unions Curated</span>
+          </div>
+        </div>
+
+        <!-- Stat 2 -->
+        <div class="col-6 col-lg-3">
+          <div class="counter-card-luxury">
+            <div class="counter-value-luxury counter-number" data-target="100" data-suffix="%">0</div>
+            <span class="subtitle-classic text-uppercase tracking-widest text-muted d-block" style="font-size: 0.65rem;">Flawless Execution</span>
+          </div>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="col-6 col-lg-3">
+          <div class="counter-card-luxury">
+            <div class="counter-value-luxury counter-number" data-target="12" data-suffix="+">0</div>
+            <span class="subtitle-classic text-uppercase tracking-widest text-muted d-block" style="font-size: 0.65rem;">Countries Visited</span>
+          </div>
+        </div>
+
+        <!-- Stat 4 -->
+        <div class="col-6 col-lg-3">
+          <div class="counter-card-luxury">
+            <div class="counter-value-luxury counter-number" data-target="28" data-suffix="">0</div>
+            <span class="subtitle-classic text-uppercase tracking-widest text-muted d-block" style="font-size: 0.65rem;">Press Features</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Review Slider (Interactive Carousel) -->
+  <section class="section-padding bg-white" id="reviewSliderSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header-wrap text-center">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Honest Words</span>
+        <h2 class="serif-font mb-4" style="font-weight: 300;">The Experience Captured</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <!-- Slider Wrap -->
+      <div class="row justify-content-center align-items-center reveal-fade-in">
+        
+        <!-- Left Arrow -->
+        <div class="col-auto d-none d-md-block">
+          <button class="slider-nav-arrow" onclick="prevSlide()" aria-label="Previous testimonial">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Slider Content -->
+        <div class="col-12 col-md-9 col-lg-8">
+          <div class="slider-container-luxury p-4 p-md-5 bg-card border rounded shadow-sm text-center">
+            
+            <!-- Large luxury quotation crest -->
+            <span class="testimonial-quote-symbol" style="position: static; font-size: 4rem; display: block; margin-bottom: -15px;">“</span>
+
+            <!-- Slide 1 -->
+            <div class="slide-luxury active" id="slide-0">
+              <div class="star-rating-luxury mb-3">★★★★★</div>
+              <p class="serif-font italic text-secondary mb-4 fs-5" style="line-height: 1.7; font-weight: 300;">
+                "Aurelia's team is not simply a group of planners; they are modern architects of pure romantic emotion. We gave them our abstract concepts of twilight lake aesthetics, and they returned with a masterpiece that exceeded every wild dream. The sensory flow of our weekend was flawless."
+              </p>
+              <div class="divider-luxury justify-content-center my-3 max-width-100 mx-auto">
+                <span class="line" style="width: 30px;"></span>
+                <span class="crest">❈</span>
+                <span class="line" style="width: 30px;"></span>
+              </div>
+              <h4 class="serif-font mb-1 text-luxury" style="font-size: 1.15rem; font-weight: 400;">Alexander & Madeleine</h4>
+              <span class="subtitle-sans text-muted" style="font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Villa Erba, Lake Como</span>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide-luxury" id="slide-1">
+              <div class="star-rating-luxury mb-3">★★★★★</div>
+              <p class="serif-font italic text-secondary mb-4 fs-5" style="line-height: 1.7; font-weight: 300;">
+                "Every botanical arrangement, every candle alignment, and even the decibel propagation of the sound system was planned with absolute mathematical and scenic poetry. The absolute peace of mind we felt was worth every single dollar of investment. We are forever grateful."
+              </p>
+              <div class="divider-luxury justify-content-center my-3 max-width-100 mx-auto">
+                <span class="line" style="width: 30px;"></span>
+                <span class="crest">❈</span>
+                <span class="line" style="width: 30px;"></span>
+              </div>
+              <h4 class="serif-font mb-1 text-luxury" style="font-size: 1.15rem; font-weight: 400;">Isabella & Sebastian</h4>
+              <span class="subtitle-sans text-muted" style="font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">St. Moritz Alpine Lodge, Switzerland</span>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide-luxury" id="slide-2">
+              <div class="star-rating-luxury mb-3">★★★★★</div>
+              <p class="serif-font italic text-secondary mb-4 fs-5" style="line-height: 1.7; font-weight: 300;">
+                "From coordinating complex multi-currency wire transfers with international illumination technicians to managing private helicopter guest transfers across three countries, Aurelia executed our 3-day estate waltz wedding with masterclass grace."
+              </p>
+              <div class="divider-luxury justify-content-center my-3 max-width-100 mx-auto">
+                <span class="line" style="width: 30px;"></span>
+                <span class="crest">❈</span>
+                <span class="line" style="width: 30px;"></span>
+              </div>
+              <h4 class="serif-font mb-1 text-luxury" style="font-size: 1.15rem; font-weight: 400;">Marcus & Elizabeth</h4>
+              <span class="subtitle-sans text-muted" style="font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Loire Valley Chateau, France</span>
+            </div>
+
+            <!-- Dots Indicators -->
+            <div class="slider-indicators-luxury">
+              <span class="slider-indicator-dot active" onclick="goToSlide(0)" id="dot-0" aria-label="Go to testimonial 1"></span>
+              <span class="slider-indicator-dot" onclick="goToSlide(1)" id="dot-1" aria-label="Go to testimonial 2"></span>
+              <span class="slider-indicator-dot" onclick="goToSlide(2)" id="dot-2" aria-label="Go to testimonial 3"></span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right Arrow -->
+        <div class="col-auto d-none d-md-block">
+          <button class="slider-nav-arrow" onclick="nextSlide()" aria-label="Next testimonial">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Arrows -->
+      <div class="row justify-content-center d-flex d-md-none mt-4 g-3">
+        <div class="col-auto">
+          <button class="slider-nav-arrow" onclick="prevSlide()" aria-label="Previous testimonial">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+        </div>
+        <div class="col-auto">
+          <button class="slider-nav-arrow" onclick="nextSlide()" aria-label="Next testimonial">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 3: Client Stories (Editorial Spreads) -->
+  <section class="section-padding bg-light-soft border-top border-bottom" style="border-color: var(--border-color-muted);" id="clientStoriesSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header-wrap text-center">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Love Chronicles</span>
+        <h2 class="serif-font mb-4" style="font-weight: 300;">Bespoke Client Stories</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="text-secondary max-width-600 mx-auto fs-7">
+          Every celebration begins with an empty canvas. Explore three full narrative case studies of couples whose legacies were brought to life.
+        </p>
+      </div>
+
+      <!-- Stories Grid -->
+      <div class="row g-4 align-items-stretch">
+        
+        <!-- Story 1 -->
+        <div class="col-lg-4 col-md-6 reveal-slide-up">
+          <div class="story-card-luxury d-flex flex-column justify-content-between">
+            <div>
+              <div class="story-img-wrap">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600" alt="Lake Como Symphony Wedding Portrait" class="story-img">
+                <span class="story-badge">Lombardy, Italy</span>
+              </div>
+              <div class="p-4">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.62rem;">The Lake Como Symphony</span>
+                <h3 class="serif-font mb-3" style="font-weight: 300; font-size: 1.35rem;">Charlotte & David</h3>
+                
+                <p class="sans-font text-secondary fs-7 mb-3" style="line-height: 1.7;">
+                  Charlotte & David envisioned an intimate, music-centered multi-day gala overlooking Lake Como. Aurelia's team orchestrated every single coordinate, from custom-designed speedboats to a live operatic string octet.
+                </p>
+                <div class="p-3 bg-light-soft border-start border-luxury mb-3" style="border-left-width: 2px;">
+                  <span class="d-block text-uppercase text-muted" style="font-size: 0.58rem; letter-spacing: 0.05em;">Bespoke Botanical Theme</span>
+                  <span class="sans-font text-dark fw-medium" style="font-size: 0.72rem;">Alabaster Rose, Cascading Olive & Citrus Branches</span>
+                </div>
+              </div>
+            </div>
+            <div class="px-4 pb-4">
+              <div class="border-top pt-3 d-flex align-items-center justify-content-between text-secondary" style="font-size: 0.7rem; border-color: var(--border-color-muted) !important;">
+                <span><strong>Guests:</strong> 110 Intimate</span>
+                <span><strong>Duration:</strong> 3 Days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Story 2 -->
+        <div class="col-lg-4 col-md-6 reveal-slide-up reveal-delay-1">
+          <div class="story-card-luxury d-flex flex-column justify-content-between">
+            <div>
+              <div class="story-img-wrap">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=600" alt="Tuscany Olive Grove Wedding Portrait" class="story-img">
+                <span class="story-badge">Tuscany, Italy</span>
+              </div>
+              <div class="p-4">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.62rem;">Tuscany Under the Olive Groves</span>
+                <h3 class="serif-font mb-3" style="font-weight: 300; font-size: 1.35rem;">Isabella & Maximillian</h3>
+                
+                <p class="sans-font text-secondary fs-7 mb-3" style="line-height: 1.7;">
+                  A rustic-meets-royal weekend celebration across rolling Italian hills. We planned three distinct events: a welcoming wood-fired pizza garden party, a twilight cathedral ceremony, and a grand vineyard banquet under stars.
+                </p>
+                <div class="p-3 bg-light-soft border-start border-luxury mb-3" style="border-left-width: 2px;">
+                  <span class="d-block text-uppercase text-muted" style="font-size: 0.58rem; letter-spacing: 0.05em;">Bespoke Botanical Theme</span>
+                  <span class="sans-font text-dark fw-medium" style="font-size: 0.72rem;">Wild Sage, White Ranunculus & Antique Rosemary</span>
+                </div>
+              </div>
+            </div>
+            <div class="px-4 pb-4">
+              <div class="border-top pt-3 d-flex align-items-center justify-content-between text-secondary" style="font-size: 0.7rem; border-color: var(--border-color-muted) !important;">
+                <span><strong>Guests:</strong> 180 Boutique</span>
+                <span><strong>Duration:</strong> 3 Days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Story 3 -->
+        <div class="col-lg-4 col-md-6 reveal-slide-up reveal-delay-2">
+          <div class="story-card-luxury d-flex flex-column justify-content-between">
+            <div>
+              <div class="story-img-wrap">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600" alt="French Chateau Legacy Portrait" class="story-img">
+                <span class="story-badge">Paris, France</span>
+              </div>
+              <div class="p-4">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.62rem;">A Sovereign French Legacy</span>
+                <h3 class="serif-font mb-3" style="font-weight: 300; font-size: 1.35rem;">Genevieve & Arthur</h3>
+                
+                <p class="sans-font text-secondary fs-7 mb-3" style="line-height: 1.7;">
+                  The absolute peak of modern royalty. A grand 300-guest celebration in a historic 17th-century château. Our logistics team synchronized over 40 fine artisans, handled multi-currency wires, and built custom acoustic layers.
+                </p>
+                <div class="p-3 bg-light-soft border-start border-luxury mb-3" style="border-left-width: 2px;">
+                  <span class="d-block text-uppercase text-muted" style="font-size: 0.58rem; letter-spacing: 0.05em;">Bespoke Botanical Theme</span>
+                  <span class="sans-font text-dark fw-medium" style="font-size: 0.72rem;">Imperial Hydrangeas, White Orchids & Gold Leaf</span>
+                </div>
+              </div>
+            </div>
+            <div class="px-4 pb-4">
+              <div class="border-top pt-3 d-flex align-items-center justify-content-between text-secondary" style="font-size: 0.7rem; border-color: var(--border-color-muted) !important;">
+                <span><strong>Guests:</strong> 300 Royal</span>
+                <span><strong>Duration:</strong> 4 Days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 4: Video Testimonials -->
+  <section class="section-padding bg-white" id="videoTestimonialsSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header-wrap text-center">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Cinematic Archives</span>
+        <h2 class="serif-font mb-4" style="font-weight: 300;">Cinematic Testimonials</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="text-secondary max-width-600 mx-auto fs-7">
+          See and feel the energy of our couples' monumental transitions. Tap below to launch a cinematic playback of their private archives.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        
+        <!-- Video 1 -->
+        <div class="col-lg-4 col-md-6 reveal-fade-in">
+          <div class="video-card-luxury">
+            <div class="video-thumbnail-container">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=700" alt="The Romance of Villa Erba" class="video-thumbnail">
+              <button class="play-btn-pulse" onclick="playVideo('como')" aria-label="Play Villa Erba Cinematic Video">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </button>
+            </div>
+            <div class="p-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="subtitle-sans text-luxury" style="font-size: 0.65rem;">Cinematic Review &bull; 3:14 min</span>
+                <span class="badge bg-light text-dark font-mono fs-8 py-1 px-2 border" style="font-weight: 400; font-size: 0.62rem;">HD 1080P</span>
+              </div>
+              <h4 class="serif-font mb-2" style="font-weight: 400; font-size: 1.15rem;">The Romance of Villa Erba</h4>
+              <p class="sans-font text-secondary fs-7 mb-0">
+                Sophia & Julian describe the effortless flow and majestic architecture built for their Como weekend.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="col-lg-4 col-md-6 reveal-fade-in reveal-delay-1">
+          <div class="video-card-luxury">
+            <div class="video-thumbnail-container">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=700" alt="Twilight Vows in Santorini" class="video-thumbnail">
+              <button class="play-btn-pulse" onclick="playVideo('santorini')" aria-label="Play Santorini Cinematic Video">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </button>
+            </div>
+            <div class="p-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="subtitle-sans text-luxury" style="font-size: 0.65rem;">Cinematic Review &bull; 2:45 min</span>
+                <span class="badge bg-light text-dark font-mono fs-8 py-1 px-2 border" style="font-weight: 400; font-size: 0.62rem;">HD 1080P</span>
+              </div>
+              <h4 class="serif-font mb-2" style="font-weight: 400; font-size: 1.15rem;">Twilight Vows in Santorini</h4>
+              <p class="sans-font text-secondary fs-7 mb-0">
+                Chloe & Alexandre reflect on their cliffside sunset ceremony coordinates and botanical canopy design.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 3 -->
+        <div class="col-lg-4 col-md-6 reveal-fade-in reveal-delay-2">
+          <div class="video-card-luxury">
+            <div class="video-thumbnail-container">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=700" alt="Castle Courtyard Waltz" class="video-thumbnail">
+              <button class="play-btn-pulse" onclick="playVideo('chateau')" aria-label="Play French Chateau Cinematic Video">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </button>
+            </div>
+            <div class="p-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="subtitle-sans text-luxury" style="font-size: 0.65rem;">Cinematic Review &bull; 4:02 min</span>
+                <span class="badge bg-light text-dark font-mono fs-8 py-1 px-2 border" style="font-weight: 400; font-size: 0.62rem;">HD 1080P</span>
+              </div>
+              <h4 class="serif-font mb-2" style="font-weight: 400; font-size: 1.15rem;">Castle Courtyard Waltz</h4>
+              <p class="sans-font text-secondary fs-7 mb-0">
+                Eleanor & Nicholas describe the grand multi-currency planning of their royal Loire Valley château gala.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Luxury Video Modal -->
+  <div class="modal fade" id="videoTestimonialModal" tabindex="-1" aria-labelledby="videoTestimonialModalLabel" aria-hidden="true" style="backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background: rgba(11, 19, 37, 0.45);">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0" style="background: transparent; box-shadow: none;">
+        
+        <div class="modal-body video-modal-body-custom rounded overflow-hidden shadow-2xl position-relative">
+          
+          <!-- Custom Close Button -->
+          <button type="button" class="video-modal-close" data-bs-dismiss="modal" aria-label="Close video modal" onclick="stopCurrentVideo()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Interactive Responsive Player Frame -->
+          <div class="video-container-embed">
+            <video id="customHtml5Player" controls playsinline preload="metadata">
+              <!-- Source is dynamically set -->
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <!-- Video Spec Footer -->
+          <div class="p-3 bg-navy text-white text-center" style="background-color: #0b1325; border-top: 1px solid rgba(255,255,255,0.06);">
+            <span class="subtitle-classic text-uppercase tracking-widest text-white opacity-50 d-block mb-1" style="font-size: 0.6rem;">Archived Cinematic Film</span>
+            <h5 class="serif-font text-white m-0" style="font-weight: 300;" id="modalVideoTitle">Eleanor & Charles Grandeur</h5>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium CTA Footer Consultation section -->
+  <section class="section-padding bg-light-soft border-top border-bottom text-center" style="border-color: var(--border-color-muted);">
+    <div class="container reveal-fade-in">
+      <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Atelier Inquiry</span>
+      <h2 class="serif-font mb-4" style="font-weight: 300; font-size: 2.2rem;">Begin Your Own Narrative</h2>
+      <div class="divider-luxury my-3">
+        <span class="line"></span>
+        <span class="crest">❈</span>
+        <span class="line"></span>
+      </div>
+      <p class="text-secondary max-width-600 mx-auto fs-7 mb-5">
+        Let us transform your romantic vision into a physical, historical waltz. Initiate a private portfolio consultation with our design directors today.
+      </p>
+      <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-3 px-5" style="letter-spacing: 0.25em; font-size: 0.72rem;">Initiate Commission Inquiry</a>
+    </div>
+  </section>
+
+  <!-- Premium Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-fade-in">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering wedding planners and romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Page-Level Interactive Scripts -->
+  <script>
+    // 1. Premium Review Slider Navigation Logic
+    let currentSlideIdx = 0;
+    const slides = document.querySelectorAll('.slide-luxury');
+    const dots = document.querySelectorAll('.slider-indicator-dot');
+    const maxSlides = slides.length;
+    let autoSlideTimer = null;
+
+    function showSlide(index) {
+      // Bounds checks
+      if (index >= maxSlides) index = 0;
+      if (index < 0) index = maxSlides - 1;
+      
+      currentSlideIdx = index;
+
+      slides.forEach((slide, i) => {
+        if (i === currentSlideIdx) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === currentSlideIdx) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      resetAutoSlide();
+      showSlide(currentSlideIdx + 1);
+    }
+
+    function prevSlide() {
+      resetAutoSlide();
+      showSlide(currentSlideIdx - 1);
+    }
+
+    function goToSlide(index) {
+      resetAutoSlide();
+      showSlide(index);
+    }
+
+    function startAutoSlide() {
+      autoSlideTimer = setInterval(() => {
+        showSlide(currentSlideIdx + 1);
+      }, 7000); // Transitions every 7 seconds
+    }
+
+    function resetAutoSlide() {
+      if (autoSlideTimer) {
+        clearInterval(autoSlideTimer);
+        startAutoSlide();
+      }
+    }
+
+    // Initialize slide loops on content load
+    document.addEventListener('DOMContentLoaded', () => {
+      startAutoSlide();
+    });
+
+    // 2. Cinematic Video Playback Controls
+    const videoData = {
+      como: {
+        title: "Sophia & Julian — Villa Erba Grandeur, Como",
+        src: "https://assets.mixkit.co/videos/preview/mixkit-beautiful-wedding-couple-walks-on-meadow-40149-large.mp4"
+      },
+      santorini: {
+        title: "Chloe & Alexandre — Twilight Caldera Vows, Santorini",
+        src: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-holding-hands-and-walking-40150-large.mp4"
+      },
+      chateau: {
+        title: "Eleanor & Nicholas — French Estate waltz, Loire Valley",
+        src: "https://assets.mixkit.co/videos/preview/mixkit-beautiful-bride-and-groom-smiling-and-walking-40151-large.mp4"
+      }
+    };
+
+    let bsVideoModal = null;
+
+    function playVideo(key) {
+      const data = videoData[key];
+      if (!data) return;
+
+      const titleEl = document.getElementById('modalVideoTitle');
+      const videoEl = document.getElementById('customHtml5Player');
+      
+      titleEl.innerText = data.title;
+      videoEl.src = data.src;
+      videoEl.load();
+
+      // Trigger video play once loaded
+      const playPromise = videoEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log("Auto-play was blocked by user interaction constraints, awaiting manual press.");
+        });
+      }
+
+      // Initialize and toggle the Bootstrap modal
+      if (!bsVideoModal) {
+        bsVideoModal = new bootstrap.Modal(document.getElementById('videoTestimonialModal'));
+      }
+      bsVideoModal.show();
+    }
+
+    function stopCurrentVideo() {
+      const videoEl = document.getElementById('customHtml5Player');
+      if (videoEl) {
+        videoEl.pause();
+        videoEl.currentTime = 0;
+      }
+    }
+
+    // Handle modal hiding to stop playback
+    const modalEl = document.getElementById('videoTestimonialModal');
+    if (modalEl) {
+      modalEl.addEventListener('hidden.bs.modal', () => {
+        stopCurrentVideo();
+      });
+    }
+  </script>
+</body>
+</html>

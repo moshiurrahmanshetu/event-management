@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Event Details — AURELIA | Luxury Wedding & Bespoke Event Planners</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    /* Detail gallery structure */
+    .detail-gallery-lux {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .detail-gallery-1 {
+      grid-column: span 6;
+      height: 300px;
+    }
+    .detail-gallery-2 {
+      grid-column: span 6;
+      height: 300px;
+    }
+    .detail-gallery-3 {
+      grid-column: span 12;
+      height: 450px;
+    }
+    @media (max-width: 768px) {
+      .detail-gallery-1, .detail-gallery-2, .detail-gallery-3 {
+        grid-column: span 12;
+        height: 280px;
+      }
+    }
+    .detail-gallery-card {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+    }
+    .detail-gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s ease;
+    }
+    .detail-gallery-card:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Meta items */
+    .blueprint-list-lux li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(var(--color-rose-gold-rgb), 0.08);
+      font-size: 0.9rem;
+    }
+    .blueprint-list-lux li:last-child {
+      border-bottom: none;
+    }
+
+    /* Timeline Luxury styling */
+    .timeline-lux {
+      position: relative;
+      padding-left: 30px;
+      border-left: 1px solid rgba(var(--color-rose-gold-rgb), 0.2);
+    }
+    .timeline-item-lux {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .timeline-item-lux:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-marker-lux {
+      position: absolute;
+      left: -36px;
+      top: 5px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background-color: var(--color-rose-gold);
+      border: 2px solid var(--bg-primary);
+      box-shadow: 0 0 0 4px rgba(var(--color-rose-gold-rgb), 0.1);
+      transition: all 0.3s ease;
+    }
+    .timeline-item-lux:hover .timeline-marker-lux {
+      background-color: var(--color-navy);
+      transform: scale(1.2);
+    }
+    .timeline-time-lux {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-rose-gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+    .timeline-title-lux {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .timeline-desc-lux {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Organizer Card Luxury */
+    .organizer-profile-lux img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 50% !important;
+      border: 2px solid rgba(var(--color-rose-gold-rgb), 0.3) !important;
+      padding: 6px;
+      background: white;
+      transition: all 0.4s ease;
+    }
+    .organizer-profile-lux:hover img {
+      border-color: var(--color-rose-gold) !important;
+      transform: scale(1.03);
+    }
+
+    /* Accordion customizations */
+    .accordion-button::after {
+      display: none !important;
+    }
+    .accordion-button:not(.collapsed) {
+      color: var(--color-rose-gold) !important;
+      box-shadow: none !important;
+    }
+    .accordion-button:focus {
+      box-shadow: none !important;
+    }
+    .accordion-icon-lux {
+      color: var(--color-rose-gold);
+      font-size: 1.1rem;
+      transition: transform 0.4s ease;
+    }
+    .accordion-button:not(.collapsed) .accordion-icon-lux {
+      transform: rotate(180deg);
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/event-details.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/event-details.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, venues, packages...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html">Our Atelier</a></li>
+        <li><a href="services.html">Curation Services</a></li>
+        <li><a href="gallery.html">Inspiration Gallery</a></li>
+        <li><a href="event.html" class="active">Grand Events</a></li>
+        <li><a href="pricing.html">Investment</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Buttons in Nav -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3 fs-7" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+     Section 1: Hero Banner (Dynamic background image & titles)
+     ========================================================================== -->
+  <header class="section-padding bg-navy text-white text-center" id="detailHeader" style="background-image: linear-gradient(rgba(11, 19, 37, 0.55), rgba(11, 19, 37, 0.72)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=2000'); background-size: cover; background-position: center; padding-top: 170px; padding-bottom: 120px;">
+    <div class="container hero-content">
+      <span class="subtitle-sans text-white mb-2 d-block reveal-fade-in" id="detailHeaderSub">Case Study Archive</span>
+      <h1 class="serif-font text-white mb-0 reveal-fade-in reveal-delay-1" id="detailHeaderTitle" style="font-size: 3rem; font-weight: 300;">Golden Hour Garden Celebration</h1>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+     Section 2: Deep Dive Case Details
+     ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="row g-5">
+        
+        <!-- Left content column -->
+        <div class="col-lg-8 reveal-fade-in">
+          <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2" id="detailPageBadge">Atmosphere & Splendor</span>
+          <h2 class="decorated-left mb-4" id="detailPageTitle">Under Cascading Wisteria</h2>
+          
+          <p class="lead serif-font italic text-muted mb-4" id="detailPageTagline" style="font-size: 1.25rem;">
+            A romantic luxury garden celebration matching the elements of early summer blossoms and warm lighting dynamics.
+          </p>
+          
+          <div class="sans-font text-secondary mb-4 leading-relaxed" id="detailPageDesc" style="font-size: 1.05rem;">
+            Our creative challenge was to integrate a modern rose-gold design DNA with a pristine historical garden estate. By selecting champagne-hued linens and custom gold-framed hardware, we structured a warm, light-reflective atmosphere that elevated the golden hour sunset.
+          </div>
+
+          <div class="sans-font text-secondary mb-5 leading-relaxed" id="detailPageSecondaryDesc" style="font-size: 1rem;">
+            In addition to the visual aesthetic, our production engineers managed full acoustic layouts to ensure crystal-clear transmissions during vows while reducing historic brick reflections. From customized arrival cocktails to a surprise evening chamber strings concerto, every milestone transpired with absolute poise and timing.
+          </div>
+          
+          <div class="row g-4 mt-4">
+            <div class="col-md-6 col-6">
+              <div class="border-start border-luxury ps-3" style="border-width: 2px !important;">
+                <span class="subtitle-sans d-block text-muted" style="font-size: 0.65rem;">Curation Atelier</span>
+                <p class="serif-font mb-0 text-luxury" style="font-size: 1.25rem;">Aurelia Directors</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-6">
+              <div class="border-start border-luxury ps-3" style="border-width: 2px !important;">
+                <span class="subtitle-sans d-block text-muted" style="font-size: 0.65rem;">Client Guest Count</span>
+                <p class="serif-font mb-0 text-luxury" style="font-size: 1.25rem;" id="detailPageGuests">180 Guests</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Visual Story Gallery -->
+          <div class="mt-5">
+            <h4 class="serif-font text-primary mb-4" style="font-weight: 300;">Visual Masterpiece Gallery</h4>
+            <div class="detail-gallery-lux" id="detailGalleryContainer">
+              <!-- Grid items populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Blueprint Sidebar -->
+        <div class="col-lg-4 reveal-fade-in reveal-delay-1">
+          <div class="p-4 p-md-5 bg-light-soft border" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important; border-radius: 4px; position: sticky; top: 120px;">
+            <h4 class="serif-font text-luxury mb-4" style="font-weight: 300; border-bottom: 1px solid rgba(var(--color-rose-gold-rgb), 0.15); padding-bottom: 12px; font-size: 1.35rem;">Event Blueprint</h4>
+            
+            <ul class="list-unstyled blueprint-list-lux sans-font text-secondary">
+              <li class="d-flex justify-content-between">
+                <strong>Celebration Date:</strong> 
+                <span id="blueDate">June 2025</span>
+              </li>
+              <li class="d-flex justify-content-between text-end">
+                <strong>Venue Estate:</strong> 
+                <span id="blueVenue">Belvedere Estate, Florence</span>
+              </li>
+              <li class="d-flex justify-content-between">
+                <strong>Styling Theme:</strong> 
+                <span id="blueStyle">Romantic Contemporary</span>
+              </li>
+              <li class="d-flex justify-content-between text-end">
+                <strong>Botanical Profile:</strong> 
+                <span id="blueFlorals">English Roses & Wisteria</span>
+              </li>
+              <li class="d-flex justify-content-between">
+                <strong>Lighting DNA:</strong> 
+                <span id="blueLighting">Warm Filaments & Amber Glow</span>
+              </li>
+              <li class="d-flex justify-content-between text-end">
+                <strong>Coordination Scope:</strong> 
+                <span id="blueScope">Full Production commissions</span>
+              </li>
+            </ul>
+
+            <div class="mt-4 pt-2">
+              <a href="contact.html" class="btn btn-luxury btn-luxury-primary w-100 py-3 text-uppercase fs-8 tracking-wider font-sans cursor-pointer" id="blueprintInquireBtn">
+                Inquire Similar Curation
+              </a>
+              <div class="text-center mt-3">
+                <a href="event.html" class="sans-font fs-8 text-muted hover-gold-text text-decoration-none">← Return to Events Portfolio</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 3: The Celebration Itinerary & Schedule
+     ========================================================================== -->
+  <section class="section-padding bg-light-soft border-top" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;">
+    <div class="container">
+      <div class="text-center mb-5 reveal-slide-up">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Chronology of Wonders</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">Event Schedule & Milestones</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+      </div>
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="timeline-lux" id="detailScheduleContainer">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 4: The Mastermind Organizers
+     ========================================================================== -->
+  <section class="section-padding bg-white border-top" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;">
+    <div class="container">
+      <div class="text-center mb-5 reveal-slide-up">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Creative Architects</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">The Planners & Organizers</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="row g-5 justify-content-center align-items-center">
+        <div class="col-md-5 col-lg-4 text-center">
+          <div class="organizer-profile-lux mb-4 mb-md-0" id="detailOrganizerImageWrapper">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+        <div class="col-md-7 col-lg-6">
+          <h3 class="serif-font mb-3" style="font-weight: 300;" id="detailOrganizerTitle">Curated with Pure Visceral Precision</h3>
+          <p class="sans-font text-secondary leading-relaxed mb-4" id="detailOrganizerQuote">
+            "A luxury event is not merely an assembly of decor; it is an immersive, living architecture that should captivate the senses and tell a profound personal story."
+          </p>
+          <div class="d-flex align-items-center gap-4 mb-4">
+            <div class="text-center bg-light-soft p-3 rounded flex-grow-1 border" style="border-color: rgba(var(--color-rose-gold-rgb), 0.1) !important;">
+              <span class="d-block font-serif text-luxury fs-4 mb-1" id="detailOrganizerStat1">12+</span>
+              <span class="subtitle-sans text-muted fs-9" id="detailOrganizerStat1Label">Years in Luxury Curation</span>
+            </div>
+            <div class="text-center bg-light-soft p-3 rounded flex-grow-1 border" style="border-color: rgba(var(--color-rose-gold-rgb), 0.1) !important;">
+              <span class="d-block font-serif text-luxury fs-4 mb-1" id="detailOrganizerStat2">200+</span>
+              <span class="subtitle-sans text-muted fs-9" id="detailOrganizerStat2Label">Global Celebrations Managed</span>
+            </div>
+          </div>
+          <div class="d-flex gap-3">
+            <a href="#bookingFormSection" class="btn btn-luxury btn-luxury-primary py-2 px-4 fs-8">Secure Booking</a>
+            <a href="about.html" class="btn btn-luxury btn-luxury-outline py-2 px-4 fs-8">Explore Atelier Vision</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 5: Curated FAQ Accordion
+     ========================================================================== -->
+  <section class="section-padding bg-light-soft border-top" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;">
+    <div class="container">
+      <div class="text-center mb-5 reveal-slide-up">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Concierge Intelligence</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">Frequently Answered Questions</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion accordion-luxury" id="faqAccordion">
+            
+            <div class="accordion-item bg-transparent border-bottom mb-3" style="border-color: rgba(var(--color-rose-gold-rgb), 0.15) !important;">
+              <h2 class="accordion-header" id="faqHeadingOne">
+                <button class="accordion-button collapsed serif-font text-primary bg-transparent py-3 px-0 border-0 fs-5 d-flex justify-content-between align-items-center w-100" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="false" aria-controls="faqCollapseOne">
+                  How early should we initiate the event planning process?
+                  <span class="accordion-icon-lux">❈</span>
+                </button>
+              </h2>
+              <div id="faqCollapseOne" class="accordion-collapse collapse" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body sans-font text-secondary pt-0 px-0 pb-4 leading-relaxed" style="font-size: 0.95rem;">
+                  We strongly advise establishing a liaison 9 to 12 months in advance of your desired date. Because our studio strictly limits commissions to only 8 grand events per season, this ensures absolute creative focus, proper booking priority at heritage estates, and sufficient timeline allocation for bespoke design rendering.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item bg-transparent border-bottom mb-3" style="border-color: rgba(var(--color-rose-gold-rgb), 0.15) !important;">
+              <h2 class="accordion-header" id="faqHeadingTwo">
+                <button class="accordion-button collapsed serif-font text-primary bg-transparent py-3 px-0 border-0 fs-5 d-flex justify-content-between align-items-center w-100" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                  Are we able to customize our menus and table setting designs?
+                  <span class="accordion-icon-lux">❈</span>
+                </button>
+              </h2>
+              <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body sans-font text-secondary pt-0 px-0 pb-4 leading-relaxed" style="font-size: 0.95rem;">
+                  Absolutely. Every Aurelia event is customized from the ground up. You will participate in private tasting sessions with Michelin-starred culinary directors and cooperate with our master stylists to hand-select Italian fabrics, customized brassware, and bespoke hand-painted chargers.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item bg-transparent border-bottom mb-3" style="border-color: rgba(var(--color-rose-gold-rgb), 0.15) !important;">
+              <h2 class="accordion-header" id="faqHeadingThree">
+                <button class="accordion-button collapsed serif-font text-primary bg-transparent py-3 px-0 border-0 fs-5 d-flex justify-content-between align-items-center w-100" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                  Do you supervise multi-day guest travel and accommodations?
+                  <span class="accordion-icon-lux">❈</span>
+                </button>
+              </h2>
+              <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body sans-font text-secondary pt-0 px-0 pb-4 leading-relaxed" style="font-size: 0.95rem;">
+                  Yes, our global concierge division coordinates full charter flights, local transfers, yacht hires, and luxury hotel block buyouts. We ensure your attendees experience a seamless luxury flow from the moment they land in the host country until their departure.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item bg-transparent border-bottom mb-3" style="border-color: rgba(var(--color-rose-gold-rgb), 0.15) !important;">
+              <h2 class="accordion-header" id="faqHeadingFour">
+                <button class="accordion-button collapsed serif-font text-primary bg-transparent py-3 px-0 border-0 fs-5 d-flex justify-content-between align-items-center w-100" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+                  What contingency frameworks are built in for outdoor events?
+                  <span class="accordion-icon-lux">❈</span>
+                </button>
+              </h2>
+              <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body sans-font text-secondary pt-0 px-0 pb-4 leading-relaxed" style="font-size: 0.95rem;">
+                  Every single outdoor celebration is designed alongside a comprehensive "Plan B" architectural framework of equal scale and sophistication. We coordinate high-end custom marquee designs or secure indoor grand halls at the venue estate, ensuring weather variations never diminish the visual drama of your milestone.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 6: Interactive Reservation Form & Booking Form
+     ========================================================================== -->
+  <section class="section-padding bg-navy text-white position-relative overflow-hidden" id="bookingFormSection" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        
+        <!-- Left Side: Informative Blueprint details -->
+        <div class="col-lg-5 reveal-slide-up">
+          <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Secure Commission Space</span>
+          <h2 class="serif-font text-white mb-4" style="font-weight: 300; font-size: 2.2rem;">Reserve Your Dates</h2>
+          <p class="sans-font text-light opacity-75 mb-4 leading-relaxed" style="font-size: 1rem;">
+            Whether you wish to co-create a wedding on the Amalfi cliffs, a tech summit gala, or a milestone birthday, our design directors will manage your vision with absolute precision.
+          </p>
+          <div class="d-flex flex-column gap-3 mb-4">
+            <div class="d-flex align-items-center gap-3">
+              <span class="text-luxury fs-4">❈</span>
+              <span class="sans-font fs-8 opacity-90">Each booking request locks priority scheduling for 14 days.</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="text-luxury fs-4">❈</span>
+              <span class="sans-font fs-8 opacity-90">Receive tailored hand-drawn sketch concepts post-validation.</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="text-luxury fs-4">❈</span>
+              <span class="sans-font fs-8 opacity-90">Personal on-site project liaison assigned immediately.</span>
+            </div>
+          </div>
+          <div class="p-3 bg-white bg-opacity-5 border border-dashed rounded text-center" style="border-color: var(--color-rose-gold);">
+            <span class="fs-8 text-luxury d-block mb-1">SECURE CONCIERGE ACCESS</span>
+            <span class="sans-font text-white fs-7">+39 02 8872 901</span>
+          </div>
+        </div>
+
+        <!-- Right Side: Booking Form -->
+        <div class="col-lg-7 reveal-slide-up">
+          <div class="p-4 p-md-5 bg-white bg-opacity-5 border" style="border-color: rgba(var(--color-rose-gold-rgb), 0.15) !important; border-radius: 4px;" id="bookingFormWrapper">
+            <h4 class="serif-font text-white mb-2" style="font-weight: 300;" id="bookingFormTitle">Atelier Booking Reservation</h4>
+            <p class="sans-font text-muted fs-8 mb-4" id="bookingFormSubtitle">Begin your luxury consultation regarding the current masterpiece.</p>
+            
+            <form id="detailBookingForm" class="form-luxury" onsubmit="handleBookingSubmit(event)">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="text" class="form-luxury-control text-white" id="bookName" required>
+                    <label for="bookName">Your Full Name</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="email" class="form-luxury-control text-white" id="bookEmail" required>
+                    <label for="bookEmail">Your Email Address</label>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="date" class="form-luxury-control text-white pt-2" id="bookDate" style="color-scheme: dark;" required>
+                    <label for="bookDate" class="active">Target Reservation Date</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <select class="form-luxury-control text-white pt-0" id="bookGuests" style="border-radius: 0; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.2); background: transparent; color: white; outline: none;" required>
+                      <option value="" disabled selected style="background: var(--color-navy);">Target Guest Count</option>
+                      <option value="under-50" style="background: var(--color-navy);">Intimate (Under 50 Guests)</option>
+                      <option value="50-150" style="background: var(--color-navy);">Classic Grand (50 - 150 Guests)</option>
+                      <option value="150-300" style="background: var(--color-navy);">Royal scale (150 - 300 Guests)</option>
+                      <option value="above-300" style="background: var(--color-navy);">Mega scale (300+ Guests)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-luxury-group form-luxury-floating">
+                <textarea class="form-luxury-control text-white" id="bookNotes" style="height: 100px; resize: none;" placeholder="Aesthetic dreams, bespoke requests, destination targets..."></textarea>
+                <label for="bookNotes" class="active">Aesthetic details & special parameters...</label>
+              </div>
+              
+              <button type="submit" class="btn btn-luxury btn-luxury-primary w-100 magnetic-target cursor-pointer py-3 text-uppercase fs-8 tracking-wider font-sans">
+                Request Date Reservation
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-fade-in">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Dynamic Content database & rendering logic -->
+  <script>
+    const DETAIL_DATABASE = {
+      1: {
+        title: "Golden Hour Garden Celebration",
+        badge: "Atmosphere & Splendor",
+        tagline: "Under Cascading Wisteria",
+        location: "Florence, Italy",
+        date: "June 2025",
+        guests: "180 Guests",
+        venue: "Belvedere Estate, Florence",
+        theme: "Romantic Contemporary",
+        florals: "English Roses & Wisteria",
+        lighting: "Warm Filaments & Amber Glow",
+        desc1: "Our creative challenge was to integrate a modern rose-gold design DNA with a pristine historical garden estate. By selecting champagne-hued linens and custom gold-framed hardware, we structured a warm, light-reflective atmosphere that elevated the golden hour sunset.",
+        desc2: "In addition to the visual aesthetic, our production engineers managed full acoustic layouts to ensure crystal-clear transmissions during vows while reducing historic brick reflections. From customized arrival cocktails to a surprise evening chamber strings concerto, every milestone transpired with absolute poise and timing.",
+        banner: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200"
+        ]
+      },
+      2: {
+        title: "Italian Lakefront Heritage Wedding",
+        badge: "Timeless Romance",
+        tagline: "Elegance of the Lario",
+        location: "Lake Como, Italy",
+        date: "September 2025",
+        guests: "120 Guests",
+        venue: "Villa d'Este Lakeside, Lake Como",
+        theme: "Classical Regal",
+        florals: "White Hydrangeas & Orchids",
+        lighting: "Fairy Lights & Candlelit Tapers",
+        desc1: "A historic villa celebration overlooking Lake Como, curated with romantic string orchestration and bespoke calligraphy place cards. Our design approach emphasized natural water reflections, utilizing mirrored surfaces and high tapers to double the visual field.",
+        desc2: "The centerpiece banquet consisted of a curated seven-course Italian gastronomy voyage, complete with organic vineyard pairings sourced directly from private Tuscany cellars. Live opera singers greeted the newlyweds' catamaran arrival.",
+        banner: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=1200"
+        ]
+      },
+      3: {
+        title: "Parisian Haute Couture Runway & Banquet",
+        badge: "High-Fashion Exhibition",
+        tagline: "Bespoke Bridal Runway",
+        location: "Paris, France",
+        date: "October 2026",
+        guests: "250 Guests",
+        venue: "Hôtel de Crillon, Paris",
+        theme: "Haute Couture & Velvet",
+        florals: "Blush Garden Roses & Peonies",
+        lighting: "Aura Spotlights & Crystal Chandeliers",
+        desc1: "An exclusive bridal showcase and luxurious evening banquet inside a historical Parisian palace. We constructed a customized glass catwalk suspended over the courtyard pool, reflecting dramatic custom illumination matrices.",
+        desc2: "Dignitaries and high-end planners reviewed previews of custom-stitched lace silhouettes, accompanied by a Michelin-caliber degustation menu. A sensory performance celebrating luxury European craft.",
+        banner: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=1200"
+        ]
+      },
+      4: {
+        title: "Santorini Cliffside Infinity Vows",
+        badge: "Global Escapes",
+        tagline: "Sky Meets Ocean",
+        location: "Santorini, Greece",
+        date: "May 2025",
+        guests: "80 Guests",
+        venue: "Canaves Oia Cliffside, Santorini",
+        theme: "Pure Minimalist Aegean",
+        florals: "Cascading White Orchids",
+        lighting: "Golden Hour Natural & LED Accents",
+        desc1: "An intimate whitewashed cliffside ceremony framing the endless Aegean sea. Our design principles stripped away unnecessary clutter to focus entirely on blue-and-white geometries and pure floral sculptures.",
+        desc2: "With Santorini's legendary golden hour sunset acting as the primary backdrop, guests enjoyed high-end champagne cocktails from an infinity pool deck, transitioning seamlessly into an open-air candlelight banquet.",
+        banner: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1520854221256-174b1ec358ef?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=1200"
+        ]
+      },
+      5: {
+        title: "Modern Luminary Tech Summit Gala",
+        badge: "Audiovisual Arts",
+        tagline: "Neon Innovation",
+        location: "Milan, Italy",
+        date: "November 2025",
+        guests: "400 Guests",
+        venue: "Palazzo del Ghiaccio, Milan",
+        theme: "Futurism & Matte Black",
+        florals: "Structured Dried Eucalyptus",
+        lighting: "Laser Scape & Dynamic Holograms",
+        desc1: "An immersive black-tie reception combining high-end light design, custom laser programming, and molecular gastronomy. The entry tunnel featured soundscapes that synchronized with body heat sensors.",
+        desc2: "Our culinary artisans constructed self-fogging dessert stations, where guests selected hand-sculpted cocoa cubes emitting soft caramel vapors. A brilliant crossover between classical prestige and luxury tech.",
+        banner: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=1200"
+        ]
+      },
+      6: {
+        title: "Imperial Velvet Milestone Birthday",
+        badge: "Personal Milestones",
+        tagline: "Deep Plum & Brass",
+        location: "London, UK",
+        date: "December 2025",
+        guests: "150 Guests",
+        venue: "The Conservatory at Barbican, London",
+        theme: "Gothic Botanical Luxury",
+        florals: "Burgundy Dahlias & Moss",
+        lighting: "Dim Edison Bulbs & Uplighting",
+        desc1: "A spectacular 40th birthday dinner inside an industrial brick conservatory, styled with heavy velvet drapes, brass charger plates, and customized crystal decanters.",
+        desc2: "Amidst dense botanical greenery, guests dined on prime English roasted cuts accompanied by a selection of aged scotch whiskies, while a private jazz quartet played late-night classics.",
+        banner: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200"
+        ]
+      },
+      7: {
+        title: "Provence Lavender Vineyard Vow Renewal",
+        badge: "Silver Milestones",
+        tagline: "Rustic French Romance",
+        location: "Provence, France",
+        date: "July 2025",
+        guests: "90 Guests",
+        venue: "Château de Sannes, Provence",
+        theme: "French Provencal Farmhouse",
+        florals: "English Lavender & Olive Leaves",
+        lighting: "Warm Festoons & Distressed Lanterns",
+        desc1: "A silver anniversary tribute set within private lavender fields, featuring rustic wooden tablescapes and organic local wines. Long estate-style tables were lined with customized olive-branch garlands and soft linen runners.",
+        desc2: "Under a blanket of French stars, the renewal couple toasted to 25 years of devotion, enjoying local goat cheese pairings, handmade lavender macaroons, and the gentle chirping of cicadas.",
+        banner: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=1200",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"
+        ]
+      },
+      8: {
+        title: "Amalfi Coast Private Chef Tasting Panel",
+        badge: "Gastronomy Escapes",
+        tagline: "Luxury Maritime Escape",
+        location: "Positano, Italy",
+        date: "September 2026",
+        guests: "50 Guests",
+        venue: "Villa Treville Cliffside, Positano",
+        theme: "Coastal Italian Glamour",
+        florals: "Bougainvillea & Fresh Lemons",
+        lighting: "Hanging Straw Lanterns & Pinspots",
+        desc1: "A golden anniversary weekend tribute spanning a private cliffside villa dinner and a luxury catamaran tour of Capri. Designed for an ultra-exclusive circle of immediate family.",
+        desc2: "Our master chefs curated a seafood-focused menu using local catches, Amalfi lemons, and hand-rolled pasta, accompanied by customized cocktails served in custom hand-painted ceramic glasses.",
+        banner: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1200"
+        ]
+      },
+      9: {
+        title: "Emerald Forest Botanical Soirée",
+        badge: "Milestones in Nature",
+        tagline: "Intimate Wooded Luxury",
+        location: "Munich, Germany",
+        date: "June 2026",
+        guests: "110 Guests",
+        venue: "Forest Estate Schlosshotel, Munich",
+        theme: "Woodland Whimsy",
+        florals: "Forest Moss, Ferns & Ivy",
+        lighting: "Floating Candles & Fairy Nets",
+        desc1: "An enchanting outdoor woodland birthday banquet, lit by thousands of floating candles and styled with forest moss. Long tables emerged seamlessly from the natural wooded floor, matching pine structures with elegant crystal stemware.",
+        desc2: "A custom classical harpist performed from a moss-covered pavilion, setting a deeply magical and cinematic tone as twilight draped over the trees.",
+        banner: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200",
+          "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=800"
+        ]
+      },
+      10: {
+        title: "Grand Habsburg Palace Ball",
+        badge: "Classic Grandeur",
+        tagline: "Historical Waltz",
+        location: "Vienna, Austria",
+        date: "January 2026",
+        guests: "300 Guests",
+        venue: "Hofburg Palace, Vienna",
+        theme: "Habsburg Imperial",
+        florals: "White Lilies & Gold Gilded Leaves",
+        lighting: "Gilt-Bronze Candelabras & Chandeliers",
+        desc1: "A corporate charity ball recreating classical Viennese grandeur, showcasing full chamber symphonies and operatic performances. The majestic high-vaulted ceilings were lit with soft amber projections to highlight the centuries-old frescoes.",
+        desc2: "Guests participated in choreographed waltzes led by principal dancers from the State Ballet, culminating in a black-tie royal banquet served on vintage silver trays.",
+        banner: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=1200",
+          "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800"
+        ]
+      },
+      11: {
+        title: "Royal Chateau de Tourreau Celebration",
+        badge: "European Legacy",
+        tagline: "Classic European Majesty",
+        location: "Provence, France",
+        date: "August 2025",
+        guests: "220 Guests",
+        venue: "Château de Tourreau, Provence",
+        theme: "French Baroque Elegance",
+        florals: "Pristine White Roses & Hydrangeas",
+        lighting: "Grand Hanging Chandeliers & Pathway Torch",
+        desc1: "An exquisite multi-day estate wedding utilizing baroque gates, lavender rows, and grand water fountains to frame a romantic outdoor dinner. Our design was centered on royal French symmetries.",
+        desc2: "From a private orchestral processional to a custom-cast iron structure supporting cascading floral clouds over the head table, every second was curated as an editorial masterstroke.",
+        banner: "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=1200",
+          "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200"
+        ]
+      },
+      12: {
+        title: "Cosmopolitan Skyline Milestone",
+        badge: "Rooftop Prestige",
+        tagline: "Monochrome Heights",
+        location: "New York, USA",
+        date: "March 2026",
+        guests: "130 Guests",
+        venue: "Manhattan Rooftop Atelier, NY",
+        theme: "Contemporary Black & White",
+        florals: "Strict White Calla Lilies",
+        lighting: "Dynamic Skyline Halos & Neon Ribbons",
+        desc1: "A luxury black-and-white themed birthday soirée on a premium Manhattan rooftop, overlooking the iconic Empire State Building. Our stylists matched matte black glassware with clean white marble tables and high calla lily pillars.",
+        desc2: "Guests enjoyed top-shelf mixology craft while listening to a modern electronic-violinist fusion set, establishing an unmatched metropolitan vibe of sophisticated fun.",
+        banner: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=2000",
+        images: [
+          "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=800",
+          "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=1200",
+          "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80&w=800"
+        ]
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Parse parameters
+      const params = new URLSearchParams(window.location.search);
+      const rawId = params.get("id");
+      let id = parseInt(rawId) || 1; // Default to ID 1 if invalid
+
+      // Fallback range check
+      if (!DETAIL_DATABASE[id]) {
+        id = 1;
+      }
+
+      const event = DETAIL_DATABASE[id];
+      populateDetails(event);
+    });
+
+    function detectCategory(event) {
+      if (event.category) return event.category;
+      const text = (event.title + " " + event.theme + " " + event.tagline).toLowerCase();
+      if (text.includes("wedding") || text.includes("vow") || text.includes("celebration")) return "wedding";
+      if (text.includes("birthday") || text.includes("milestone")) return "birthday";
+      if (text.includes("tech") || text.includes("summit") || text.includes("runway") || text.includes("gala") || text.includes("corporate")) return "corporate";
+      return "anniversary";
+    }
+
+    function getScheduleData(category) {
+      if (category === "wedding") {
+        return [
+          { time: "09:00 AM", title: "Morning Bridal Prep & Portraiture", desc: "Private styling and cinematic capture inside the estate suite, featuring soft natural lighting." },
+          { time: "04:30 PM", title: "Chamber Strings Guest Welcome", desc: "Arrival of dignitaries and guests to the courtyard gardens, greeted by live violin and iced rose champagne." },
+          { time: "05:00 PM", title: "The Scenic Vow Exchange", desc: "A breathtaking cliffside or garden ceremony under a cascading canopy of custom floral architecture." },
+          { time: "06:00 PM", title: "Sunset Cocktail & Oyster Hour", desc: "Fine culinary chemistry and mixology on the terrace, timed perfectly with the golden hour descent." },
+          { time: "07:30 PM", title: "Grand Candlelit Banquet", desc: "A classical multi-course gastronomy feast utilizing long tables styled with heritage linens and glowing tapers." },
+          { time: "10:30 PM", title: "Midnight Fireworks & Dancing", desc: "A spectacular aerial illumination display reflecting over the local landscape, transitioning to the afterparty." }
+        ];
+      } else if (category === "corporate") {
+        return [
+          { time: "01:00 PM", title: "Media Clearance & Delegate Arrival", desc: "Press registration and VIP welcoming at the grand foyer, complete with custom architectural hologram visuals." },
+          { time: "02:30 PM", title: "Keynote Panels & Innovation Show", desc: "High-caliber industry insights paired with immersive 3D spatial sound and bespoke laser mapping." },
+          { time: "05:00 PM", title: "Bespoke Cocktail Networking", desc: "Intermission with fine culinary bites, experimental mixology, and direct stakeholder liaisons." },
+          { time: "07:00 PM", title: "Black-Tie Charity Banquet", desc: "An elegant evening feast featuring curated global cuisines and performances by classical conservatory musicians." },
+          { time: "09:30 PM", title: "Honorary Awards Presentation", desc: "Recognizing outstanding global accomplishments, complete with customized heavy glass trophy displays." },
+          { time: "10:30 PM", title: "Late-Night Lounge Performance", desc: "An exclusive modern electronic-jazz fusion live performance and final celebratory networking toast." }
+        ];
+      } else if (category === "birthday") {
+        return [
+          { time: "03:00 PM", title: "Atelier Welcome & Private Portraits", desc: "Greeting the guest of honor and immediate circle for stylized editorial photography in the conservatory." },
+          { time: "06:30 PM", title: "Arrival of Soirée Attendees", desc: "Welcome reception featuring dry ice punch cocktails, ambient jazz, and immersive dim candlelight styling." },
+          { time: "08:00 PM", title: "Bespoke Gastronomy Dinner", desc: "A custom dining menu matched with vintage wines, showcasing the honoree's favorite global delicacies." },
+          { time: "10:00 PM", title: "Champagne Toast & Cake Unveiling", desc: "A grand multi-tier architectural cake sculpture illuminated by floating sparklers and celebratory speeches." },
+          { time: "10:30 PM", title: "Curated Beats & After-Hour Lounge", desc: "The space transitions into a high-end club vibe with custom live DJ sets, laser backdrops, and signature mixology." }
+        ];
+      } else {
+        return [
+          { time: "11:00 AM", title: "Liaison Greeting & Private Catamaran Ride", desc: "An intimate tour of the surrounding coastlines or valleys for immediate family and silver couple." },
+          { time: "05:00 PM", title: "Vow Renewal Ceremony", desc: "An emotional, intimate exchange of vows amidst private lavender rows or historic villa columns." },
+          { time: "06:00 PM", title: "Outdoor Terrace Reception", desc: "A vintage-styled gathering with local farm-to-table grazing tables, organic vineyard pairings, and classical harp." },
+          { time: "07:30 PM", title: "The Tribute Feast", desc: "Long family-style banquet tables styled with natural foliage, celebrating key life milestones and love letters." },
+          { time: "09:30 PM", title: "Cinematic Retrospective Film", desc: "A custom curated documentary projection showcasing cherished memories, followed by celebratory champagne toasts." },
+          { time: "10:30 PM", title: "Serenade Under the Stars", desc: "A gentle evening dance session with acoustic guitar, illuminated entirely by festoons and lanterns." }
+        ];
+      }
+    }
+
+    function getOrganizerData(category) {
+      if (category === "corporate") {
+        return {
+          name: "Jean-Laurent Dubois",
+          title: "Executive Production Director",
+          image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=500",
+          quote: "A luxury corporate gala requires structural accuracy, rigorous timing loops, and state-of-the-art audiovisual orchestration. We approach each commission with military logistic discipline combined with high-end creative theater.",
+          stat1: "15+",
+          stat1Label: "Years Production Leadership",
+          stat2: "350+",
+          stat2Label: "Corporate & Tech Galas"
+        };
+      } else {
+        return {
+          name: "Isabella Sterling",
+          title: "Lead Creative Director",
+          image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=500",
+          quote: "A luxury event is not merely an assembly of decor; it is an immersive, living architecture that should captivate the senses and tell a profound personal story. We approach every commission as a museum-tier exhibition where timing, comfort, and aesthetics integrate into a singular masterpiece.",
+          stat1: "12+",
+          stat1Label: "Years in Luxury Curation",
+          stat2: "200+",
+          stat2Label: "Global Celebrations"
+        };
+      }
+    }
+
+    function handleBookingSubmit(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById("bookName").value;
+      const email = document.getElementById("bookEmail").value;
+      const date = document.getElementById("bookDate").value;
+      const guestsSelect = document.getElementById("bookGuests");
+      const guests = guestsSelect.options[guestsSelect.selectedIndex].text;
+      
+      const container = document.getElementById("bookingFormWrapper");
+      if (container) {
+        container.innerHTML = `
+          <div class="text-center py-5 reveal-slide-up">
+            <span class="crest fs-1 text-luxury d-block mb-3" style="color: var(--color-rose-gold);">❈</span>
+            <h3 class="serif-font text-white mb-3" style="font-weight: 300;">Commission Request Received</h3>
+            <p class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-4" style="font-size: 0.75rem; color: var(--color-rose-gold);">CONCIERGE TICKET SECURED</p>
+            <p class="sans-font text-light opacity-75 max-width-600 mx-auto mb-4" style="font-size: 0.95rem; line-height: 1.7;">
+              Thank you, <strong>${name}</strong>. Your reservation parameters for a celebration of <strong>${guests}</strong> targeting <strong>${date}</strong> have been validated by our security clears.
+            </p>
+            <div class="p-3 bg-white bg-opacity-5 border border-dashed rounded d-inline-block text-start mb-4" style="border-color: var(--color-rose-gold);">
+              <span class="fs-9 text-luxury d-block mb-1 font-sans text-uppercase tracking-wider">SECURE DIRECT INQUIRY RECORD</span>
+              <span class="sans-font text-white fs-8">Ref: AURELIA-RES-${Math.floor(100000 + Math.random() * 900000)}</span>
+            </div>
+            <p class="sans-font text-muted fs-8 mb-0">
+              A bespoke curation liaison will coordinate with you at <strong>${email}</strong> within 12 hours.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    function populateDetails(event) {
+      if (!event) return;
+
+      // Update Page Title
+      document.getElementById("pageTitle").textContent = `${event.title} — AURELIA | Luxury Case Study`;
+
+      // Update Hero Header Background & Content
+      const header = document.getElementById("detailHeader");
+      if (header) {
+        header.style.backgroundImage = `linear-gradient(rgba(11, 19, 37, 0.55), rgba(11, 19, 37, 0.72)), url('${event.banner}')`;
+      }
+      document.getElementById("detailHeaderTitle").textContent = event.title;
+      document.getElementById("detailHeaderSub").textContent = `${event.location.toUpperCase()} • ${event.date.toUpperCase()}`;
+
+      // Update Content Column
+      document.getElementById("detailPageBadge").textContent = event.badge;
+      document.getElementById("detailPageTitle").textContent = event.tagline;
+      document.getElementById("detailPageTagline").textContent = `${event.title} • ${event.venue}`;
+      document.getElementById("detailPageDesc").textContent = event.desc1;
+      document.getElementById("detailPageSecondaryDesc").textContent = event.desc2;
+      document.getElementById("detailPageGuests").textContent = event.guests;
+
+      // Update Blueprint Sidebar
+      document.getElementById("blueDate").textContent = event.date;
+      document.getElementById("blueVenue").textContent = event.venue;
+      document.getElementById("blueStyle").textContent = event.theme;
+      document.getElementById("blueFlorals").textContent = event.florals;
+      document.getElementById("blueLighting").textContent = event.lighting;
+
+      const category = detectCategory(event);
+
+      // Update CTA query parameters prefill
+      const inquireBtn = document.getElementById("blueprintInquireBtn");
+      if (inquireBtn) {
+        inquireBtn.href = `contact.html?subject=${encodeURIComponent("Inquiry regarding " + event.title)}&category=${category}`;
+      }
+
+      // Populate Image Gallery
+      const galleryContainer = document.getElementById("detailGalleryContainer");
+      if (galleryContainer && event.images && event.images.length >= 3) {
+        galleryContainer.innerHTML = `
+          <div class="detail-gallery-1">
+            <div class="detail-gallery-card h-100">
+              <img loading="lazy" src="${event.images[0]}" alt="Atelier detail visual 1">
+            </div>
+          </div>
+          <div class="detail-gallery-2">
+            <div class="detail-gallery-card h-100">
+              <img loading="lazy" src="${event.images[1]}" alt="Atelier detail visual 2">
+            </div>
+          </div>
+          <div class="detail-gallery-3">
+            <div class="detail-gallery-card h-100">
+              <img loading="lazy" src="${event.images[2]}" alt="Atelier detail visual 3">
+            </div>
+          </div>
+        `;
+      }
+
+      // Populate Dynamic Schedule Timeline
+      const scheduleContainer = document.getElementById("detailScheduleContainer");
+      if (scheduleContainer) {
+        const schedule = getScheduleData(category);
+        scheduleContainer.innerHTML = schedule.map(item => `
+          <div class="timeline-item-lux reveal-slide-up">
+            <div class="timeline-marker-lux"></div>
+            <span class="timeline-time-lux">${item.time}</span>
+            <h4 class="timeline-title-lux">${item.title}</h4>
+            <p class="timeline-desc-lux">${item.desc}</p>
+          </div>
+        `).join("");
+      }
+
+      // Populate Dynamic Organizer Section
+      const organizer = getOrganizerData(category);
+      const organizerImgWrapper = document.getElementById("detailOrganizerImageWrapper");
+      if (organizerImgWrapper) {
+        organizerImgWrapper.innerHTML = `
+          <img loading="lazy" src="${organizer.image}" alt="${organizer.name} — ${organizer.title}" class="img-fluid rounded shadow-sm border border-luxury-soft">
+          <h4 class="serif-font mt-3 mb-1" style="font-weight: 300;">${organizer.name}</h4>
+          <span class="subtitle-sans text-luxury fs-8 text-uppercase tracking-widest">${organizer.title}</span>
+        `;
+      }
+      document.getElementById("detailOrganizerQuote").textContent = organizer.quote;
+      document.getElementById("detailOrganizerStat1").textContent = organizer.stat1;
+      document.getElementById("detailOrganizerStat1Label").textContent = organizer.stat1Label;
+      document.getElementById("detailOrganizerStat2").textContent = organizer.stat2;
+      document.getElementById("detailOrganizerStat2Label").textContent = organizer.stat2Label;
+
+      // Set target booking date to a reasonable future date
+      const dateInput = document.getElementById("bookDate");
+      if (dateInput) {
+        const today = new Date();
+        today.setDate(today.getDate() + 90); // 90 days in future
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        dateInput.value = `${yyyy}-${mm}-${dd}`;
+        dateInput.min = new Date().toISOString().split('T')[0];
+      }
+    }
+  </script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

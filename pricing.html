@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bespoke Event Investment — AURELIA Premium Template</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    /* Smooth Scroll helper */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    /* Core Variable Overrides and Helpers */
+    :root {
+      --color-rose-gold: #B76E79;
+      --color-rose-gold-rgb: 183, 110, 121;
+      --color-navy: #0b1325;
+      --color-champagne: #e8d8c8;
+      --color-champagne-rgb: 232, 216, 200;
+    }
+
+    /* Premium Theme Adjustments */
+    [data-theme="dark"] {
+      --bg-light-soft: #111a2e;
+      --bg-card: #152238;
+      --text-muted: #a0aec0;
+      --border-color-muted: rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="light"] {
+      --border-color-muted: rgba(183, 110, 121, 0.12);
+    }
+
+    /* Package Spotlight & Custom Display Image System */
+    .package-spotlight-card {
+      border: 1px solid var(--border-color-muted);
+      background: var(--bg-card);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .package-spotlight-card:hover {
+      border-color: rgba(var(--color-rose-gold-rgb), 0.4);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Custom Table Styling for Luxury Comparison Matrix */
+    .luxury-table-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color-muted);
+      overflow: hidden;
+      margin-top: 40px;
+    }
+    .table-luxury {
+      width: 100%;
+      margin-bottom: 0;
+      color: var(--text-primary);
+      vertical-align: middle;
+      border-collapse: collapse;
+    }
+    .table-luxury th {
+      background: rgba(var(--color-rose-gold-rgb), 0.05);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color-muted);
+      padding: 24px 20px;
+    }
+    .table-luxury td {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color-muted);
+      padding: 20px;
+      transition: background 0.3s ease;
+    }
+    .table-luxury tr:last-child td {
+      border-bottom: none;
+    }
+    .table-luxury tr:hover td {
+      background: rgba(var(--color-rose-gold-rgb), 0.02);
+    }
+    .table-col-highlight {
+      background: rgba(var(--color-rose-gold-rgb), 0.02);
+      border-left: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+      border-right: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+    }
+
+    /* Custom Botanical Palette Dot */
+    .botanical-palette-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* Interactive Package Highlight List */
+    .interactive-package-item {
+      padding: 22px;
+      border-left: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      background: transparent;
+    }
+    .interactive-package-item.active, .interactive-package-item:hover {
+      background: rgba(var(--color-rose-gold-rgb), 0.04);
+      border-left-color: var(--color-rose-gold);
+    }
+
+    /* Accordion Custom Header Button Color On Dark Theme */
+    [data-theme="dark"] .accordion-luxury .accordion-button {
+      color: #ffffff;
+    }
+    [data-theme="dark"] .accordion-luxury .accordion-button:not(.collapsed) {
+      color: var(--color-rose-gold);
+    }
+
+    /* Elegant Custom Form Structure */
+    .form-luxury-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1.5px solid var(--border-color-muted);
+      border-radius: 0;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      padding: 15px 5px;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .form-luxury-input:focus {
+      background: transparent;
+      border-color: var(--color-rose-gold);
+      box-shadow: none;
+      color: var(--text-primary);
+    }
+    .form-luxury-select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23B76E79' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      background-size: 12px 12px;
+    }
+
+    /* Floating Crest Element in Form Card */
+    .floating-crest-decor {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 1.8rem;
+      color: rgba(var(--color-rose-gold-rgb), 0.15);
+      user-select: none;
+    }
+
+    /* Visual validation checks checkmarks */
+    .luxury-checkmark {
+      color: var(--color-rose-gold);
+      margin-right: 8px;
+    }
+    .luxury-cross {
+      color: var(--text-muted);
+      opacity: 0.4;
+      margin-right: 8px;
+    }
+
+    /* Image zoom and transition on Spotlight card hover */
+    .spotlight-img-wrapper {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+    }
+    .spotlight-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .package-spotlight-card:hover .spotlight-img {
+      transform: scale(1.05);
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/pricing.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/pricing.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, packages, planners...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html">Our Atelier</a></li>
+        <li><a href="services.html">Curation Services</a></li>
+        <li><a href="gallery.html">Inspiration Gallery</a></li>
+        <li><a href="event.html">Grand Events</a></li>
+        <li><a href="pricing.html" class="active">Investment Guide</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Controls -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Luxury Page Header -->
+  <header class="section-padding bg-navy text-white text-center" style="background-image: linear-gradient(rgba(11, 19, 37, 0.6), rgba(11, 19, 37, 0.8)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1500'); background-size: cover; background-position: center; padding-top: 170px; padding-bottom: 110px;">
+    <div class="container hero-content">
+      <span class="subtitle-sans text-white mb-2 d-block text-uppercase tracking-widest reveal-fade-in">Transparent Curation</span>
+      <h1 class="serif-font text-white mb-3 reveal-fade-in reveal-delay-1" style="font-weight: 300;">Bespoke Event Investment</h1>
+      <div class="divider-luxury my-2 justify-content-center">
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+      </div>
+      <p class="sans-font text-white opacity-75 max-width-600 mx-auto mt-2 fs-7 text-uppercase tracking-widest reveal-fade-in reveal-delay-2" style="font-size: 0.8rem;">
+        Day-Of Management &bull; Partial Curation &bull; Full-Scale Sovereign Planning
+      </p>
+    </div>
+  </header>
+
+  <!-- Section 1: Core Pricing Plans -->
+  <section class="section-padding bg-light-soft" id="pricingPlansSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Our Planning Core</span>
+        <h2 class="serif-font mb-4" style="font-weight: 300;">Transparent Planning Levels</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="text-secondary max-width-600 mx-auto fs-7">
+          Every celebration begins with an honest architectural blueprint. Select the level of creative orchestration and structural logic that perfectly matches your wedding timeline.
+        </p>
+      </div>
+
+      <!-- Plan Cards Grid -->
+      <div class="row g-4 justify-content-center">
+        
+        <!-- Plan 1: Day-Of -->
+        <div class="col-lg-4 col-md-6 reveal-slide-up">
+          <div class="card-luxury card-luxury-framed h-100 p-4 d-flex flex-column justify-content-between bg-card text-center">
+            <div>
+              <span class="subtitle-sans text-luxury mb-2 d-block" style="font-size: 0.65rem;">The Atelier Classic</span>
+              <h3 class="serif-font mb-3" style="font-weight: 300;">Day-Of Coordination</h3>
+              <div class="mb-4">
+                <span class="serif-font fs-3 text-luxury font-mono" style="font-weight: 300;">$3,500</span>
+              </div>
+              
+              <div class="divider-luxury my-3 justify-content-center">
+                <span class="line"></span>
+                <span class="crest">❈</span>
+                <span class="line"></span>
+              </div>
+
+              <ul class="list-unstyled text-secondary sans-font fs-7 d-flex flex-column gap-3 py-3 text-start">
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Final Month Timeline Drafting
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> 10 Hours of On-Site Supervision
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Full Primary Vendor Intake
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Technical Floor Plan Audit
+                </li>
+                <li class="d-flex align-items-center text-muted opacity-50">
+                  <span class="luxury-cross">✕</span> Bespoke Floral Scenography
+                </li>
+                <li class="d-flex align-items-center text-muted opacity-50">
+                  <span class="luxury-cross">✕</span> Multi-Currency Budget Escrow
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-4 border-top" style="border-color: var(--border-color-muted);">
+              <a href="#consultationSection" class="btn btn-luxury btn-luxury-outline w-100 select-package-btn" data-package="classic">Inquire Level</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plan 2: Partial -->
+        <div class="col-lg-4 col-md-6 reveal-slide-up reveal-delay-1">
+          <div class="card-luxury h-100 p-4 d-flex flex-column justify-content-between bg-card text-center" style="border: 2px solid var(--color-rose-gold);">
+            <div>
+              <span class="badge-luxury mb-3 d-inline-block" style="font-size: 0.6rem;">Most Coveted</span>
+              <span class="subtitle-sans text-luxury mb-2 d-block" style="font-size: 0.65rem;">The Signature Curated</span>
+              <h3 class="serif-font mb-3" style="font-weight: 300;">Partial Styling & Design</h3>
+              <div class="mb-4">
+                <span class="serif-font fs-3 text-luxury font-mono" style="font-weight: 300;">$8,500</span>
+              </div>
+              
+              <div class="divider-luxury my-3 justify-content-center">
+                <span class="line"></span>
+                <span class="crest">❈</span>
+                <span class="line"></span>
+              </div>
+
+              <ul class="list-unstyled text-secondary sans-font fs-7 d-flex flex-column gap-3 py-3 text-start">
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> 6-Month Collaborative Curation
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Custom Botanical Color Palettes
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Vendor Contract Curation & Scouting
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> 16 Hours of Lead Staging Supervision
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Linen & Tableware Styling Maps
+                </li>
+                <li class="d-flex align-items-center text-muted opacity-50">
+                  <span class="luxury-cross">✕</span> Unlimited Global Site Scouting
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-4 border-top" style="border-color: var(--border-color-muted);">
+              <a href="#consultationSection" class="btn btn-luxury btn-luxury-primary w-100 select-package-btn" data-package="signature">Inquire Level</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plan 3: Full Royal -->
+        <div class="col-lg-4 col-md-6 reveal-slide-up reveal-delay-2">
+          <div class="card-luxury card-luxury-framed h-100 p-4 d-flex flex-column justify-content-between bg-card text-center">
+            <div>
+              <span class="subtitle-sans text-luxury mb-2 d-block" style="font-size: 0.65rem;">The Sovereign Estate</span>
+              <h3 class="serif-font mb-3" style="font-weight: 300;">Full Royal Planning</h3>
+              <div class="mb-4">
+                <span class="serif-font fs-3 text-luxury font-mono" style="font-weight: 300;">$18,000+</span>
+              </div>
+              
+              <div class="divider-luxury my-3 justify-content-center">
+                <span class="line"></span>
+                <span class="crest">❈</span>
+                <span class="line"></span>
+              </div>
+
+              <ul class="list-unstyled text-secondary sans-font fs-7 d-flex flex-column gap-3 py-3 text-start">
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> End-to-End Multi-Day Composition
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Unlimited Worldwide Venue Scouting
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Bespoke Culinary & Wine Pairing Design
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Full Acoustic & Lighting Spatial Renders
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Continuous 72-Hour Physical Supervision
+                </li>
+                <li class="d-flex align-items-center">
+                  <span class="luxury-checkmark">✓</span> Complete VIP Guest Logistics & Concierge
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-4 border-top" style="border-color: var(--border-color-muted);">
+              <a href="#consultationSection" class="btn btn-luxury btn-luxury-outline w-100 select-package-btn" data-package="sovereign">Inquire Level</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 2: Immersive Wedding Packages Explorer -->
+  <section class="section-padding bg-white border-top" style="border-color: var(--border-color-muted);" id="weddingPackagesSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Curated Collections</span>
+        <h2 class="serif-font mb-4" style="font-weight: 300;">Bespoke Wedding Collections</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="text-secondary max-width-600 mx-auto fs-7">
+          Our destination masterpieces seamlessly bundle elite local scouting, high-end design, and coordination into a unified romantic journey. Hover or click below to inspect our signature botanicals.
+        </p>
+      </div>
+
+      <div class="row g-5 align-items-stretch">
+        
+        <!-- Left Column: Interactive Package List -->
+        <div class="col-lg-6 d-flex flex-column justify-content-center reveal-fade-in">
+          <div class="d-flex flex-column gap-3">
+            
+            <!-- Package item 1 -->
+            <div class="interactive-package-item active" data-package-id="como" id="packageItemComo">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="serif-font m-0" style="font-weight: 400; font-size: 1.3rem;">The Lake Como Grandeur</h4>
+                <span class="font-mono text-luxury fw-bold" style="font-size: 0.95rem;">$22,000</span>
+              </div>
+              <p class="sans-font text-secondary fs-7 mb-2">
+                Italy’s majestic historic villas, botanical lake arches, custom vintage wooden boat timelines, and cliffside dinners.
+              </p>
+              <div class="d-flex gap-3 align-items-center" style="font-size: 0.72rem;">
+                <span class="text-muted"><strong class="text-dark">Capacity:</strong> Up to 150 guests</span>
+                <span class="text-muted"><strong class="text-dark">Duration:</strong> 3-day experience</span>
+              </div>
+            </div>
+
+            <!-- Package item 2 -->
+            <div class="interactive-package-item" data-package-id="santorini" id="packageItemSantorini">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="serif-font m-0" style="font-weight: 400; font-size: 1.3rem;">The Santorini Sunset Cliffside</h4>
+                <span class="font-mono text-luxury fw-bold" style="font-size: 0.95rem;">$16,500</span>
+              </div>
+              <p class="sans-font text-secondary fs-7 mb-2">
+                Cliffside caldera ceremonies in Oia, whitewashed terrace styling, customized sea-breeze botanical arches, and sunset banquets.
+              </p>
+              <div class="d-flex gap-3 align-items-center" style="font-size: 0.72rem;">
+                <span class="text-muted"><strong class="text-dark">Capacity:</strong> Up to 80 guests</span>
+                <span class="text-muted"><strong class="text-dark">Duration:</strong> 2-day experience</span>
+              </div>
+            </div>
+
+            <!-- Package item 3 -->
+            <div class="interactive-package-item" data-package-id="chateau" id="packageItemChateau">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="serif-font m-0" style="font-weight: 400; font-size: 1.3rem;">The French Château Legacy</h4>
+                <span class="font-mono text-luxury fw-bold" style="font-size: 0.95rem;">$28,000</span>
+              </div>
+              <p class="sans-font text-secondary fs-7 mb-2">
+                An ultra-luxury romance across deep French estates. Grand courtyard banquets, crystal candelabras, and string ensembles.
+              </p>
+              <div class="d-flex gap-3 align-items-center" style="font-size: 0.72rem;">
+                <span class="text-muted"><strong class="text-dark">Capacity:</strong> Up to 250 guests</span>
+                <span class="text-muted"><strong class="text-dark">Duration:</strong> 4-day experience</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right Column: Immersive Media Panel and Botanical Specs -->
+        <div class="col-lg-6 reveal-fade-in reveal-delay-1">
+          <div class="package-spotlight-card h-100 p-4 d-flex flex-column justify-content-between">
+            
+            <div class="spotlight-img-wrapper shadow-sm mb-4">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=900" alt="Lake Como Grandeur Ceremony" class="spotlight-img" id="spotlightMainImg">
+            </div>
+
+            <div>
+              <span class="subtitle-sans text-luxury mb-1 d-block" id="spotlightDest">LOMBARDY, ITALY</span>
+              <h4 class="serif-font mb-3" style="font-weight: 300;" id="spotlightTitle">The Lake Como Grandeur</h4>
+              
+              <div class="p-3 bg-light-soft border border-light mb-0">
+                <span class="subtitle-sans text-luxury mb-2 d-block" style="font-size: 0.65rem;">Signature Curation Highlight</span>
+                <p class="sans-font text-secondary fs-7 mb-3" id="spotlightDescription">
+                  "Features high-end botanical structures woven around ancient stone balustrades. Includes private wooden speedboats for couple photography, custom linen calligraphy, and live operatic quartet pacing during cocktail sunset transitions."
+                </p>
+                <div class="d-flex align-items-center gap-4 flex-wrap">
+                  <div>
+                    <span class="d-block text-uppercase text-muted" style="font-size: 0.6rem;">Curated Botanical Palette</span>
+                    <div class="d-flex align-items-center mt-1">
+                      <span class="botanical-palette-dot" style="background-color: #F4E8E1;" id="palDot1"></span>
+                      <span class="botanical-palette-dot" style="background-color: #A3B899;" id="palDot2"></span>
+                      <span class="botanical-palette-dot" style="background-color: #FFFFFF;" id="palDot3"></span>
+                      <span class="sans-font text-dark fw-medium" style="font-size: 0.72rem;" id="spotlightPaletteName">Alabaster Citrus & Olive</span>
+                    </div>
+                  </div>
+                  <div>
+                    <span class="d-block text-uppercase text-muted" style="font-size: 0.6rem;">Key Botanical Elements</span>
+                    <span class="sans-font text-dark fw-medium" style="font-size: 0.72rem;" id="spotlightBotanics">Olive branches, white roses, eucalyptus</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 3: Premium Comparison Matrix -->
+  <section class="section-padding bg-light-soft border-top" style="border-color: var(--border-color-muted);" id="comparisonSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">The Details</span>
+        <h2 class="serif-font mb-4" style="font-weight: 300;">Investment Matrix</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="text-secondary max-width-600 mx-auto fs-7">
+          Compare core services side-by-side. Our planning logic provides transparent pricing structures, designed to ensure peace of mind.
+        </p>
+      </div>
+
+      <!-- Comparison Table Wrapper -->
+      <div class="luxury-table-wrapper shadow-sm reveal-fade-in">
+        <div class="table-responsive">
+          <table class="table-luxury">
+            <thead>
+              <tr>
+                <th style="width: 28%;" class="text-start">Curated Service Pillar</th>
+                <th style="width: 24%;" class="text-center">Classic Day-Of</th>
+                <th style="width: 24%;" class="text-center table-col-highlight">Signature partial</th>
+                <th style="width: 24%;" class="text-center">Sovereign estate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-start text-dark font-medium">Dedicated Team Allocation</td>
+                <td class="text-center">1 Event Lead (Day-Of)</td>
+                <td class="text-center table-col-highlight fw-medium text-dark">Lead Planner & Design Director</td>
+                <td class="text-center">Founder + Creative Lead + Logistics Coordinator</td>
+              </tr>
+              <tr>
+                <td class="text-start text-dark font-medium">Bespoke Location Scouting</td>
+                <td class="text-center">Preferred List Only</td>
+                <td class="text-center table-col-highlight">Up to 12 venue evaluations</td>
+                <td class="text-center fw-medium text-dark">Unlimited global physical scouting</td>
+              </tr>
+              <tr>
+                <td class="text-start text-dark font-medium">Acoustic & Light Mapping</td>
+                <td class="text-center">Standard Floor Plan Review</td>
+                <td class="text-center table-col-highlight">3D Architectural Layout Renders</td>
+                <td class="text-center fw-medium text-dark">Full decibel propagation & 3D scenic simulation</td>
+              </tr>
+              <tr>
+                <td class="text-start text-dark font-medium">Sensory & Floral Styling</td>
+                <td class="text-center text-muted">✕ Not Included</td>
+                <td class="text-center table-col-highlight fw-medium text-dark">Custom Color-Palette Boards & Styling</td>
+                <td class="text-center">Bespoke Botanical & Fabric Architecture</td>
+              </tr>
+              <tr>
+                <td class="text-start text-dark font-medium">Coordination Span</td>
+                <td class="text-center">10 Hours (Day-Of Only)</td>
+                <td class="text-center table-col-highlight">16 Hours (Lead + Assistant)</td>
+                <td class="text-center fw-medium text-dark">Unlimited 72-Hour continuous control</td>
+              </tr>
+              <tr>
+                <td class="text-start text-dark font-medium">VIP Guest Concierge</td>
+                <td class="text-center text-muted">✕ Not Included</td>
+                <td class="text-center table-col-highlight">Included for immediate couple family</td>
+                <td class="text-center fw-medium text-dark">Full multi-lingual host, transfers & villas setup</td>
+              </tr>
+              <tr>
+                <td class="text-start text-dark font-medium">Budget Escrow Tracking</td>
+                <td class="text-center">Standard Template</td>
+                <td class="text-center table-col-highlight">Predictive custom tracking</td>
+                <td class="text-center fw-medium text-dark">Multi-currency escrow management & optimization</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 4: Curated FAQ Accordion -->
+  <section class="section-padding bg-white border-top" style="border-color: var(--border-color-muted);" id="faqSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Curated Inquiries</span>
+        <h2 class="serif-font mb-4" style="font-weight: 300;">Frequently Answered Questions</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="text-secondary max-width-600 mx-auto fs-7">
+          Understanding the details of high-end event investment ensures perfect execution. Explore answers to our most common operational inquiries.
+        </p>
+      </div>
+
+      <!-- FAQ Accordion using template style .accordion-luxury -->
+      <div class="row justify-content-center reveal-fade-in">
+        <div class="col-lg-8">
+          
+          <div class="accordion accordion-luxury" id="pricingFAQ">
+            
+            <!-- Accordion Item 1 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  How early should we initiate the curation process?
+                </button>
+              </h3>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#pricingFAQ">
+                <div class="accordion-body">
+                  For international destination commissions (e.g., Lake Como, French Châteaux, Amalfi), we recommend initiating the partnership 10 to 14 months in advance. This ensures absolute priority for premium historic venues, specialized Michelin-caliber catering, and premier botanical sourcing schedules. For regional celebrations, 6 to 8 months is appropriate.
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item 2 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  What is the difference between Day-Of Coordination and Partial styling?
+                </button>
+              </h3>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                <div class="accordion-body">
+                  Our Classic Day-Of Coordination begins strictly 30 days prior to your celebration date. We step in to absorb the pre-existing contracts, finalize vendor timing matrices, and run the technical choreography. The Partial Styling level is a 6-month collaborative relationship, where we establish the visual concept, design botanical color palettes, recommend premier artisans, and structure your tablescapes.
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item 3 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Do you handle multi-currency destination budgets?
+                </button>
+              </h3>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                <div class="accordion-body">
+                  Yes. Under our Sovereign planning level, we manage multi-currency international budgets, utilizing protective exchange rate models, coordinating international bank wire schedules, and ensuring compliance with local European or global tax structures for event installations.
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item 4 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  What backup contingencies are established for weather emergencies?
+                </button>
+              </h3>
+              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                <div class="accordion-body">
+                  Every outdoor commission features a dual-track staging plan (Plan A & Plan B) designed from day one. If a sudden weather event threatens cliffside coastal installations, we coordinate rapid structural scaffolding adjustments, coordinate architectural lighting offsets to mimic romantic sunset tones inside secure glass conservatories, and pre-negotiate indoor backup structures with historical venues.
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item 5 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  Can we merge planning levels or customize a destination package?
+                </button>
+              </h3>
+              <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                <div class="accordion-body">
+                  Absolutely. Every romance is unique. We regularly customize individual items—such as adding a third-day yacht brunch curation to a Partial Curation level, or expanding guest concierge services to accommodate international royal families. Discuss your precise vision during your private consultation.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 5: Beautiful Consultation CTA Form -->
+  <section class="section-padding bg-light-soft border-top" style="border-color: var(--border-color-muted);" id="consultationSection">
+    <div class="container">
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          
+          <div class="card-luxury p-5 bg-card shadow-lg position-relative reveal-fade-in" id="consultationCard">
+            <!-- Decorative luxury crest -->
+            <div class="floating-crest-decor">❈</div>
+
+            <div class="text-center mb-4">
+              <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-1">Private Curation</span>
+              <h3 class="serif-font mb-3" style="font-weight: 300; font-size: 1.8rem;">Inquire About Your Celebration</h3>
+              <div class="divider-luxury my-2 justify-content-center">
+                <span class="line"></span>
+                <span class="crest">❈</span>
+                <span class="line"></span>
+              </div>
+              <p class="sans-font text-secondary fs-7 mt-2">
+                Let us shape your dreams into physical legacy. Complete the fields below to initiate a private luxury consultation.
+              </p>
+            </div>
+
+            <!-- Form Content -->
+            <form id="consultationForm" onsubmit="handleInquirySubmission(event);">
+              <div class="row g-4">
+                
+                <!-- Name Field -->
+                <div class="col-md-6 d-flex flex-column">
+                  <label for="clientName" class="subtitle-sans text-luxury mb-1" style="font-size: 0.65rem;">Full Name</label>
+                  <input type="text" id="clientName" class="form-luxury-input" placeholder="e.g. Aurelia Laurent" required>
+                </div>
+
+                <!-- Email Field -->
+                <div class="col-md-6 d-flex flex-column">
+                  <label for="clientEmail" class="subtitle-sans text-luxury mb-1" style="font-size: 0.65rem;">Email Address</label>
+                  <input type="email" id="clientEmail" class="form-luxury-input" placeholder="e.g. contact@aurelia.com" required>
+                </div>
+
+                <!-- Select Plan / Package -->
+                <div class="col-md-6 d-flex flex-column">
+                  <label for="selectedTier" class="subtitle-sans text-luxury mb-1" style="font-size: 0.65rem;">Desired Investment Level</label>
+                  <select id="selectedTier" class="form-luxury-input form-luxury-select" required>
+                    <option value="" disabled selected>Select investment tier...</option>
+                    <option value="classic">The Atelier Classic (Day-Of)</option>
+                    <option value="signature">The Signature Curated (Partial)</option>
+                    <option value="sovereign">The Sovereign Estate (Full)</option>
+                    <option value="como">The Lake Como Grandeur Package</option>
+                    <option value="santorini">The Santorini Sunset Package</option>
+                    <option value="chateau">The French Château Legacy Package</option>
+                  </select>
+                </div>
+
+                <!-- Estimated Guests -->
+                <div class="col-md-6 d-flex flex-column">
+                  <label for="guestCount" class="subtitle-sans text-luxury mb-1" style="font-size: 0.65rem;">Estimated Guest Count</label>
+                  <select id="guestCount" class="form-luxury-input form-luxury-select" required>
+                    <option value="" disabled selected>Select crowd tier...</option>
+                    <option value="intimate">Under 50 guests (Intimate)</option>
+                    <option value="boutique">50 - 120 guests (Boutique)</option>
+                    <option value="grand">120 - 250 guests (Grand)</option>
+                    <option value="royal">Over 250 guests (Royal)</option>
+                  </select>
+                </div>
+
+                <!-- Dream Destination -->
+                <div class="col-md-12 d-flex flex-column">
+                  <label for="destinationText" class="subtitle-sans text-luxury mb-1" style="font-size: 0.65rem;">Celebration Destination</label>
+                  <input type="text" id="destinationText" class="form-luxury-input" placeholder="e.g. Lake Como, Italy or Provence, France" required>
+                </div>
+
+                <!-- Details text -->
+                <div class="col-md-12 d-flex flex-column">
+                  <label for="visionText" class="subtitle-sans text-luxury mb-1" style="font-size: 0.65rem;">Tell Us About Your Vision</label>
+                  <textarea id="visionText" class="form-luxury-input" rows="3" placeholder="Describe the atmosphere, floristry dreams, and timelines you wish to compose..."></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="col-md-12 text-center mt-5">
+                  <button type="submit" class="btn btn-luxury btn-luxury-primary py-3 px-5" style="font-size: 0.7rem; letter-spacing: 0.25em;">Submit Curation Inquiry</button>
+                </div>
+
+              </div>
+            </form>
+
+            <!-- Success State Overlay -->
+            <div class="position-absolute inset-0 d-none flex-column align-items-center justify-content-center p-5 text-center bg-card" id="formSuccessState" style="inset: 0; z-index: 10;">
+              <div class="mb-4">
+                <span style="font-size: 3.5rem; color: var(--color-rose-gold);">❈</span>
+              </div>
+              <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Commission Accepted</span>
+              <h3 class="serif-font mb-3" style="font-weight: 300;" id="successStateTitle">Thank you, Aurelia</h3>
+              <p class="sans-font text-secondary max-width-600 mx-auto fs-7" style="line-height: 1.8;">
+                Our Principal Director, Sophia Laurent, has received your private inquiry. We are reviewing the local venue capacities for <strong class="text-dark" id="successStateDest">Lake Como</strong> relative to your estimated guest count.
+              </p>
+              <p class="sans-font text-muted fs-8 mt-3">
+                A private invitations liaison will connect with you at <strong class="text-dark" id="successStateEmail">contact@aurelia.com</strong> within 24 business hours to coordinate an initial video portfolio walkthrough.
+              </p>
+              <div class="mt-4">
+                <button onclick="resetInquiryForm()" class="btn btn-luxury btn-luxury-outline py-2 px-4" style="font-size: 0.65rem;">Submit Another Request</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Premium Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-fade-in">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering wedding planners and romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Interactive page-level log scripts -->
+  <script>
+    // 1. Interactive Destination Curation Explorer
+    const packageItems = [
+      {
+        id: 'como',
+        title: 'The Lake Como Grandeur',
+        dest: 'LOMBARDY, ITALY',
+        image: 'https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=900',
+        description: '"Features high-end botanical structures woven around ancient stone balustrades. Includes private wooden speedboats for couple photography, custom linen calligraphy, and live operatic quartet pacing during cocktail sunset transitions."',
+        paletteName: 'Alabaster Citrus & Olive',
+        paletteColors: ['#F4E8E1', '#A3B899', '#FFFFFF'],
+        botanics: 'Olive branches, white roses, eucalyptus'
+      },
+      {
+        id: 'santorini',
+        title: 'The Santorini Sunset',
+        dest: 'CYCLADES, GREECE',
+        image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=900',
+        description: '"A breathtaking display overlooking high caldera horizons. Includes custom whitewashed geometric floral frames, Mediterranean sea-breeze olive styling, string duets, and late-night ocean lanterns."',
+        paletteName: 'Aegean Azur & Ivory',
+        paletteColors: ['#3A5F85', '#EAE6DF', '#FFFFFF'],
+        botanics: 'Wild bougainvillea, white hydrangea, ocean sea-grass'
+      },
+      {
+        id: 'chateau',
+        title: 'The French Château Legacy',
+        dest: 'PROVENCE, FRANCE',
+        image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=900',
+        description: '"An aristocratic composition matching historic masonry. Features towering custom floral pillars in gravel courtyards, grand multi-tiered champagne pours, wax-sealed stationary collections, and royal candlelight tracks."',
+        paletteName: 'Château Dusk & Dusty Rose',
+        paletteColors: ['#B76E79', '#D0C1B4', '#555F61'],
+        botanics: 'Dusty rose roses, trailing jasmine, dry lavender sprigs'
+      }
+    ];
+
+    const itemElements = document.querySelectorAll('.interactive-package-item');
+    const spotlightImg = document.getElementById('spotlightMainImg');
+    const spotlightDest = document.getElementById('spotlightDest');
+    const spotlightTitle = document.getElementById('spotlightTitle');
+    const spotlightDesc = document.getElementById('spotlightDescription');
+    const spotlightPaletteName = document.getElementById('spotlightPaletteName');
+    const spotlightBotanics = document.getElementById('spotlightBotanics');
+    const palDot1 = document.getElementById('palDot1');
+    const palDot2 = document.getElementById('palDot2');
+    const palDot3 = document.getElementById('palDot3');
+
+    itemElements.forEach(elem => {
+      // Listen for both clicks and hovers for instant luxury response
+      ['click', 'mouseenter'].forEach(evtName => {
+        elem.addEventListener(evtName, function() {
+          itemElements.forEach(el => el.classList.remove('active'));
+          elem.classList.add('active');
+
+          const pkgId = elem.getAttribute('data-package-id');
+          const pkgData = packageItems.find(p => p.id === pkgId);
+
+          if (pkgData) {
+            // Apply fluid fade transition out and in
+            spotlightImg.style.opacity = '0.3';
+            setTimeout(() => {
+              spotlightImg.src = pkgData.image;
+              spotlightImg.style.opacity = '1';
+            }, 150);
+
+            spotlightDest.textContent = pkgData.dest;
+            spotlightTitle.textContent = pkgData.title;
+            spotlightDesc.textContent = pkgData.description;
+            spotlightPaletteName.textContent = pkgData.paletteName;
+            spotlightBotanics.textContent = pkgData.botanics;
+            palDot1.style.backgroundColor = pkgData.paletteColors[0];
+            palDot2.style.backgroundColor = pkgData.paletteColors[1];
+            palDot3.style.backgroundColor = pkgData.paletteColors[2];
+          }
+        });
+      });
+    });
+
+    // 2. Select package button click helper
+    const selectPackageBtns = document.querySelectorAll('.select-package-btn');
+    const selectedTierInput = document.getElementById('selectedTier');
+
+    selectPackageBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const pkgVal = this.getAttribute('data-package');
+        if (pkgVal) {
+          selectedTierInput.value = pkgVal;
+        }
+      });
+    });
+
+    // 3. Form Curation Submission Logics
+    function handleInquirySubmission(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('clientName').value;
+      const email = document.getElementById('clientEmail').value;
+      const dest = document.getElementById('destinationText').value;
+
+      document.getElementById('successStateTitle').textContent = 'Thank you, ' + name;
+      document.getElementById('successStateDest').textContent = dest || 'your dream destination';
+      document.getElementById('successStateEmail').textContent = email;
+
+      const successOverlay = document.getElementById('formSuccessState');
+      successOverlay.classList.remove('d-none');
+      successOverlay.classList.add('d-flex');
+    }
+
+    function resetInquiryForm() {
+      document.getElementById('consultationForm').reset();
+      const successOverlay = document.getElementById('formSuccessState');
+      successOverlay.classList.remove('d-flex');
+      successOverlay.classList.add('d-none');
+    }
+  </script>
+</body>
+</html>

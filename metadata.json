@@ -1,0 +1,6 @@
+{
+  "name": "Aurelia - Premium Wedding & Event Template",
+  "description": "A luxury, premium, and romantic static HTML template for high-end wedding and event planners. Built with Bootstrap 5 and vanilla JavaScript.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

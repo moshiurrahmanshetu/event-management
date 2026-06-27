@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bespoke Consultation — AURELIA Premium Template</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    /* Custom CSS Overrides for a Pristine Contact Experience */
+    :root {
+      --color-rose-gold: #B76E79;
+      --color-rose-gold-rgb: 183, 110, 121;
+      --color-navy: #0b1325;
+      --color-champagne: #e8d8c8;
+      --color-champagne-rgb: 232, 216, 200;
+      --gold-glowing: #dfa85a;
+    }
+
+    /* Map styling with high-end responsive filters */
+    .luxury-map-wrapper {
+      position: relative;
+      border: 1px solid var(--border-color);
+      padding: 8px;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .luxury-map-wrapper:hover {
+      border-color: var(--color-rose-gold);
+      box-shadow: var(--shadow-md);
+    }
+    .luxury-map-container {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      overflow: hidden;
+    }
+    .luxury-map-iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(100%) contrast(1.1) brightness(0.9);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    [data-theme="dark"] .luxury-map-iframe {
+      filter: grayscale(100%) invert(90%) contrast(1.2) brightness(0.85);
+    }
+
+    /* Atelier Selector Buttons */
+    .atelier-toggle-btn {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 10px 25px;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      color: var(--text-primary);
+      transition: var(--transition-smooth);
+      cursor: pointer;
+    }
+    .atelier-toggle-btn.active,
+    .atelier-toggle-btn:hover {
+      background: var(--color-rose-gold);
+      color: white !important;
+      border-color: var(--color-rose-gold);
+    }
+
+    /* Office Cards */
+    .office-card {
+      cursor: pointer;
+      border-left: 2px solid var(--border-color);
+      transition: var(--transition-smooth);
+    }
+    .office-card:hover,
+    .office-card.active {
+      border-left-color: var(--color-rose-gold);
+      transform: translateX(5px);
+    }
+    .office-card.active {
+      background: rgba(var(--color-rose-gold-rgb), 0.03);
+    }
+
+    /* FAQ Preview overrides for extra polish */
+    .faq-search-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0;
+      padding: 25px;
+      margin-bottom: 40px;
+    }
+
+    /* Social discovery */
+    .social-grid-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 40px 30px;
+      text-align: center;
+      transition: var(--transition-smooth);
+      height: 100%;
+    }
+    .social-grid-card:hover {
+      border-color: var(--color-rose-gold);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-sm);
+    }
+    .social-card-icon {
+      color: var(--color-rose-gold);
+      margin-bottom: 20px;
+      transition: var(--transition-smooth);
+    }
+    .social-grid-card:hover .social-card-icon {
+      transform: scale(1.1);
+    }
+
+    /* Form success screen */
+    .success-receipt-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--color-rose-gold);
+      padding: 50px 40px;
+      position: relative;
+    }
+    .success-receipt-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.25);
+      pointer-events: none;
+    }
+
+    /* Utility spacing delay */
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/contact.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/contact.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, packages, planners...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html">Our Atelier</a></li>
+        <li><a href="services.html">Curation Services</a></li>
+        <li><a href="gallery.html">Inspiration Gallery</a></li>
+        <li><a href="event.html">Grand Events</a></li>
+        <li><a href="pricing.html">Investment Guide</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html" class="active">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Controls -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Section 1: Hero Header -->
+  <header class="section-padding bg-navy text-white text-center" style="background-image: linear-gradient(rgba(11, 19, 37, 0.65), rgba(11, 19, 37, 0.85)), url('https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=1500'); background-size: cover; background-position: center; padding-top: 170px; padding-bottom: 110px;">
+    <div class="container hero-content">
+      <span class="subtitle-sans text-white mb-2 d-block text-uppercase tracking-widest reveal-fade-in">Request Elegance</span>
+      <h1 class="serif-font text-white mb-3 reveal-fade-in reveal-delay-1" style="font-weight: 300;">Bespoke Consultations</h1>
+      <div class="divider-luxury my-2 justify-content-center">
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+      </div>
+      <p class="sans-font text-white opacity-75 max-width-600 mx-auto mt-2 fs-7 text-uppercase tracking-widest reveal-fade-in reveal-delay-2" style="font-size: 0.8rem;">
+        CHOREOGRAPHING HIGH-END CELEBRATIONS, FLORAL ARCHITECTURE AND GLOBAL SCHEDULING
+      </p>
+    </div>
+  </header>
+
+  <!-- Section 2 & 4: Contact Form and Office Information Grid -->
+  <section class="section-padding bg-white" id="inquirySection">
+    <div class="container">
+      <div class="row g-5">
+        
+        <!-- Left Side: Office Information & Atelier Details -->
+        <div class="col-lg-5 reveal-fade-in">
+          <div class="pe-xl-4">
+            <span class="subtitle-classic">Atelier Presence</span>
+            <h2 class="decorated-left mb-4">Our Offices &amp; Studios</h2>
+            <p class="text-secondary mb-5">
+              Aurelia Planners maintains flagship ateliers in the core design capitals of London and Florence. We welcome global couples, luxury suppliers, and floral collaborators to align aesthetics by private appointment.
+            </p>
+
+            <div class="d-flex flex-column gap-4">
+              
+              <!-- London Atelier Card -->
+              <div class="office-card active p-4 rounded bg-light-soft" id="londonOfficeCard" onclick="focusAtelier('london')">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h4 class="serif-font mb-0" style="font-size: 1.15rem; font-weight: 400;">London Flagship</h4>
+                  <span class="badge bg-navy text-white text-uppercase tracking-wider px-2 py-1 border border-light border-opacity-10" style="font-size: 0.55rem; background-color: var(--color-rose-gold);">Primary</span>
+                </div>
+                <span class="subtitle-classic text-muted d-block mb-3" style="font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;">Belgravia Design Quarter</span>
+                
+                <ul class="list-unstyled d-flex flex-column gap-2 sans-font text-secondary fs-7 mb-0">
+                  <li class="d-flex align-items-start gap-2">
+                    <svg class="mt-1 flex-shrink-0 text-luxury" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>42 Belgravia Place, Belgravia, London SW1X, UK</span>
+                  </li>
+                  <li class="d-flex align-items-center gap-2">
+                    <svg class="flex-shrink-0 text-luxury" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>+44 (0) 20 7946 0192</span>
+                  </li>
+                  <li class="d-flex align-items-center gap-2">
+                    <svg class="flex-shrink-0 text-luxury" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <span>london@aureliaevents.com</span>
+                  </li>
+                  <li class="d-flex align-items-start gap-2 pt-2 border-top border-light-dark" style="border-color: var(--border-color) !important;">
+                    <svg class="mt-1 flex-shrink-0 text-luxury" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>10:00 AM – 6:00 PM GMT<br><strong class="text-luxury">By Private Appointment Only</strong></span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Florence Atelier Card -->
+              <div class="office-card p-4 rounded bg-light-soft" id="florenceOfficeCard" onclick="focusAtelier('florence')">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h4 class="serif-font mb-0" style="font-size: 1.15rem; font-weight: 400;">Florence Atelier</h4>
+                  <span class="badge bg-navy text-white text-uppercase tracking-wider px-2 py-1 border border-light border-opacity-10" style="font-size: 0.55rem; background-color: var(--color-rose-gold);">Tuscany</span>
+                </div>
+                <span class="subtitle-classic text-muted d-block mb-3" style="font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;">Palazzo Tornabuoni</span>
+                
+                <ul class="list-unstyled d-flex flex-column gap-2 sans-font text-secondary fs-7 mb-0">
+                  <li class="d-flex align-items-start gap-2">
+                    <svg class="mt-1 flex-shrink-0 text-luxury" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>Palazzo Tornabuoni, Via de' Tornabuoni, 50123 Firenze, Italy</span>
+                  </li>
+                  <li class="d-flex align-items-center gap-2">
+                    <svg class="flex-shrink-0 text-luxury" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>+39 055 2468 1357</span>
+                  </li>
+                  <li class="d-flex align-items-center gap-2">
+                    <svg class="flex-shrink-0 text-luxury" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <span>firenze@aureliaevents.com</span>
+                  </li>
+                  <li class="d-flex align-items-start gap-2 pt-2 border-top border-light-dark" style="border-color: var(--border-color) !important;">
+                    <svg class="mt-1 flex-shrink-0 text-luxury" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>9:00 AM – 7:00 PM CET<br><strong class="text-luxury">By Private Appointment Only</strong></span>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Contact Form Section -->
+        <div class="col-lg-7 reveal-fade-in reveal-delay-1">
+          <div class="card-luxury card-luxury-framed h-100" id="inquiryFormContainer">
+            
+            <!-- Standard Form State -->
+            <form id="consultationForm" onsubmit="handleFormSubmission(event)">
+              <span class="subtitle-classic text-luxury d-block mb-1">Curation Ledger</span>
+              <h3 class="serif-font mb-4" style="font-weight: 300;">Initiate Your Masterpiece</h3>
+              
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="text" class="form-luxury-control" id="contactName" required autocomplete="name">
+                    <label for="contactName">Your Full Name*</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="email" class="form-luxury-control" id="contactEmail" required autocomplete="email">
+                    <label for="contactEmail">Email Address*</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="tel" class="form-luxury-control" id="contactPhone" required autocomplete="tel">
+                    <label for="contactPhone">Preferred Phone*</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="text" class="form-luxury-control" id="contactLocation" required placeholder=" ">
+                    <label for="contactLocation">Target Location / Destination*</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="date" class="form-luxury-control" id="contactDate" required style="padding-top: 15px;">
+                    <label for="contactDate" style="top: -10px; font-size: 0.7rem; color: var(--color-rose-gold); letter-spacing: 0.15em; font-weight: 600;">Desired Date*</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-luxury-group">
+                    <label class="form-luxury-label" for="contactEventType">Event Classification</label>
+                    <select class="form-luxury-control" id="contactEventType" required style="border-radius: 0; border: none; border-bottom: 1px solid var(--border-color); background: transparent; -webkit-appearance: none; appearance: none; padding-right: 20px;">
+                      <option value="" disabled selected>Choose a classification...</option>
+                      <option value="Bespoke Wedding Curation">Bespoke Wedding Curation</option>
+                      <option value="Milestone Gala">Milestone Gala</option>
+                      <option value="Corporate Banquet">Corporate Banquet</option>
+                      <option value="Destination Retreat">Destination Retreat</option>
+                      <option value="Private Floral Soirée">Private Floral Soirée</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row align-items-center mb-4">
+                <div class="col-md-6">
+                  <div class="form-luxury-group">
+                    <label class="form-luxury-label" for="guestCount">Estimated Guest Count</label>
+                    <div class="d-flex align-items-center gap-3">
+                      <input type="range" class="form-range" id="guestCount" min="20" max="500" step="10" value="120" oninput="updateGuestDisplay(this.value)" style="accent-color: var(--color-rose-gold);">
+                      <span id="guestCountVal" class="sans-font fw-semibold text-luxury" style="font-size: 0.85rem; min-width: 60px;">120 Guests</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <p class="sans-font text-muted fs-9 mb-0" style="line-height: 1.4;">
+                    Our planning atelier operates at a tier optimized for unions of 20 to 500 attendees, ensuring pristine attention to logistics.
+                  </p>
+                </div>
+              </div>
+
+              <div class="form-luxury-group form-luxury-floating">
+                <textarea class="form-luxury-control" id="contactMsg" required style="height: 110px; resize: none;"></textarea>
+                <label for="contactMsg">Describe your vision (themes, floral maps, tablescapes)...</label>
+              </div>
+
+              <button type="submit" class="btn btn-luxury btn-luxury-primary w-100" id="submitBtn">
+                Send Consultation Request
+              </button>
+            </form>
+
+            <!-- Success State (Hidden by Default) -->
+            <div id="formSuccessState" style="display: none;" class="success-receipt-wrapper text-center my-auto">
+              <span class="crest fs-1 text-luxury d-block mb-3">❈</span>
+              <h2 class="serif-font mb-2">Inquiry Documented</h2>
+              <p class="sans-font text-muted fs-8 text-uppercase tracking-widest mb-4">WELCOME TO THE AURELIA REGISTRY</p>
+              
+              <div class="divider-luxury my-3 justify-content-center">
+                <span class="line" style="width: 50px;"></span>
+                <span class="crest">❈</span>
+                <span class="line" style="width: 50px;"></span>
+              </div>
+
+              <div class="p-4 bg-light-soft rounded mb-4 text-start" style="border: 1px solid var(--border-color);">
+                <span class="fs-9 text-muted d-block text-uppercase tracking-wider font-mono mb-2">Ledger Details</span>
+                <ul class="list-unstyled sans-font fs-8 d-flex flex-column gap-2 mb-0 text-secondary">
+                  <li><strong>Ledger Ticket:</strong> <span id="successTicket" class="font-mono text-luxury">AURELIA-2026-8319</span></li>
+                  <li><strong>Client Name:</strong> <span id="successName">Name</span></li>
+                  <li><strong>Date Assigned:</strong> <span id="successDate">Date</span></li>
+                  <li><strong>Classification:</strong> <span id="successClassification">Bespoke Wedding</span></li>
+                  <li><strong>Volume:</strong> <span id="successGuests">120 Attendees</span></li>
+                  <li><strong>Proposed Location:</strong> <span id="successLoc">London</span></li>
+                </ul>
+              </div>
+
+              <p class="sans-font text-secondary fs-7 max-width-500 mx-auto mb-4" style="line-height: 1.6;">
+                A design director has been aligned to evaluate your floral and tablescape request. We will coordinate directly via your provided email address within 24 hours.
+              </p>
+
+              <button onclick="resetInquiryForm()" class="btn btn-luxury btn-luxury-outline py-2 px-4" style="font-size: 0.65rem;">
+                Submit Another Request
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Google Map -->
+  <section class="section-padding bg-light-soft" id="atelierMapSection" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header-wrap text-center mb-5 reveal-fade-in">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Atelier Coordinates</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">Bespoke Geographic Maps</h2>
+        <div class="divider-luxury my-2 justify-content-center">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="text-secondary max-width-600 mx-auto fs-7 mt-3">
+          Our main design rooms and luxury floral ateliers are plotted inside key European zones. Toggle views to locate your nearest private design center.
+        </p>
+
+        <!-- Dynamic Toggle Buttons -->
+        <div class="d-flex justify-content-center gap-3 mt-4">
+          <button onclick="switchAtelierView('london')" id="btnMapLondon" class="atelier-toggle-btn active">London Atelier</button>
+          <button onclick="switchAtelierView('florence')" id="btnMapFlorence" class="atelier-toggle-btn">Florence Atelier</button>
+        </div>
+      </div>
+
+      <!-- Map Frame Container -->
+      <div class="luxury-map-wrapper reveal-fade-in reveal-delay-1">
+        <div class="luxury-map-container">
+          <!-- London Map active by default -->
+          <iframe 
+            id="atelierMapIframe"
+            class="luxury-map-iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.540424564887!2d-0.1554904!3d51.494916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876052309ff4ecb%3A0xe7a5ee2e6981df55!2sBelgravia%20Square!5e0!3m2!1sen!2suk!4v1700000000000!5m2!1sen!2suk" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 5: FAQ Preview -->
+  <section class="section-padding bg-white" id="faqPreviewSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header-wrap text-center mb-5 reveal-fade-in">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Aesthetic Clarifications</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">Inquiry FAQ Ledger</h2>
+        <div class="divider-luxury my-2 justify-content-center">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8 reveal-fade-in">
+          
+          <!-- Accordion Luxury -->
+          <div class="accordion accordion-luxury" id="contactFAQ">
+            
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faqHeadingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="false" aria-controls="faqCollapseOne">
+                  Do you curate destination weddings globally?
+                </button>
+              </h2>
+              <div id="faqCollapseOne" class="accordion-collapse collapse" aria-labelledby="faqHeadingOne" data-bs-parent="#contactFAQ">
+                <div class="accordion-body">
+                  Yes, Aurelia is specialized in high-end destination celebrations. We coordinate operations across the Amalfi Coast, Lake Como, the French Riviera, Paris, Tuscany, Bali, and Santorini. All local permissions, accommodation coordination, translation services, and physical setup logistics are managed by our core directors.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faqHeadingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                  What level of design investment is required?
+                </button>
+              </h2>
+              <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#contactFAQ">
+                <div class="accordion-body">
+                  Aurelia operates as a high-end boutique event curation house. Since we only take on a highly limited number of weddings per season to maintain pristine attention, our curation schedules are optimized for physical budgets commencing at &pound;75,000 / &euro;90,000 depending on location parameters.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faqHeadingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                  Can we align floral architecture and custom tablescapes with you?
+                </button>
+              </h2>
+              <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#contactFAQ">
+                <div class="accordion-body">
+                  Absolutely. Classical scenery, floral artistry, and custom physical tablescape coordination constitute our core expertise. We outline spatial drawings and botanical specifications, choosing rare flora, custom silk runners, and rose gold flatware to harmonize with your venue's acoustics and light angles.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faqHeadingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+                  What is the schedule for booking and planning?
+                </button>
+              </h2>
+              <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#contactFAQ">
+                <div class="accordion-body">
+                  We usually require 6 to 12 months for proper venue scheduling, custom physical material fabrications, and botanical alignments. However, for high-priority global celebrations, we can activate fast-track processes depending on our studio's active capacity.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="text-center mt-5">
+            <span class="sans-font text-muted fs-8">Have specialized questions regarding global logistics?</span>
+            <a href="faq.html" class="btn-luxury-link d-block mt-2">View Full FAQ Directory</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 6: Social Links -->
+  <section class="section-padding bg-light-soft" id="socialDiscoverySection" style="border-top: 1px solid var(--border-color);">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header-wrap text-center mb-5 reveal-fade-in">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">The Digital Atelier</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">Exquisite Portfolios</h2>
+        <div class="divider-luxury my-2 justify-content-center">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        
+        <!-- Instagram Card -->
+        <div class="col-sm-6 col-lg-3 reveal-fade-in">
+          <div class="social-grid-card">
+            <div class="social-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.1rem; font-weight: 400;">Instagram</h4>
+            <p class="sans-font text-muted fs-8 mb-3">@AureliaAtelier</p>
+            <p class="sans-font text-secondary fs-8 mb-4" style="line-height: 1.5;">Daily stories highlighting coastal floral mapping, champagne fabrics, and tablescapes.</p>
+            <a href="gallery.html" class="btn-luxury-link" style="font-size: 0.65rem;">Explore Stories</a>
+          </div>
+        </div>
+
+        <!-- Pinterest Card -->
+        <div class="col-sm-6 col-lg-3 reveal-fade-in reveal-delay-1">
+          <div class="social-grid-card">
+            <div class="social-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <path d="M5 12h14"></path>
+                <circle cx="12" cy="12" r="9"></circle>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.1rem; font-weight: 400;">Pinterest</h4>
+            <p class="sans-font text-muted fs-8 mb-3">/AureliaAtelier</p>
+            <p class="sans-font text-secondary fs-8 mb-4" style="line-height: 1.5;">Curated visual boards detailing wedding gowns, high-end invitations, and placecards.</p>
+            <a href="https://pinterest.com" class="btn-luxury-link" style="font-size: 0.65rem;">View Board</a>
+          </div>
+        </div>
+
+        <!-- Vogue Planner Card -->
+        <div class="col-sm-6 col-lg-3 reveal-fade-in reveal-delay-2">
+          <div class="social-grid-card">
+            <div class="social-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.1rem; font-weight: 400;">Vogue Registry</h4>
+            <p class="sans-font text-muted fs-8 mb-3">Aurelia Curation</p>
+            <p class="sans-font text-secondary fs-8 mb-4" style="line-height: 1.5;">Verified editorial profile outlining top international venues and châteaux rankings.</p>
+            <a href="blog.html" class="btn-luxury-link" style="font-size: 0.65rem;">Read Feature</a>
+          </div>
+        </div>
+
+        <!-- WeChat Card -->
+        <div class="col-sm-6 col-lg-3 reveal-fade-in reveal-delay-3">
+          <div class="social-grid-card">
+            <div class="social-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 6.1h1a5.9 5.9 0 0 1 0 11.8h-1a5.9 5.9 0 0 1 0-11.8Z"></path>
+                <path d="M6 17.9h1a5.9 5.9 0 0 0 0-11.8H6a5.9 5.9 0 0 0 0 11.8Z"></path>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.1rem; font-weight: 400;">WeChat Global</h4>
+            <p class="sans-font text-muted fs-8 mb-3">Aurelia_Global</p>
+            <p class="sans-font text-secondary fs-8 mb-4" style="line-height: 1.5;">Direct channel optimized for our East-Asian couples and high-end destination portfolios.</p>
+            <a href="contact.html" class="btn-luxury-link" style="font-size: 0.65rem;">Connect WeChat</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Premium Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-fade-in">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering wedding planners and romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Custom Page Interactions -->
+  <script>
+    // Map URL constants for each Atelier
+    const mapCoordinates = {
+      london: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.540424564887!2d-0.1554904!3d51.494916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876052309ff4ecb%3A0xe7a5ee2e6981df55!2sBelgravia%20Square!5e0!3m2!1sen!2suk!4v1700000000000!5m2!1sen!2suk",
+      florence: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2881.0426188264567!2d11.2497673!3d43.7719602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a56a64426cbff%3A0x8e8334812a67a0ea!2sVia%20de&#39;%20Tornabuoni!5e0!3m2!1sen!2sit!4v1700000000000!5m2!1sen!2sit"
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Pre-fill inquiry form subject parameter from URL (for Event inquiries)
+      const params = new URLSearchParams(window.location.search);
+      const subject = params.get("subject");
+      if (subject) {
+        const msgField = document.getElementById("contactMsg");
+        const typeSelect = document.getElementById("contactEventType");
+        
+        if (msgField) {
+          msgField.value = `I am inquiring regarding the "${subject}" listed in your Grand Events portfolio. I would love to orchestrate a similar luxury celebration with you. Please coordinate with me.`;
+        }
+        if (typeSelect) {
+          typeSelect.value = "Bespoke Wedding Curation";
+        }
+      }
+    });
+
+    // 2. Interactive Guest Count Slider Indicator
+    function updateGuestDisplay(val) {
+      document.getElementById('guestCountVal').innerText = `${val} Guests`;
+    }
+
+    // 3. Switch active atelier map view & card states
+    function switchAtelierView(atelierKey) {
+      const mapIframe = document.getElementById('atelierMapIframe');
+      const btnLondon = document.getElementById('btnMapLondon');
+      const btnFlorence = document.getElementById('btnMapFlorence');
+      
+      const cardLondon = document.getElementById('londonOfficeCard');
+      const cardFlorence = document.getElementById('florenceOfficeCard');
+
+      if (!mapIframe) return;
+
+      // Add smooth fade out transition
+      mapIframe.style.opacity = '0';
+      mapIframe.style.transform = 'scale(0.98)';
+
+      setTimeout(() => {
+        // Update URL source
+        mapIframe.src = mapCoordinates[atelierKey];
+        
+        // Update toggles
+        if (atelierKey === 'london') {
+          btnLondon.classList.add('active');
+          btnFlorence.classList.remove('active');
+          cardLondon.classList.add('active');
+          cardFlorence.classList.remove('active');
+        } else {
+          btnFlorence.classList.add('active');
+          btnLondon.classList.remove('active');
+          cardFlorence.classList.add('active');
+          cardLondon.classList.remove('active');
+        }
+
+        // Fade in back smoothly
+        setTimeout(() => {
+          mapIframe.style.opacity = '1';
+          mapIframe.style.transform = 'scale(1)';
+        }, 150);
+
+      }, 350);
+    }
+
+    // Secondary card helper
+    function focusAtelier(atelierKey) {
+      switchAtelierView(atelierKey);
+      document.getElementById('atelierMapSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // 4. Exquisite custom Form Curation submission handler
+    function handleFormSubmission(e) {
+      e.preventDefault();
+
+      const nameVal = document.getElementById('contactName').value;
+      const emailVal = document.getElementById('contactEmail').value;
+      const phoneVal = document.getElementById('contactPhone').value;
+      const locationVal = document.getElementById('contactLocation').value;
+      const dateVal = document.getElementById('contactDate').value;
+      const typeVal = document.getElementById('contactEventType').value;
+      const guestsVal = document.getElementById('guestCount').value;
+
+      const submitBtn = document.getElementById('submitBtn');
+      const formEl = document.getElementById('consultationForm');
+      const successEl = document.getElementById('formSuccessState');
+
+      // Simulate luxury validation and registry locking
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Authenticating Ledger...";
+
+      setTimeout(() => {
+        submitBtn.innerText = "Securing Registry Slots...";
+        
+        setTimeout(() => {
+          // Generate an elegant random ledger receipt
+          const ticketNumber = `AURELIA-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+          
+          // Inject success text
+          document.getElementById('successTicket').innerText = ticketNumber;
+          document.getElementById('successName').innerText = nameVal;
+          document.getElementById('successClassification').innerText = typeVal;
+          document.getElementById('successGuests').innerText = `${guestsVal} Attendees`;
+          document.getElementById('successLoc').innerText = locationVal;
+
+          // Format Date beautifully
+          try {
+            const formattedDate = new Date(dateVal).toLocaleDateString('en-US', {
+              weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+            document.getElementById('successDate').innerText = formattedDate;
+          } catch(e) {
+            document.getElementById('successDate').innerText = dateVal;
+          }
+
+          // Animate transition
+          formEl.style.opacity = '0';
+          setTimeout(() => {
+            formEl.style.display = 'none';
+            successEl.style.display = 'block';
+            successEl.style.opacity = '0';
+            successEl.style.transform = 'translateY(15px)';
+            
+            setTimeout(() => {
+              successEl.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+              successEl.style.opacity = '1';
+              successEl.style.transform = 'translateY(0)';
+            }, 50);
+
+            // Scroll container slightly to center success
+            document.getElementById('inquiryFormContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 300);
+
+        }, 1000);
+      }, 1000);
+    }
+
+    // 5. Reset Curation Form back to edit state
+    function resetInquiryForm() {
+      const formEl = document.getElementById('consultationForm');
+      const successEl = document.getElementById('formSuccessState');
+      const submitBtn = document.getElementById('submitBtn');
+
+      // Reset fields
+      formEl.reset();
+      updateGuestDisplay(120);
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Send Consultation Request";
+
+      // Animate back
+      successEl.style.opacity = '0';
+      setTimeout(() => {
+        successEl.style.display = 'none';
+        formEl.style.display = 'block';
+        formEl.style.opacity = '0';
+        formEl.style.transform = 'translateY(15px)';
+        
+        setTimeout(() => {
+          formEl.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+          formEl.style.opacity = '1';
+          formEl.style.transform = 'translateY(0)';
+        }, 50);
+
+        document.getElementById('inquiryFormContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+  </script>
+</body>
+</html>

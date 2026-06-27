@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aesthetics Atelier & Gallery — AURELIA</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    /* Smooth Scroll helper */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    /* Category Filter Buttons Styling */
+    .gallery-filter-btn {
+      background: transparent;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.2);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 10px 26px;
+      border-radius: 0;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      font-weight: 500;
+    }
+    .gallery-filter-btn:hover, .gallery-filter-btn.active {
+      background: var(--color-rose-gold);
+      border-color: var(--color-rose-gold);
+      color: white !important;
+      box-shadow: 0 10px 25px -5px rgba(var(--color-rose-gold-rgb), 0.25);
+    }
+
+    /* Masonry Gallery Column Flow CSS */
+    .masonry-grid-lux {
+      column-count: 3;
+      column-gap: 28px;
+      width: 100%;
+    }
+    @media (max-width: 992px) {
+      .masonry-grid-lux {
+        column-count: 2;
+        column-gap: 20px;
+      }
+    }
+    @media (max-width: 576px) {
+      .masonry-grid-lux {
+        column-count: 1;
+      }
+    }
+
+    /* Masonry Item Transition Wrapper */
+    .masonry-item-lux {
+      break-inside: avoid;
+      margin-bottom: 28px;
+      position: relative;
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: center;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    @media (max-width: 992px) {
+      .masonry-item-lux {
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Filtering Transition Classes */
+    .masonry-item-lux.filtered-out, .grid-item-lux.filtered-out {
+      opacity: 0 !important;
+      transform: scale(0.9) translateY(20px) !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+    }
+
+    /* Custom Luxury Card styling */
+    .lux-gallery-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.12);
+      background: var(--bg-card);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: none; /* Hide cursor to support our custom floating VIEW badge */
+    }
+    .lux-gallery-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(var(--color-rose-gold-rgb), 0.5);
+    }
+
+    .lux-gallery-img-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    .lux-gallery-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .lux-gallery-card:hover img {
+      transform: scale(1.06);
+    }
+
+    /* Inner Double Gold Frame for cards */
+    .lux-gallery-card::before {
+      content: '';
+      position: absolute;
+      inset: 15px;
+      border: 1px solid rgba(var(--color-champagne-rgb), 0);
+      z-index: 2;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .lux-gallery-card:hover::before {
+      border-color: rgba(var(--color-champagne-rgb), 0.45);
+    }
+
+    /* Luxury Card Overlay Inner Frame */
+    .lux-gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(18, 24, 38, 0.92) 0%, rgba(18, 24, 38, 0.4) 60%, rgba(18, 24, 38, 0.15) 100%);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: flex-end;
+      padding: 35px;
+      z-index: 3;
+    }
+    .lux-gallery-card:hover .lux-gallery-overlay {
+      opacity: 1;
+    }
+
+    .lux-gallery-content {
+      transform: translateY(20px);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+    }
+    .lux-gallery-card:hover .lux-gallery-content {
+      transform: translateY(0);
+    }
+
+    /* Grid Gallery Bento layouts */
+    .grid-gallery-lux {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    @media (max-width: 992px) {
+      .grid-gallery-lux {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+    @media (max-width: 576px) {
+      .grid-gallery-lux {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .grid-item-lux {
+      position: relative;
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .grid-gallery-lux .lux-gallery-card {
+      aspect-ratio: 1 / 1;
+    }
+    .grid-gallery-lux .lux-gallery-card.landscape-frame {
+      aspect-ratio: 16 / 10;
+    }
+    .grid-gallery-lux .lux-gallery-card.portrait-frame {
+      aspect-ratio: 10 / 14;
+    }
+
+    /* Interactive Cursor follower badge */
+    .gallery-hover-badge {
+      position: fixed;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      background: white;
+      color: var(--color-navy);
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0;
+      transform: scale(0) translate(-50%, -50%);
+      transform-origin: 0 0;
+      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.3);
+    }
+    .gallery-hover-badge.active {
+      opacity: 1;
+      transform: scale(1) translate(-50%, -50%);
+    }
+
+    /* Video Play Pulse styling */
+    .video-play-pulse-lux {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70px;
+      height: 70px;
+      background: var(--color-rose-gold);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 0 0 rgba(var(--color-rose-gold-rgb), 0.5);
+      animation: playPulseLux 2s infinite;
+      transition: all 0.4s ease;
+      z-index: 4;
+    }
+    .lux-gallery-card:hover .video-play-pulse-lux {
+      background: white;
+      color: var(--color-navy);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    @keyframes playPulseLux {
+      0% {
+        box-shadow: 0 0 0 0 rgba(var(--color-rose-gold-rgb), 0.6);
+      }
+      70% {
+        box-shadow: 0 0 0 20px rgba(var(--color-rose-gold-rgb), 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(var(--color-rose-gold-rgb), 0);
+      }
+    }
+
+    /* Bespoke Lightbox Modal Frame */
+    .lux-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(11, 19, 37, 0.97);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 40px;
+    }
+    .lux-lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lux-lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2.2rem;
+      font-weight: 200;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+      z-index: 10100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+    }
+    .lux-lightbox-close:hover {
+      transform: rotate(90deg) scale(1.1);
+      color: var(--color-rose-gold);
+    }
+
+    .lux-lightbox-content-box {
+      position: relative;
+      max-width: 80%;
+      max-height: 65vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .lux-lightbox-content-box {
+        max-width: 95%;
+      }
+    }
+
+    .lux-lightbox-image {
+      max-width: 100%;
+      max-height: 65vh;
+      object-fit: contain;
+      box-shadow: 0 35px 70px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      transform: scale(0.95);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .lux-lightbox-iframe {
+      width: 800px;
+      height: 450px;
+      max-width: 100%;
+      max-height: 65vh;
+      box-shadow: 0 35px 70px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      transform: scale(0.95);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .lux-lightbox.active .lux-lightbox-image,
+    .lux-lightbox.active .lux-lightbox-iframe {
+      transform: scale(1);
+    }
+
+    .lux-lightbox-caption-box {
+      margin-top: 30px;
+      text-align: center;
+      color: white;
+      max-width: 650px;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+    }
+    .lux-lightbox.active .lux-lightbox-caption-box {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .lux-lightbox-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 10100;
+    }
+    .lux-lightbox-nav-arrow:hover {
+      background: var(--color-rose-gold);
+      border-color: var(--color-rose-gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .lux-lightbox-nav-arrow-prev {
+      left: 40px;
+    }
+    .lux-lightbox-nav-arrow-next {
+      right: 40px;
+    }
+    @media (max-width: 768px) {
+      .lux-lightbox-nav-arrow {
+        width: 44px;
+        height: 44px;
+      }
+      .lux-lightbox-nav-arrow-prev {
+        left: 10px;
+      }
+      .lux-lightbox-nav-arrow-next {
+        right: 10px;
+      }
+    }
+
+    /* Photo Swipe / Slide Animation Effect */
+    .lightbox-transitioning .lux-lightbox-image {
+      transform: scale(0.97);
+      opacity: 0.3;
+    }
+
+    /* Light/Dark variable helper overrides */
+    [data-theme="dark"] .gallery-hover-badge {
+      background: var(--bg-card);
+      color: white;
+      border-color: rgba(var(--color-rose-gold-rgb), 0.4);
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/gallery.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/gallery.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Dynamic Gallery Cursor Follower VIEW/PLAY badge -->
+  <div class="gallery-hover-badge" id="galleryHoverBadge">View</div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, venues, packages...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html">Our Atelier</a></li>
+        <li><a href="services.html">Curation Services</a></li>
+        <li><a href="gallery.html" class="active">Inspiration Gallery</a></li>
+        <li><a href="event.html">Grand Events</a></li>
+        <li><a href="pricing.html">Investment</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Buttons in Nav -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Luxury Page Header -->
+  <header class="section-padding bg-navy text-white text-center" style="background-image: linear-gradient(rgba(11, 19, 37, 0.62), rgba(11, 19, 37, 0.8)), url('https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=1500'); background-size: cover; background-position: center; padding-top: 170px; padding-bottom: 110px;">
+    <div class="container hero-content">
+      <span class="subtitle-sans text-white mb-2 d-block text-uppercase tracking-widest reveal-fade-in">Aesthetics Atelier</span>
+      <h1 class="serif-font text-white mb-3 reveal-fade-in reveal-delay-1" style="font-weight: 300;">Visual Masterpieces</h1>
+      <div class="divider-luxury my-2 justify-content-center">
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.2);"></span>
+      </div>
+      <p class="sans-font text-white opacity-75 max-width-600 mx-auto mt-2 fs-7 text-uppercase tracking-widest reveal-fade-in reveal-delay-2" style="font-size: 0.8rem;">
+        Amalfi Cliffs &bull; Tuscan Groves &bull; Parisian Châteaux &bull; Grand Metropolises
+      </p>
+    </div>
+  </header>
+
+  <!-- Section 1: Masonry Gallery & Filter System -->
+  <section class="section-padding bg-light-soft" id="masonrySection">
+    <div class="container">
+      
+      <!-- Section Header & Filter System -->
+      <div class="text-center mb-5">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Curator's Edit</span>
+        <h2 class="serif-font mb-4" style="font-weight: 300;">Staggered Masonry Collection</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        
+        <!-- Filter Bar -->
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-4 reveal-slide-up" id="filterContainer">
+          <button class="gallery-filter-btn active" data-filter="all" id="filterBtnAll">All Commissions</button>
+          <button class="gallery-filter-btn" data-filter="wedding" id="filterBtnWedding">Weddings</button>
+          <button class="gallery-filter-btn" data-filter="banquets" id="filterBtnBanquets">Royal Banquets</button>
+          <button class="gallery-filter-btn" data-filter="chateau" id="filterBtnChateau">Château Gala</button>
+          <button class="gallery-filter-btn" data-filter="corporate" id="filterBtnCorporate">Corporate Theater</button>
+        </div>
+      </div>
+
+      <!-- Masonry Grid -->
+      <div class="masonry-grid-lux" id="masonryGrid">
+        
+        <!-- Item 1: Wedding Tall -->
+        <div class="masonry-item-lux" data-category="wedding">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(0, 'masonry')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600" alt="Amalfi Cliffside Exchange">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Amalfi Coast</span>
+                <h4 class="serif-font text-white mb-2" style="font-size: 1.25rem; font-weight: 300;">Cliffside Exchange</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  A breathtaking ceremony suspended between sky and Mediterranean sea.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Banquet Regular -->
+        <div class="masonry-item-lux" data-category="banquets">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(1, 'masonry')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=600" alt="Tuscan Golden Hour Banqueting">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Tuscany</span>
+                <h4 class="serif-font text-white mb-2" style="font-size: 1.25rem; font-weight: 300;">Golden Hour Feast</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  Long rustic tables aligned with local olive groves and glowing vintage chandeliers.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Chateau Tall -->
+        <div class="masonry-item-lux" data-category="chateau">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(2, 'masonry')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=600" alt="Château Evening Gala">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Parisian Atelier</span>
+                <h4 class="serif-font text-white mb-2" style="font-size: 1.25rem; font-weight: 300;">Château Candlestick Soirée</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  Bespoke historical dining hall illuminated entirely by thousand warm candles.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: Wedding Normal -->
+        <div class="masonry-item-lux" data-category="wedding">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(3, 'masonry')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600" alt="Royal Floral Canopy">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Florence</span>
+                <h4 class="serif-font text-white mb-2" style="font-size: 1.25rem; font-weight: 300;">Floral Dreamway</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  Cascading rose and wisteria structures lining a historical marble pathway.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5: Banquet Tall -->
+        <div class="masonry-item-lux" data-category="banquets">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(4, 'masonry')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80&w=600" alt="The Champagne Sculpture">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Venice</span>
+                <h4 class="serif-font text-white mb-2" style="font-size: 1.25rem; font-weight: 300;">Champagne Waterfall</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  A sparkling tower of vintage crystal coupes cascading with direct reserves.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6: Corporate Normal -->
+        <div class="masonry-item-lux" data-category="corporate">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(5, 'masonry')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=600" alt="Milanese Runway Theatre">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Milan</span>
+                <h4 class="serif-font text-white mb-2" style="font-size: 1.25rem; font-weight: 300;">Avant-Garde Runway</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  High-fashion layout with modern holographic mappings and structural precision.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 7: Corporate Tall -->
+        <div class="masonry-item-lux" data-category="corporate">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(6, 'masonry')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1471967183320-ee018f6e114a?auto=format&fit=crop&q=80&w=600" alt="Venetian Masked Theater">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Gothic Palace</span>
+                <h4 class="serif-font text-white mb-2" style="font-size: 1.25rem; font-weight: 300;">Masquerade Orchestra</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  Deep velvety draperies paired with dark gold lighting loops and operatic dramas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 8: Wedding Normal -->
+        <div class="masonry-item-lux" data-category="wedding">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(7, 'masonry')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1520854221256-17451cc35953?auto=format&fit=crop&q=80&w=600" alt="Santorini Caldera Dinner">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Santorini</span>
+                <h4 class="serif-font text-white mb-2" style="font-size: 1.25rem; font-weight: 300;">White-Wash Caldera</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  An architectural feast positioned over volcanic cliffs during the indigo hour.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 9: Chateau Tall -->
+        <div class="masonry-item-lux" data-category="chateau">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(8, 'masonry')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=600" alt="Palace Crystal Chandelier">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Versailles Ring</span>
+                <h4 class="serif-font text-white mb-2" style="font-size: 1.25rem; font-weight: 300;">Palatial Mirrors Ballroom</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.8rem; line-height: 1.5;">
+                  Bespoke crystal architecture reflecting royal scales of historical celebrations.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 2: Geometric Bento Grid Gallery -->
+  <section class="section-padding bg-white border-top" style="border-color: rgba(var(--color-rose-gold-rgb), 0.12) !important;" id="gridSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5 reveal-slide-up">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Architectural Symmetry</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">Geometric Grid Curations</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="sans-font text-secondary max-width-600 mx-auto mt-2">
+          Strict symmetrical canvas framing, capturing raw luxury details, intimate gestures, and grand vistas with absolute editorial accuracy.
+        </p>
+      </div>
+
+      <!-- Grid Showcase -->
+      <div class="grid-gallery-lux" id="geometricGrid">
+        
+        <!-- Grid 1: Landscape (Lake Como) -->
+        <div class="grid-item-lux">
+          <div class="lux-gallery-card card-luxury-img landscape-frame" onclick="openLightbox(0, 'grid')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800" alt="Lake Como Floating Dock" class="h-100 w-100">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Lake Como</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.2rem; font-weight: 300;">Floating Atrium</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem;">A bespoke wood pontoon extending into crystal blue Italian waters.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid 2: Square (Garden Rose) -->
+        <div class="grid-item-lux">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(1, 'grid')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80&w=800" alt="Conservatory Rose Garden" class="h-100 w-100">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Heritage Conservatory</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.2rem; font-weight: 300;">Rose Conservatories</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem;">Exotic glasshouse setups framing ivory and champagne floristry lines.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid 3: Portrait (Table Details) -->
+        <div class="grid-item-lux">
+          <div class="lux-gallery-card card-luxury-img portrait-frame" onclick="openLightbox(2, 'grid')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&q=80&w=800" alt="Luxury Table Scape Details" class="h-100 w-100">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Milanese Styling</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.2rem; font-weight: 300;">Italian Silk & Brass</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem;">Custom dye-stamped menus resting on fine bone china and hand-forged chargers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid 4: Square (String Quartet) -->
+        <div class="grid-item-lux">
+          <div class="lux-gallery-card card-luxury-img" onclick="openLightbox(3, 'grid')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=800" alt="Symphony String Quartet" class="h-100 w-100">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Classical Chamber</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.2rem; font-weight: 300;">Conservatory Quartet</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem;">Vivaldi allegros resounding through arches of towering local limestone.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid 5: Landscape (Midnight Fireworks) -->
+        <div class="grid-item-lux">
+          <div class="lux-gallery-card card-luxury-img landscape-frame" onclick="openLightbox(4, 'grid')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=800" alt="Midnight Fireworks Over Lake" class="h-100 w-100">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Lake Como</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.2rem; font-weight: 300;">Aether Fireworks</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem;">A grand theatrical cascade reflecting on glass-calm midnight waters.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid 6: Portrait (Gold Ballroom) -->
+        <div class="grid-item-lux">
+          <div class="lux-gallery-card card-luxury-img portrait-frame" onclick="openLightbox(5, 'grid')">
+            <div class="lux-gallery-img-wrapper">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=800" alt="The Crystal Chandelier Hall" class="h-100 w-100">
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Vienna Palace</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.2rem; font-weight: 300;">Royal Gold Ballroom</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem;">Bespoke imperial gilding paired with thousands of hanging fresh white blooms.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Cinematic Video Gallery -->
+  <section class="section-padding bg-navy text-white position-relative overflow-hidden" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);" id="videoSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2" style="color: var(--color-rose-gold);">The Motion Picture</span>
+        <h2 class="serif-font text-white mb-3" style="font-weight: 300;">Cinematic Event Reels</h2>
+        <div class="divider-luxury my-3">
+          <span class="line" style="background-color: rgba(255,255,255,0.15);"></span>
+          <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+          <span class="line" style="background-color: rgba(255,255,255,0.15);"></span>
+        </div>
+        <p class="sans-font text-light opacity-75 max-width-600 mx-auto mt-2" style="font-size: 0.95rem;">
+          Our direct media crew captures celebrations with 35mm film accuracy. Walk through our living, breathing stories of sensory architecture.
+        </p>
+      </div>
+
+      <!-- Video Grid -->
+      <div class="row g-4 justify-content-center">
+        
+        <!-- Video Item 1 -->
+        <div class="col-md-6 col-lg-4 reveal-slide-up">
+          <div class="lux-gallery-card card-luxury-img" onclick="openVideoLightbox('https://www.youtube.com/embed/5F6m1Gq7gQA', 'Chamber Orchestras & Visual Theatres', 'Gothic Cathedral')">
+            <div class="lux-gallery-img-wrapper" style="aspect-ratio: 16 / 10;">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=800" alt="Chamber Orchestras" class="h-100 w-100">
+              <div class="video-play-pulse-lux">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Soundscape</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.15rem; font-weight: 300;">Chamber Orchestras</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem;">A dramatic symphonic rehearsal inside vaulted historical spaces.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Item 2 -->
+        <div class="col-md-6 col-lg-4 reveal-slide-up reveal-delay-1">
+          <div class="lux-gallery-card card-luxury-img" onclick="openVideoLightbox('https://www.youtube.com/embed/5y0oXf3FzSw', 'Grand Royal Banquet Procession', 'Villa d\'Este')">
+            <div class="lux-gallery-img-wrapper" style="aspect-ratio: 16 / 10;">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Grand Entrance" class="h-100 w-100">
+              <div class="video-play-pulse-lux">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Atelier Feature</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.15rem; font-weight: 300;">The Procession Walk</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem;">Bespoke bridal entry captured amidst high-contrast Italian shadows.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Item 3 -->
+        <div class="col-md-6 col-lg-4 reveal-slide-up reveal-delay-2">
+          <div class="lux-gallery-card card-luxury-img" onclick="openVideoLightbox('https://www.youtube.com/embed/S2p8E4bUq6Q', 'Michelin Culinary Artistry Curation', 'Parisian Château')">
+            <div class="lux-gallery-img-wrapper" style="aspect-ratio: 16 / 10;">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80&w=800" alt="Michelin Culinary" class="h-100 w-100">
+              <div class="video-play-pulse-lux">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+            </div>
+            <div class="lux-gallery-overlay">
+              <div class="lux-gallery-content">
+                <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem; color: var(--color-champagne) !important;">Gastronomy</span>
+                <h4 class="serif-font text-white mb-1" style="font-size: 1.15rem; font-weight: 300;">Culinary Theatre</h4>
+                <p class="sans-font text-light opacity-75 mb-0" style="font-size: 0.75rem;">Michelin-starred sensory details choreographed for multi-sensory banquets.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Unified Lightbox Modal -->
+  <div class="lux-lightbox" id="luxuryLightboxModal">
+    <button class="lux-lightbox-close" onclick="closeLightbox()">&times;</button>
+    
+    <!-- Prev Arrow -->
+    <div class="lux-lightbox-nav-arrow lux-lightbox-nav-arrow-prev" onclick="prevLightboxItem(event)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </div>
+    
+    <!-- Image Display Box -->
+    <div class="lux-lightbox-content-box" id="lightboxContentBox">
+      <!-- Injected dynamically by JavaScript -->
+    </div>
+    
+    <!-- Next Arrow -->
+    <div class="lux-lightbox-nav-arrow lux-lightbox-nav-arrow-next" onclick="nextLightboxItem(event)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </div>
+    
+    <!-- Caption & Info -->
+    <div class="lux-lightbox-caption-box">
+      <span class="subtitle-sans text-luxury mb-1 d-block text-uppercase tracking-widest" id="lightboxMeta" style="color: var(--color-rose-gold);">Amalfi Coast</span>
+      <h3 class="serif-font text-white mb-2" id="lightboxTitle" style="font-weight: 300; font-size: 1.6rem;">Cliffside Vow Exchange</h3>
+      <div class="divider-luxury my-2 justify-content-center" style="opacity: 0.3;">
+        <span class="line" style="background-color: white;"></span>
+        <span class="crest" style="color: white;">❈</span>
+        <span class="line" style="background-color: white;"></span>
+      </div>
+      <p class="sans-font text-light opacity-75 mb-0" id="lightboxDesc" style="font-size: 0.9rem; line-height: 1.6;"></p>
+      <span class="d-block font-mono text-white mt-3 opacity-50" id="lightboxCount" style="font-size: 0.75rem;">1 / 9</span>
+    </div>
+  </div>
+
+  <!-- Premium Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-fade-in">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering wedding planners and romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Interactive Gallery Logics -->
+  <script>
+    // 1. Data arrays for Masonry & Grid Galleries to power beautiful full Lightbox
+    const masonryData = [
+      {
+        src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200",
+        meta: "Amalfi Coast &bull; Wedding",
+        title: "Cliffside Vow Exchange",
+        desc: "A stunning ceremony suspended between blue skies and the deep azure waters of the Amalfi Coast clifflines."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=1200",
+        meta: "Tuscany &bull; Royal Banquet",
+        title: "Golden Hour Feasting",
+        desc: "Long, linen-decked tables curated next to historical Tuscan farmhouses, styled under hanging crystal fixtures."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=1200",
+        meta: "Parisian Atelier &bull; Château Gala",
+        title: "Château Candlestick Soirée",
+        desc: "Authentic historical design featuring a high-contrast warm glow generated entirely by beeswax candlesticks."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1200",
+        meta: "Florence &bull; Wedding",
+        title: "Floral Grand Dreamway",
+        desc: "An organic cathedral formed by arches of pastel pink hydrangeas and custom white climbing roses."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&q=80&w=1200",
+        meta: "Venice &bull; Royal Banquet",
+        title: "Champagne Waterfall Cascade",
+        desc: "Fine vintage reserves pouring down a structural glass-coupe sculpture of museum proportions."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=1200",
+        meta: "Milan &bull; Corporate Theater",
+        title: "Avant-Garde Runway Showcase",
+        desc: "A futuristic high-fashion stage layout featuring projection mapping, lasers, and industrial aluminum lines."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1471967183320-ee018f6e114a?auto=format&fit=crop&q=80&w=1200",
+        meta: "Gothic Palace &bull; Corporate Theater",
+        title: "Venetian Masquerade Grand Opera",
+        desc: "Dark operatic grandeur utilizing custom heavy velvets, theatrical light sweeps, and classical vocal artists."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1520854221256-17451cc35953?auto=format&fit=crop&q=80&w=1200",
+        meta: "Santorini &bull; Wedding",
+        title: "White-Wash Caldera Dinner",
+        desc: "Minimalist cycladic terraces styled with simple floating structures and custom candles facing the volcano."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200",
+        meta: "Versailles Ring &bull; Château Gala",
+        title: "Palatial Mirrors Ballroom",
+        desc: "A royal scale ball designed within a baroque palace hall, styling historical columns with contemporary white wisterias."
+      }
+    ];
+
+    const gridData = [
+      {
+        src: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200",
+        meta: "Lake Como &bull; Italian Curation",
+        title: "Lake Como Floating Atrium",
+        desc: "A high-end wooden runway extending directly into Lake Como's calm waters, styled with delicate floating floral beds."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80&w=1200",
+        meta: "Heritage Conservatory &bull; Floristry Lines",
+        title: "Symmetrical Glasshouse Rose Gardens",
+        desc: "A classical iron-ribbed Victorian glasshouse filled with custom-curated ivory, pink, and champagne rose lines."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&q=80&w=1200",
+        meta: "Milanese Styling &bull; Table Detail",
+        title: "Italian Silk & Brass Details",
+        desc: "Hand-painted organic silk ribbons paired with customized brass chargers, heavy gold cutlery, and hand-gilded card details."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=1200",
+        meta: "Classical Chamber &bull; Sound Performance",
+        title: "Conservatory String Quartet",
+        desc: "Elite conservatory-trained string artists performing under cascades of delicate floating greenery."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=1200",
+        meta: "Lake Como &bull; Midnight Display",
+        title: "The Golden Sky Fireworks",
+        desc: "A breathtaking midnight display coordinates custom vertical mortars and floating lake barges in perfect symphony."
+      },
+      {
+        src: "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=1200",
+        meta: "Vienna Palace &bull; Imperial Ballroom",
+        title: "Royal Imperial Ballroom Design",
+        desc: "Grand-scale ceiling arrangements integrating modern atmospheric spotlights and traditional warm candelabras."
+      }
+    ];
+
+    let currentActiveSet = [];
+    let currentActiveIndex = 0;
+    let isVideoMode = false;
+
+    // 2. Filter system behavior
+    document.addEventListener("DOMContentLoaded", () => {
+      const filterBtns = document.querySelectorAll(".gallery-filter-btn");
+      const masonryItems = document.querySelectorAll(".masonry-item-lux");
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          // Remove active class
+          filterBtns.forEach(b => b.classList.remove("active"));
+          // Add active class
+          btn.classList.add("active");
+
+          const filterVal = btn.getAttribute("data-filter");
+
+          masonryItems.forEach(item => {
+            const cat = item.getAttribute("data-category");
+            if (filterVal === "all" || cat === filterVal) {
+              item.classList.remove("filtered-out");
+            } else {
+              item.classList.add("filtered-out");
+            }
+          });
+        });
+      });
+
+      // 3. Immersive Mouse Follower Badge logic
+      const hoverBadge = document.getElementById("galleryHoverBadge");
+      const galleryCards = document.querySelectorAll(".lux-gallery-card");
+
+      // Smooth cursor follower physics
+      let mouseX = 0, mouseY = 0;
+      let badgeX = 0, badgeY = 0;
+
+      window.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateBadge() {
+        const ease = 0.15;
+        badgeX += (mouseX - badgeX) * ease;
+        badgeY += (mouseY - badgeY) * ease;
+
+        hoverBadge.style.left = badgeX + "px";
+        hoverBadge.style.top = badgeY + "px";
+
+        requestAnimationFrame(animateBadge);
+      }
+      requestAnimationFrame(animateBadge);
+
+      galleryCards.forEach(card => {
+        card.addEventListener("mouseenter", () => {
+          hoverBadge.classList.add("active");
+          // If the card has a video indicator, change badge text
+          if (card.querySelector(".video-play-pulse-lux")) {
+            hoverBadge.textContent = "Play";
+            hoverBadge.style.background = "var(--color-rose-gold)";
+            hoverBadge.style.color = "white";
+          } else {
+            hoverBadge.textContent = "View";
+            hoverBadge.style.background = "white";
+            hoverBadge.style.color = "var(--color-navy)";
+          }
+        });
+
+        card.addEventListener("mouseleave", () => {
+          hoverBadge.classList.remove("active");
+        });
+      });
+    });
+
+    // 4. Lightbox Functions
+    function openLightbox(index, setType) {
+      const modal = document.getElementById("luxuryLightboxModal");
+      const contentBox = document.getElementById("lightboxContentBox");
+      
+      isVideoMode = false;
+      
+      if (setType === 'masonry') {
+        // Collect currently filtered (visible) masonry items
+        const visibleElements = Array.from(document.querySelectorAll(".masonry-item-lux")).filter(item => !item.classList.contains("filtered-out"));
+        const originalIndices = visibleElements.map(el => {
+          // Find original index from the raw layout elements
+          const cards = Array.from(document.querySelectorAll("#masonryGrid .lux-gallery-card"));
+          const currentCard = el.querySelector(".lux-gallery-card");
+          return cards.indexOf(currentCard);
+        });
+
+        // Set current active dataset
+        currentActiveSet = originalIndices.map(idx => masonryData[idx]);
+        // Find click index within the active set
+        const matchingCard = document.querySelectorAll("#masonryGrid .lux-gallery-card")[index];
+        const visibleIdxOfClick = visibleElements.findIndex(el => el.querySelector(".lux-gallery-card") === matchingCard);
+        currentActiveIndex = visibleIdxOfClick !== -1 ? visibleIdxOfClick : 0;
+      } else {
+        // Grid set (all items are visible)
+        currentActiveSet = gridData;
+        currentActiveIndex = index;
+      }
+
+      updateLightboxContent();
+      modal.classList.add("active");
+    }
+
+    function openVideoLightbox(videoUrl, title, meta) {
+      const modal = document.getElementById("luxuryLightboxModal");
+      const contentBox = document.getElementById("lightboxContentBox");
+      
+      isVideoMode = true;
+      currentActiveSet = []; // Clear set to hide navigation chevrons
+
+      // Hide chevrons
+      document.querySelectorAll(".lux-lightbox-nav-arrow").forEach(arrow => arrow.style.display = "none");
+
+      // Inject Iframe
+      contentBox.innerHTML = `
+        <iframe class="lux-lightbox-iframe" src="${videoUrl}?autoplay=1&mute=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      `;
+
+      // Update metadata
+      document.getElementById("lightboxMeta").innerHTML = meta + " &bull; Motion Picture";
+      document.getElementById("lightboxTitle").textContent = title;
+      document.getElementById("lightboxDesc").textContent = "Step inside a curated architectural experience showing moments of pure visceral luxury captured by our professional 35mm cinematographers.";
+      document.getElementById("lightboxCount").textContent = "Cinematic Release";
+
+      modal.classList.add("active");
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById("luxuryLightboxModal");
+      const contentBox = document.getElementById("lightboxContentBox");
+      
+      modal.classList.remove("active");
+      
+      // Stop dynamic video players/iframes
+      setTimeout(() => {
+        contentBox.innerHTML = "";
+      }, 500);
+    }
+
+    function updateLightboxContent() {
+      const contentBox = document.getElementById("lightboxContentBox");
+      const item = currentActiveSet[currentActiveIndex];
+      if (!item) return;
+
+      // Show navigation arrows for lists
+      document.querySelectorAll(".lux-lightbox-nav-arrow").forEach(arrow => arrow.style.display = "flex");
+
+      // Add fade animation transition
+      const modal = document.getElementById("luxuryLightboxModal");
+      modal.classList.add("lightbox-transitioning");
+
+      setTimeout(() => {
+        contentBox.innerHTML = `
+          <img loading="lazy" class="lux-lightbox-image" src="${item.src}" alt="${item.title}">
+        `;
+        document.getElementById("lightboxMeta").innerHTML = item.meta;
+        document.getElementById("lightboxTitle").textContent = item.title;
+        document.getElementById("lightboxDesc").textContent = item.desc;
+        document.getElementById("lightboxCount").textContent = `${currentActiveIndex + 1} / ${currentActiveSet.length}`;
+        modal.classList.remove("lightbox-transitioning");
+      }, 250);
+    }
+
+    function prevLightboxItem(event) {
+      if (event) event.stopPropagation();
+      if (isVideoMode || currentActiveSet.length <= 1) return;
+
+      if (currentActiveIndex === 0) {
+        currentActiveIndex = currentActiveSet.length - 1;
+      } else {
+        currentActiveIndex--;
+      }
+      updateLightboxContent();
+    }
+
+    function nextLightboxItem(event) {
+      if (event) event.stopPropagation();
+      if (isVideoMode || currentActiveSet.length <= 1) return;
+
+      if (currentActiveIndex === currentActiveSet.length - 1) {
+        currentActiveIndex = 0;
+      } else {
+        currentActiveIndex++;
+      }
+      updateLightboxContent();
+    }
+
+    // Keyboard controls for Lightbox
+    document.addEventListener("keydown", (e) => {
+      const lightbox = document.getElementById("luxuryLightboxModal");
+      if (!lightbox.classList.contains("active")) return;
+
+      if (e.key === "Escape") {
+        closeLightbox();
+      } else if (e.key === "ArrowLeft") {
+        prevLightboxItem();
+      } else if (e.key === "ArrowRight") {
+        nextLightboxItem();
+      }
+    });
+
+    // Handle clicks outside image area to close
+    document.getElementById("luxuryLightboxModal").addEventListener("click", (e) => {
+      if (e.target.id === "luxuryLightboxModal" || e.target.id === "lightboxContentBox") {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>

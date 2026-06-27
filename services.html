@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curation Services — AURELIA | Luxury Wedding & Bespoke Event Planners</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Smooth Scroll helper */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/services.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/services.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, venues, packages...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html">Our Atelier</a></li>
+        <li><a href="services.html" class="active">Curation Services</a></li>
+        <li><a href="gallery.html">Inspiration Gallery</a></li>
+        <li><a href="event.html">Grand Events</a></li>
+        <li><a href="pricing.html">Investment</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Buttons in Nav -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3 fs-7" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+     Section 1: Hero Banner
+     ========================================================================== -->
+  <section class="about-hero-banner" style="background-image: url('https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=2000');">
+    <div class="about-hero-content reveal-zoom-in">
+      <span class="subtitle-sans text-uppercase text-white tracking-widest d-block mb-3" style="color: var(--color-rose-gold) !important;">OUR PORTFOLIO OF OFFERINGS</span>
+      <h1 class="about-hero-title">Bespoke Curation Services</h1>
+      <p class="sans-font text-white opacity-90 max-width-600 mx-auto" style="letter-spacing: 0.05em; font-size: 1.1rem;">
+        An exquisite array of custom design, pristine logistical planning, and fine art coordination for milestone events.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 2: Service Grid (Interactive Index)
+     ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-title-wrapper text-center reveal-slide-up">
+        <span class="subtitle-sans">The Aurelia Suite</span>
+        <h2 class="decorated mb-2">Our Core Curation Spheres</h2>
+        <p class="text-muted">Select an offering below to explore our detailed, uncompromising approach to each domain of execution.</p>
+      </div>
+
+      <div class="row g-4 mt-4">
+        <!-- 01. Wedding Planning -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up" onclick="document.getElementById('wedding-planning').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">01. Wedding Planning</h4>
+            <p class="sans-font text-muted fs-8 mb-0">End-to-end meticulous orchestration and timeline choreographies.</p>
+          </div>
+        </div>
+
+        <!-- 02. Destination Wedding -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up reveal-delay-1" onclick="document.getElementById('destination-wedding').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">02. Destination Weddings</h4>
+            <p class="sans-font text-muted fs-8 mb-0">Scouting coastal sanctuaries and securing overseas clearances.</p>
+          </div>
+        </div>
+
+        <!-- 03. Photography & Film -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up reveal-delay-2" onclick="document.getElementById('photography').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">03. Photography & Film</h4>
+            <p class="sans-font text-muted fs-8 mb-0">Fine art photography and cinematic film story preservation.</p>
+          </div>
+        </div>
+
+        <!-- 04. Decoration & Floral -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up reveal-delay-3" onclick="document.getElementById('decoration').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">04. Floral & Decoration</h4>
+            <p class="sans-font text-muted fs-8 mb-0">Botanical structures, tablescapes, and color architecture.</p>
+          </div>
+        </div>
+
+        <!-- 05. Venue Selection -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up" onclick="document.getElementById('venue-selection').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">05. Venue Selection</h4>
+            <p class="sans-font text-muted fs-8 mb-0">Sourcing historical European châteaux and secluded coastal villas.</p>
+          </div>
+        </div>
+
+        <!-- 06. Bride & Groom Styling -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up reveal-delay-1" onclick="document.getElementById('styling').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="4"></line>
+                <line x1="8" y1="2" x2="8" y2="4"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">06. Bespoke Styling</h4>
+            <p class="sans-font text-muted fs-8 mb-0">High-fashion wedding dress and custom couture suit guidance.</p>
+          </div>
+        </div>
+
+        <!-- 07. Entertainment -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up reveal-delay-2" onclick="document.getElementById('entertainment').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">07. Grand Entertainment</h4>
+            <p class="sans-font text-muted fs-8 mb-0">Symphony orchestras, soloists, and state-of-the-art light shows.</p>
+          </div>
+        </div>
+
+        <!-- 08. Catering & Gastronomy -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up reveal-delay-3" onclick="document.getElementById('catering').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">08. Fine Gastronomy</h4>
+            <p class="sans-font text-muted fs-8 mb-0">Michelin-caliber curated tasting menus and wine pairings.</p>
+          </div>
+        </div>
+
+        <!-- 09. Corporate Events -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up" onclick="document.getElementById('corporate').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">09. Corporate Galas</h4>
+            <p class="sans-font text-muted fs-8 mb-0">High-profile product launches, banquets, and summits.</p>
+          </div>
+        </div>
+
+        <!-- 10. Birthday Events -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up reveal-delay-1" onclick="document.getElementById('birthday').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">10. Birthday Soirées</h4>
+            <p class="sans-font text-muted fs-8 mb-0">Milestone weekend gatherings and bespoke themed celebrations.</p>
+          </div>
+        </div>
+
+        <!-- 11. Anniversary Events -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up reveal-delay-2" onclick="document.getElementById('anniversary').scrollIntoView();">
+          <div class="service-index-card">
+            <div class="service-icon-wrap-classic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem;">11. Anniversary Tributes</h4>
+            <p class="sans-font text-muted fs-8 mb-0">Vow renewals, intimate fine dining, and legacy celebrations.</p>
+          </div>
+        </div>
+
+        <!-- 12. Request Consult Call -->
+        <div class="col-xl-3 col-md-6 col-12 reveal-slide-up reveal-delay-3" onclick="document.getElementById('consultationInquiryForm').scrollIntoView();">
+          <div class="service-index-card" style="border: 1.5px dashed var(--color-rose-gold); background-color: rgba(var(--color-rose-gold-rgb), 0.03);">
+            <div class="service-icon-wrap-classic" style="background-color: var(--color-rose-gold); color: #FFF;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <h4 class="serif-font mb-2" style="font-size: 1.15rem; color: var(--color-rose-gold);">Inquire Atelier</h4>
+            <p class="sans-font text-muted fs-8 mb-0">Establish a direct line with our directors for a private call.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 3: Wedding Planning Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="wedding-planning">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Atelier Core Sphere</span>
+          <h2 class="serif-font mb-4">01. End-to-End Complete Wedding Planning</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Our flagship complete planning service takes you on an stress-free journey from initial design parameters to your grand send-off. We manage the complex web of vendors, agreements, budgets, and guest registrations so you remain present to enjoy every milestone moment.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Through real-time logistics software, structured timeline matrices, and dedicated on-site event coordination, we ensure your wedding is choregraphed down to the second.
+          </p>
+          <ul class="service-feature-list">
+            <li>Custom 12-month progress checklists and vendor integration maps</li>
+            <li>Financial matrix management and contract review safeguards</li>
+            <li>On-site production team and timing directors (up to 24 hours of live management)</li>
+            <li>Post-event wrap up, supplier dispatching, and logistics resolution</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Bespoke wedding layout reception">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 4: Destination Wedding Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="destination-wedding">
+    <div class="container">
+      <div class="row g-5 align-items-center flex-lg-row-reverse">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Global Escapes</span>
+          <h2 class="serif-font mb-4">02. Destination Wedding Curation</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            From private Amalfi Coast villas and historic châteaux in southern France to the iconic whitewashed cliffs of Santorini, our international planning division secures exclusive destination access worldwide.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            We handle the intricate details of legal filings, overseas registry processing, luxury guest accommodations, and specialized regional transport solutions.
+          </p>
+          <ul class="service-feature-list">
+            <li>Bespoke location scouting, site inspections, and local tax filings</li>
+            <li>Foreign registry translation management and legal consultant coordination</li>
+            <li>Guest concierge services, lodging bookings, and luxury transfer assets</li>
+            <li>Multi-day itinerary planning (welcome sunset cocktail, brunch, private yacht sails)</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800" alt="Spectacular destination wedding oceanfront setup">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 5: Photography Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="photography">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Visual Preservation</span>
+          <h2 class="serif-font mb-4">03. Fine Art Photography & Cinema</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            We collaborate with award-winning editorial film photographers and cinematic directors to capture your celebration with visual poetry. Rather than standard snapshots, we prioritize light balance, romantic angles, and raw emotion.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Every file is processed in custom boutique studios, yielding physical, luxury leather-bound albums and raw cinematic footage that preserve your legacy.
+          </p>
+          <ul class="service-feature-list">
+            <li>Fine art medium-format film and digital ultra-high-definition capture</li>
+            <li>Bespoke wedding drone photography and cinematic aerial coordination</li>
+            <li>Private digital portfolios and luxury physical leather-bound memory books</li>
+            <li>Engagement sessions and pre-wedding rehearsal film portraits</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&q=80&w=800" alt="Editorial wedding couple cinematic photo">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 6: Decoration Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="decoration">
+    <div class="container">
+      <div class="row g-5 align-items-center flex-lg-row-reverse">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Creative Styling</span>
+          <h2 class="serif-font mb-4">04. Custom Decoration & Botanical Styling</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Led by our master stylists, we outline a unique, couture aesthetic DNA for your event. We draft specialized color stories, select linen textures, and model asymmetrical botanical arches that complement your venue's inherent architecture.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Our florists source premium, fresh seasonal blossoms globally to assemble breathtaking living backdrops and elegant tabletop centerpieces.
+          </p>
+          <ul class="service-feature-list">
+            <li>3D spatial layout modeling and high-fidelity rendering maps</li>
+            <li>Couture linen sourcing, curated charger plates, and bespoke dinnerware</li>
+            <li>Fresh, premium global floral imports and sculptural botanical walls</li>
+            <li>Atmospheric and fairy-light custom electrical placement design</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=800" alt="Breathtaking tablescape and candles decoration styling">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 7: Venue Selection Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="venue-selection">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Estate Scouting</span>
+          <h2 class="serif-font mb-4">05. Exclusive Venue Selection & Scouting</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Finding the ideal stage is half the magic. Aurelia holds proprietary access partnerships with elite global estates, historical landmarks, private islands, and luxury villas that are generally inaccessible to the public.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            We evaluate physical acoustics, golden-hour shadow metrics, weather contingency options, and vendor ingress capabilities to ensure your venue is perfectly functional.
+          </p>
+          <ul class="service-feature-list">
+            <li>Proprietary access catalogs for premium private properties globally</li>
+            <li>Detailed venue site survey logs, acoustics audits, and shadow map planning</li>
+            <li>Exclusive negotiations, insurance checkups, and rental clearances</li>
+            <li>Full multi-day venue occupancy logistics and layout modeling</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1544078751-58fed2b84d57?auto=format&fit=crop&q=80&w=800" alt="Historical luxury estate villa interior">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 8: Bride & Groom Styling Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="styling">
+    <div class="container">
+      <div class="row g-5 align-items-center flex-lg-row-reverse">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Couture Fashion</span>
+          <h2 class="serif-font mb-4">06. Bride & Groom Styling Concierge</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Ensure your attire is as timeless as your vows. Our elite fashion consultants assist with dress scouting, luxury tailor bookings, and bespoke designer fittings in Milan, Paris, and London.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            We coordinate bridal dress preservation, on-site steamed styling prep on your celebration morning, and bespoke styling details for the bridal party.
+          </p>
+          <ul class="service-feature-list">
+            <li>Private salon bookings, custom sketch approvals, and trunk show access</li>
+            <li>Master Italian tailor sourcing for custom groom suits and tuxedos</li>
+            <li>On-site styling assistants and dress steamers on celebration day</li>
+            <li>Bridal party fashion planning and custom cosmetic trial bookings</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1519225495810-7517c296517a?auto=format&fit=crop&q=80&w=800" alt="Bespoke wedding suit and dress details styling">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 9: Entertainment Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="entertainment">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Audiovisual Arts</span>
+          <h2 class="serif-font mb-4">07. Symphony Orchestra & Live Entertainment</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Evoke raw emotion through curated sound. We coordinate with elite classical string quartets, symphony orchestra directors, world-class jazz vocalists, and high-energy luxury reception bands.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Our production team installs custom sound architecture, spectacular programmed fairy-light transitions, and bespoke projection systems.
+          </p>
+          <ul class="service-feature-list">
+            <li>Exclusive bookings for high-profile artists, bands, and international performers</li>
+            <li>Programmed orchestral soundscapes for processional vows and toasts</li>
+            <li>Custom spatial acoustic designs and premium speaker installations</li>
+            <li>Programmed light shows, fireworks, and outdoor sparkler arrays</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=800" alt="Grand reception live orchestra band instruments">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 10: Catering Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="catering">
+    <div class="container">
+      <div class="row g-5 align-items-center flex-lg-row-reverse">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Gastronomical Mastery</span>
+          <h2 class="serif-font mb-4">08. Michelin-Caliber Catering & Wine Curation</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Treat your guests to a sensory culinary voyage. We partner with Michelin-rated executive chefs to draft custom gastronomic menus, elegant molecular dessert structures, and custom cocktail formulations.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Our sommelier division reviews private vineyards to hand-select champagne vintages and premium wine pairings that complement every bite.
+          </p>
+          <ul class="service-feature-list">
+            <li>Custom menu prototyping, private chef-led tastings, and plating plans</li>
+            <li>Premium molecular dessert counters and bespoke tiered cake architectures</li>
+            <li>Exclusive champagne imports and aged vintage red/white wine pairing guides</li>
+            <li>Staffing and service choreography (white-glove butler services)</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80&w=800" alt="Michelin caliber curated catering fine dining plate">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 11: Corporate Events Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="corporate">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Corporate Curation</span>
+          <h2 class="serif-font mb-4">09. High-Profile Corporate Galas & Summits</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            We translate brand narratives into high-end physical experiences. Whether organizing a luxury charity banquet, an architectural product launch, or a private executive board dinner, we enforce strict logistical precision.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Our designers build immersive branded zones, press walls, and secure coordinates for high-profile stakeholders and global media networks.
+          </p>
+          <ul class="service-feature-list">
+            <li>Complete brand styling, immersive media screens, and press room maps</li>
+            <li>Secure credential management and executive guest transport plans</li>
+            <li>Michelin-level banquet catering and customized logo-embellished details</li>
+            <li>High-end sound systems, translators, and presentation technologies</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800" alt="Luxury corporate gala ballroom banquet">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 12: Birthday Events Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="birthday">
+    <div class="container">
+      <div class="row g-5 align-items-center flex-lg-row-reverse">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Milestone Soirées</span>
+          <h2 class="serif-font mb-4">10. Milestone Birthday Celebrations</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Celebrate another solar orbit with unrivaled grandeur. We plan multi-day weekend experiences, secluded luxury beach club takeovers, private charter voyages, and immersive theme soirées.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            No vision is too wild — from booking celebrity DJs to establishing high-fidelity floral environments, we manifest your dream theme with absolute style.
+          </p>
+          <ul class="service-feature-list">
+            <li>Unique theme concepualization, custom graphic design, and invitations</li>
+            <li>High-profile booking coordination for elite global talent and DJs</li>
+            <li>Secluded private property rentals, yacht charters, and island clearances</li>
+            <li>Customized luxury cocktail bars and custom birthday cakes</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&q=80&w=800" alt="Milestone birthday celebration lights and sparklers">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 13: Anniversary Events Detail
+     ========================================================================== -->
+  <section class="service-detail-section" id="anniversary">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="service-feature-badge">Legacy Tributes</span>
+          <h2 class="serif-font mb-4">11. Custom Anniversary & Vow Renewal Tributes</h2>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Commemorate decades of devotion. We design intimate fine-dining tributes and beautiful vow renewal ceremonies that reflect the unique history of your love story.
+          </p>
+          <p class="sans-font text-secondary leading-relaxed mb-4">
+            Our production team coordinates memory corridors containing archival physical assets, custom lighting atmospheres, and intimate family gatherings.
+          </p>
+          <ul class="service-feature-list">
+            <li>Archival physical displays, custom photo/film corridors, and projections</li>
+            <li>Vow renewal site bookings (secluded cliffs, châteaux gardens, historic chapels)</li>
+            <li>Michelin tasting menus, vintage wine pairings, and live string quartets</li>
+            <li>Bespoke family legacy video and photograph documentation teams</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 reveal-zoom-in">
+          <div class="service-detail-img-wrap">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=800" alt="Vow renewal champagne sunset celebration">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 14: CTA (The Consultation Inquiry Form)
+     ========================================================================== -->
+  <section class="section-padding bg-light-soft" id="cta-consultation">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Left Side Form Column -->
+        <div class="col-lg-6 reveal-slide-up">
+          <span class="subtitle-sans text-luxury mb-2 d-block">Start Your Journey</span>
+          <h2 class="serif-font mb-4" style="font-weight: 300;">Request A Luxury Consultation</h2>
+          <p class="sans-font text-secondary mb-5">Our planning spaces are strictly limited to coordinate high-end celebrations. Connect with our directors today to review venue scouting and budget matrices.</p>
+          
+          <form id="consultationInquiryForm" class="form-luxury" onsubmit="event.preventDefault(); alert('Your consultation request has been received. Our concierge will contact you shortly.'); this.reset();">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formName" required>
+                  <label for="formName">Your Full Name</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="email" class="form-luxury-control" id="formEmail" required>
+                  <label for="formEmail">Your Email Address</label>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formDesiredDate" placeholder="Desired Celebration Date">
+                  <label for="formDesiredDate">Desired Celebration Date</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-luxury-group form-luxury-floating">
+                  <input type="text" class="form-luxury-control" id="formDesiredVenue" placeholder="Desired Venue/Location">
+                  <label for="formDesiredVenue">Desired Venue / Location</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-luxury-group form-luxury-floating">
+              <textarea class="form-luxury-control" id="formDetails" style="height: 100px; resize: none;" required></textarea>
+              <label for="formDetails">Brief details on your vision, date, and venue...</label>
+            </div>
+            <button type="submit" class="btn btn-luxury btn-luxury-primary w-100 magnetic-target">Send Inquiry</button>
+          </form>
+        </div>
+
+        <!-- Footer Form Right Column (Atelier Contact details) -->
+        <div class="col-lg-6 reveal-slide-up reveal-delay-1">
+          <span class="subtitle-sans text-luxury mb-2 d-block">Contact Atelier</span>
+          <h3 class="serif-font mb-4">Contact Details</h3>
+          <p class="sans-font text-secondary mb-5">Prefer to reach out directly? Connect with our global headquarters in Milan or Santorini for immediate support.</p>
+          
+          <ul class="list-unstyled d-flex flex-column gap-4">
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">MILAN</div>
+              <span class="sans-font text-secondary">Via Monte Napoleone, 12, 20121 Milano MI, Italy</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">GREECE</div>
+              <span class="sans-font text-secondary">Oia Cliffside Street 45, Santorini, Greece</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">CALL</div>
+              <span class="sans-font text-secondary">+39 02 8872 901</span>
+            </li>
+            <li class="d-flex align-items-center gap-3">
+              <div class="badge-luxury py-2 px-3">EMAIL</div>
+              <span class="sans-font text-secondary">concierge@aurelia-atelier.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-slide-up">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

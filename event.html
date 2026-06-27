@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curated Events Archive — AURELIA | Luxury Wedding & Bespoke Event Planners</title>
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Premium Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    /* Smooth Scroll helper */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    /* Luxury Filter Bar styling */
+    .filter-wrapper-lux {
+      background: var(--bg-card);
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.12);
+      border-radius: 4px;
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 50px;
+    }
+
+    .filter-btn-pill {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      background: transparent;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.2);
+      color: var(--text-secondary);
+      border-radius: 30px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-right: 8px;
+      margin-bottom: 10px;
+    }
+
+    .filter-btn-pill:hover {
+      border-color: var(--color-rose-gold);
+      color: var(--color-rose-gold);
+      background-color: rgba(var(--color-rose-gold-rgb), 0.02);
+    }
+
+    .filter-btn-pill.active {
+      background-color: var(--color-rose-gold);
+      border-color: var(--color-rose-gold);
+      color: white !important;
+    }
+
+    /* Dropdown customization */
+    .select-luxury-input {
+      background-color: transparent;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.25);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      padding: 12px 20px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      width: 100%;
+    }
+
+    .select-luxury-input:focus {
+      border-color: var(--color-rose-gold);
+    }
+
+    .search-luxury-input {
+      background-color: transparent;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.25);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      padding: 12px 20px 12px 45px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      width: 100%;
+    }
+
+    .search-luxury-input:focus {
+      border-color: var(--color-rose-gold);
+    }
+
+    .search-input-wrapper {
+      position: relative;
+    }
+
+    .search-input-wrapper svg {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-rose-gold);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    /* Ticket / Pass Cards for Upcoming Events */
+    .ticket-card-lux {
+      background: var(--bg-card);
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-bottom: 24px;
+    }
+
+    .ticket-card-lux:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-rose-gold);
+      box-shadow: var(--shadow-md);
+    }
+
+    .ticket-date-block {
+      background-color: rgba(var(--color-rose-gold-rgb), 0.05);
+      border-right: 1px dashed rgba(var(--color-rose-gold-rgb), 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      min-width: 130px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Ticket stub cuts */
+    .ticket-date-block::before, .ticket-date-block::after {
+      content: '';
+      position: absolute;
+      right: -8px;
+      width: 16px;
+      height: 16px;
+      background-color: var(--bg-primary); /* matches parent body background */
+      border-radius: 50%;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+      z-index: 2;
+    }
+    .ticket-date-block::before {
+      top: -8px;
+    }
+    .ticket-date-block::after {
+      bottom: -8px;
+    }
+
+    .ticket-month {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-rose-gold);
+      font-weight: 600;
+    }
+
+    .ticket-day {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1;
+      margin: 4px 0;
+    }
+
+    .ticket-year {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      opacity: 0.7;
+    }
+
+    .ticket-body {
+      padding: 24px 30px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .ticket-card-lux {
+        flex-direction: column;
+      }
+      .ticket-date-block {
+        border-right: none;
+        border-bottom: 1px dashed rgba(var(--color-rose-gold-rgb), 0.25);
+        padding: 20px;
+      }
+      .ticket-date-block::before {
+        top: auto;
+        left: -8px;
+        bottom: -8px;
+      }
+      .ticket-date-block::after {
+        top: auto;
+        right: -8px;
+        bottom: -8px;
+      }
+      .ticket-body {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 24px;
+      }
+    }
+
+    /* Transition-fade utility for content swap */
+    .transition-fade-events {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .transition-fade-events.is-switching {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    /* Destination Carousel Cards */
+    .dest-card-lux {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 420px;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.5s ease;
+    }
+
+    .dest-card-lux img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dest-card-lux:hover img {
+      transform: scale(1.08);
+    }
+
+    .dest-overlay-lux {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(var(--color-navy-rgb), 0.9) 0%, rgba(var(--color-navy-rgb), 0.4) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 35px;
+      transition: all 0.4s ease;
+    }
+
+    .dest-badge-lux {
+      align-self: flex-start;
+      background-color: var(--color-rose-gold);
+      color: white;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-family: var(--font-sans);
+    }
+
+    /* Pagination controls */
+    .pagination-lux {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 50px;
+    }
+
+    .pagination-btn-lux {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(var(--color-rose-gold-rgb), 0.25);
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+
+    .pagination-btn-lux:hover {
+      border-color: var(--color-rose-gold);
+      color: var(--color-rose-gold);
+      background-color: rgba(var(--color-rose-gold-rgb), 0.03);
+    }
+
+    .pagination-btn-lux.active {
+      background-color: var(--color-rose-gold);
+      border-color: var(--color-rose-gold);
+      color: white;
+    }
+
+    .pagination-btn-lux.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 fill=%22%23B76E79%22>❈</text></svg>">
+
+  <!-- Open Graph / Facebook / Pinterest SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aureliaevents.com/event.html">
+  <meta property="og:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="og:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+  
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://aureliaevents.com/event.html">
+  <meta property="twitter:title" content="Aurelia — Premium Wedding & Bespoke Event Management Planners">
+  <meta property="twitter:description" content="An elegant and highly customized planning workspace for elite, romantic wedding and bespoke events globally. Built with pure luxury and precision.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+
+
+  <!-- Schema Markup (JSON-LD) for LocalBusiness/EventVenue -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "name": "Aurelia Planners",
+    "description": "An elegant, bespoke luxury wedding & event planning service globally curated with high-end aesthetic details.",
+    "url": "https://aureliaevents.com",
+    "telephone": "+44-20-7946-0192",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "42 Belgravia Place",
+      "addressLocality": "London",
+      "postalCode": "SW1X",
+      "addressCountry": "GB"
+    },
+    "sameAs": [
+      "https://instagram.com",
+      "https://pinterest.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-circle"></div>
+
+  <!-- Global Full Screen Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch" aria-label="Close search overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="search-inner">
+      <span class="search-meta subtitle-sans mb-3 d-block text-center text-white opacity-50">What are you dreaming of?</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search destinations, venues, packages...">
+      <div class="text-center mt-3">
+        <span class="fs-8 text-white opacity-50">Press ESC to exit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Luxury Drawer Navigation Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+
+  <!-- Mobile Luxury Drawer Navigation -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-logo">AURELIA</span>
+      <button class="close-mobile-drawer" id="closeMobileDrawer" aria-label="Close mobile drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html">Home Atelier</a></li>
+        <li><a href="about.html">Our Atelier</a></li>
+        <li><a href="services.html">Curation Services</a></li>
+        <li><a href="gallery.html">Inspiration Gallery</a></li>
+        <li><a href="event.html" class="active">Grand Events</a></li>
+        <li><a href="pricing.html">Investment</a></li>
+        <li><a href="blog.html">The Journal</a></li>
+        <li><a href="contact.html">Request Consultation</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <div class="divider-luxury my-4">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="fs-8 text-center text-muted m-0">Curating luxury events globally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Sticky Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-luxury fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURELIA</a>
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn-navbar-control search-trigger" aria-label="Open search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation" style="border: none;">
+          <span class="navbar-toggler-icon" style="filter: brightness(0.5);"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Atelier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="event.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pricing.html">Investment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <!-- Action Buttons in Nav -->
+          <li class="nav-item ms-lg-3 d-none d-lg-inline-block">
+            <button class="btn-navbar-control search-trigger magnetic-target" aria-label="Open search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </li>
+          <li class="nav-item d-none d-lg-inline-block ms-lg-2">
+            <button class="btn-navbar-control theme-switch-btn" id="themeToggleBtnNavbar" aria-label="Toggle theme" style="border: none; background: none;">
+              <!-- Handled in main.js -->
+            </button>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a href="contact.html" class="btn btn-luxury btn-luxury-primary py-2 px-3 fs-7" style="font-size: 0.65rem;">Inquire Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+     Section 1: Hero Banner
+     ========================================================================== -->
+  <section class="about-hero-banner" style="background-image: linear-gradient(rgba(11, 19, 37, 0.4), rgba(11, 19, 37, 0.65)), url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=2000'); background-position: center 30%;">
+    <div class="about-hero-content reveal-zoom-in">
+      <span class="subtitle-sans text-uppercase text-white tracking-widest d-block mb-3" style="color: var(--color-rose-gold) !important;">GRAND MASTERPIECES</span>
+      <h1 class="about-hero-title">Events Portfolio</h1>
+      <p class="sans-font text-white opacity-90 max-width-600 mx-auto" style="letter-spacing: 0.05em; font-size: 1.1rem;">
+        An exploration of bespoke weddings, high-fashion galas, and breathtaking global celebrations designed by Aurelia.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 2: Destination Masterpieces (Visual Grid)
+     ========================================================================== -->
+  <section class="section-padding bg-light-soft">
+    <div class="container">
+      <div class="text-center mb-5 reveal-slide-up">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Exclusive Geography</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">Bespoke Destination Highlights</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="sans-font text-secondary max-width-600 mx-auto" style="font-size: 0.95rem;">
+          Securing historical landmarks, private islands, and luxury villas across the world's most romantic coordinates.
+        </p>
+      </div>
+
+      <div class="row g-4 reveal-slide-up">
+        <!-- Destination 1 -->
+        <div class="col-lg-4">
+          <div class="dest-card-lux">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800" alt="Santorini Destination Celebration">
+            <div class="dest-overlay-lux">
+              <span class="dest-badge-lux">SANTORINI, GREECE</span>
+              <h4 class="serif-font text-white mb-2" style="font-weight: 300;">Cliffside Infinity Vows</h4>
+              <p class="sans-font text-white opacity-80 fs-8 mb-3">An intimate white-floral sanctuary overlooking the Aegean Caldera.</p>
+              <a href="event-details.html?id=4" class="btn btn-luxury btn-luxury-primary py-2 px-3 fs-8" style="font-size: 0.65rem;">Explore Destination study</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destination 2 -->
+        <div class="col-lg-4">
+          <div class="dest-card-lux">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800" alt="Lake Como Celebration">
+            <div class="dest-overlay-lux">
+              <span class="dest-badge-lux">LAKE COMO, ITALY</span>
+              <h4 class="serif-font text-white mb-2" style="font-weight: 300;">Lakefront Heritage Wedding</h4>
+              <p class="sans-font text-white opacity-80 fs-8 mb-3">A classical villa takeover featuring lakeside strings and custom brass tableware.</p>
+              <a href="event-details.html?id=2" class="btn btn-luxury btn-luxury-primary py-2 px-3 fs-8" style="font-size: 0.65rem;">Explore Destination study</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destination 3 -->
+        <div class="col-lg-4">
+          <div class="dest-card-lux">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=800" alt="Provence Celebration">
+            <div class="dest-overlay-lux">
+              <span class="dest-badge-lux">PROVENCE, FRANCE</span>
+              <h4 class="serif-font text-white mb-2" style="font-weight: 300;">Royal Chateau Celebration</h4>
+              <p class="sans-font text-white opacity-80 fs-8 mb-3">An exquisite lavender-valley residency framed by historic fountains and baroque gates.</p>
+              <a href="event-details.html?id=11" class="btn btn-luxury btn-luxury-primary py-2 px-3 fs-8" style="font-size: 0.65rem;">Explore Destination study</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 3: Upcoming Masterclasses & Private Exhibits (Upcoming Events)
+     ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center mb-5 reveal-slide-up">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Next Chapters</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">Upcoming Atelier Events</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+        <p class="sans-font text-secondary max-width-600 mx-auto" style="font-size: 0.95rem;">
+          Secure your invitation to our upcoming exhibitions, private menu tastings, and bespoke design panel sessions.
+        </p>
+      </div>
+
+      <div class="row g-4 reveal-slide-up" id="upcomingContainer">
+        <!-- Will be dynamically populated for Upcoming Items from JS database -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 4: The Archive Portfolio (Filter System & Paginated Grid)
+     ========================================================================== -->
+  <section class="section-padding bg-light-soft border-top border-bottom" id="archive-section" style="border-color: rgba(var(--color-rose-gold-rgb), 0.1) !important;">
+    <div class="container">
+      
+      <!-- Section Title -->
+      <div class="text-center mb-5 reveal-slide-up">
+        <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">The Complete Collection</span>
+        <h2 class="serif-font mb-3" style="font-weight: 300;">Interactive Portfolio & Chronicles</h2>
+        <div class="divider-luxury my-3">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <!-- Luxury Interactive Control Panel -->
+      <div class="filter-wrapper-lux reveal-slide-up">
+        <div class="row g-4 align-items-center">
+          
+          <!-- Column 1: Search -->
+          <div class="col-lg-4 col-md-6">
+            <div class="search-input-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="portfolioSearch" class="search-luxury-input" placeholder="Search title, venue, coordinates...">
+            </div>
+          </div>
+
+          <!-- Column 2: Status / Chronology Dropdown -->
+          <div class="col-lg-3 col-md-6">
+            <select id="portfolioStatusSelect" class="select-luxury-input">
+              <option value="all">All Chronologies & Filters</option>
+              <option value="upcoming">Upcoming Chronicles</option>
+              <option value="past">Past Celebrations</option>
+              <option value="destination">Destination Escapes</option>
+            </select>
+          </div>
+
+          <!-- Column 3: Active Counter -->
+          <div class="col-lg-5 text-lg-end col-md-12">
+            <span class="sans-font text-muted fs-8 tracking-wide" id="portfolioCounter">
+              Calculating master list...
+            </span>
+          </div>
+
+        </div>
+
+        <div class="divider-luxury my-4" style="opacity: 0.15;">
+          <span class="line"></span>
+          <span class="crest">❈</span>
+          <span class="line"></span>
+        </div>
+
+        <!-- Category Horizontal Select -->
+        <div class="d-flex flex-wrap justify-content-start align-items-center" id="categoryTabsContainer">
+          <button class="filter-btn-pill active" data-category="all">All Masterpieces</button>
+          <button class="filter-btn-pill" data-category="wedding">Couture Weddings</button>
+          <button class="filter-btn-pill" data-category="corporate">Corporate Galas</button>
+          <button class="filter-btn-pill" data-category="birthday">Birthday Soirées</button>
+          <button class="filter-btn-pill" data-category="anniversary">Anniversary Tributes</button>
+        </div>
+      </div>
+
+      <!-- Main Dynamic Grid -->
+      <div class="row g-4 transition-fade-events" id="portfolioGrid">
+        <!-- Will be dynamically populated via JS -->
+      </div>
+
+      <!-- Dynamic Pagination Controls -->
+      <div class="pagination-lux reveal-slide-up" id="portfolioPagination">
+        <!-- Dynamically populated via JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     Section 5: Inquiries & Registration Forms
+     ========================================================================== -->
+  <section class="section-padding bg-navy text-white" id="event-consultation">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        
+        <!-- Left Side: Dynamic Consultation details -->
+        <div class="col-lg-5 reveal-slide-up">
+          <span class="subtitle-classic text-luxury text-uppercase tracking-widest d-block mb-2">Secure Your Place</span>
+          <h2 class="serif-font text-white mb-4" style="font-weight: 300; font-size: 2.2rem;">Begin Your Own Narrative</h2>
+          <p class="sans-font text-light opacity-75 mb-4 leading-relaxed" style="font-size: 1rem;">
+            Whether you are inquiring about a future wedding on the Amalfi Coast, booking an exclusive masterclass pass, or designing a historic milestone, we manage your dream with impeccable structural care.
+          </p>
+          <div class="d-flex flex-column gap-3 mb-4">
+            <div class="d-flex align-items-center gap-3">
+              <span class="text-luxury fs-4">❈</span>
+              <span class="sans-font fs-8 opacity-90">Only 8 wedding commissions accepted per calendar season.</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="text-luxury fs-4">❈</span>
+              <span class="sans-font fs-8 opacity-90">Bespoke luxury custom concierge assigned 24/7.</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="text-luxury fs-4">❈</span>
+              <span class="sans-font fs-8 opacity-90">Full global coordination, insurance, and local municipal clearing.</span>
+            </div>
+          </div>
+          <div class="p-3 bg-white bg-opacity-5 border border-dashed rounded text-center" style="border-color: var(--color-rose-gold);">
+            <span class="fs-8 text-luxury d-block mb-1">IMMEDIATE LIAISON</span>
+            <span class="sans-font text-white fs-7">+39 02 8872 901</span>
+          </div>
+        </div>
+
+        <!-- Right Side: Contact / Inquiry Form -->
+        <div class="col-lg-7 reveal-slide-up">
+          <div class="p-4 p-md-5 bg-white bg-opacity-5 border" style="border-color: rgba(var(--color-rose-gold-rgb), 0.15) !important; border-radius: 4px;">
+            <h4 class="serif-font text-white mb-2" style="font-weight: 300;">Atelier Inquiry Form</h4>
+            <p class="sans-font text-muted fs-8 mb-4">Provide details on your desired scale, coordinate target, and date.</p>
+            
+            <form id="portfolioInquiryForm" class="form-luxury" onsubmit="event.preventDefault(); alert('Your consultation booking request has been received. Our concierge team will reach out to you within 24 hours with secure appointment times.'); this.reset();">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="text" class="form-luxury-control text-white" id="inqName" required>
+                    <label for="inqName">Your Full Name</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="email" class="form-luxury-control text-white" id="inqEmail" required>
+                    <label for="inqEmail">Your Email Address</label>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <select class="form-luxury-control text-white pt-0" id="inqCategory" style="border-radius: 0; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.2); background: transparent; color: white; outline: none;">
+                      <option value="general" style="background: var(--color-navy);">General Consultation</option>
+                      <option value="wedding" style="background: var(--color-navy);">Couture Wedding</option>
+                      <option value="corporate" style="background: var(--color-navy);">Corporate Gala</option>
+                      <option value="birthday" style="background: var(--color-navy);">Birthday Soirée</option>
+                      <option value="anniversary" style="background: var(--color-navy);">Anniversary Tribute</option>
+                      <option value="ticket" style="background: var(--color-navy);">Atelier Masterclass Pass</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-luxury-group form-luxury-floating">
+                    <input type="text" class="form-luxury-control text-white" id="inqSubject" placeholder="Desired Event Target / Subject">
+                    <label for="inqSubject">Desired Event / Subject</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-luxury-group form-luxury-floating">
+                <textarea class="form-luxury-control text-white" id="inqDetails" style="height: 100px; resize: none;" required></textarea>
+                <label for="inqDetails">Describe your target guest count, aesthetic vision, and timing parameters...</label>
+              </div>
+              <button type="submit" class="btn btn-luxury btn-luxury-primary w-100 magnetic-target cursor-pointer">Transmit Request Coordinates</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Footer -->
+  <footer class="section-padding bg-navy text-white text-center" style="background-color: var(--color-navy); border-top: 1px solid rgba(var(--color-rose-gold-rgb), 0.15);">
+    <div class="container reveal-slide-up">
+      <h3 class="serif-font text-white mb-3">AURELIA</h3>
+      <span class="subtitle-sans text-luxury mb-4 d-block">Premium Wedding & Event Management</span>
+      <p class="text-light opacity-50 max-width-600 mx-auto mb-4" style="max-width: 500px;">
+        Empowering romantic couples to manifest grand, luxury celebrations. Original theme architecture.
+      </p>
+      
+      <!-- Footer links preview -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+        <a href="about.html" class="nav-link text-white opacity-75 hover-gold-text">About Us</a>
+        <a href="services.html" class="nav-link text-white opacity-75 hover-gold-text">Our Services</a>
+        <a href="gallery.html" class="nav-link text-white opacity-75 hover-gold-text">Inspiration Gallery</a>
+        <a href="event.html" class="nav-link text-white opacity-75 hover-gold-text">Grand Events</a>
+        <a href="contact.html" class="nav-link text-white opacity-75 hover-gold-text">Request Luxury Consultation</a>
+      </div>
+
+      <div class="divider-luxury my-4">
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+        <span class="crest" style="color: var(--color-rose-gold);">❈</span>
+        <span class="line" style="background-color: rgba(255,255,255,0.1);"></span>
+      </div>
+
+      <p class="fs-8 text-white opacity-50 m-0 font-sans" style="font-size: 0.75rem;">
+        &copy; 2026 Aurelia Planners. All Rights Reserved. Crafted with pure high-end static luxury.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Light/Dark Mode Fixed Switch -->
+  <div class="theme-switch-wrapper" id="themeSwitchSection">
+    <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+      <!-- Icon is updated dynamically by main.js -->
+    </button>
+  </div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Main Application Logic & Events Database -->
+  <script>
+    const EVENTS_DATABASE = [
+      {
+        id: 1,
+        title: "Golden Hour Garden Celebration",
+        category: "wedding",
+        status: "past",
+        isUpcoming: false,
+        isPast: true,
+        isDestination: false,
+        location: "Florence, Italy",
+        date: "June 2025",
+        guests: "180 Guests",
+        tagline: "Under Cascading Wisteria",
+        description: "A romantic luxury garden celebration matching the elements of early summer blossoms and warm lighting dynamics.",
+        image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=1"
+      },
+      {
+        id: 2,
+        title: "Italian Lakefront Heritage Wedding",
+        category: "wedding",
+        status: "past",
+        isUpcoming: false,
+        isPast: true,
+        isDestination: true,
+        location: "Lake Como, Italy",
+        date: "September 2025",
+        guests: "120 Guests",
+        tagline: "Elegance of the Lario",
+        description: "A historic villa celebration overlooking Lake Como, curated with romantic string orchestration and bespoke calligraphy place cards.",
+        image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=2"
+      },
+      {
+        id: 3,
+        title: "Parisian Haute Couture Runway & Banquet",
+        category: "corporate",
+        status: "upcoming",
+        isUpcoming: true,
+        isPast: false,
+        isDestination: true,
+        location: "Paris, France",
+        date: "October 2026",
+        guests: "250 Guests",
+        tagline: "High-Fashion Exhibition",
+        description: "An exclusive bridal showcase and luxurious evening banquet inside a historical Parisian palace.",
+        image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=3",
+        ticketDate: { month: "OCT", day: "14", year: "2026" }
+      },
+      {
+        id: 4,
+        title: "Santorini Cliffside Infinity Vows",
+        category: "wedding",
+        status: "past",
+        isUpcoming: false,
+        isPast: true,
+        isDestination: true,
+        location: "Santorini, Greece",
+        date: "May 2025",
+        guests: "80 Guests",
+        tagline: "Sky Meets Ocean",
+        description: "An intimate whitewashed cliffside ceremony framing the endless Aegean sea with cascading white orchids.",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=4"
+      },
+      {
+        id: 5,
+        title: "Modern Luminary Tech Summit Gala",
+        category: "corporate",
+        status: "past",
+        isUpcoming: false,
+        isPast: true,
+        isDestination: false,
+        location: "Milan, Italy",
+        date: "November 2025",
+        guests: "400 Guests",
+        tagline: "Neon Innovation",
+        description: "An immersive black-tie reception combining high-end light design, holograms, and fine culinary chemistry.",
+        image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=5"
+      },
+      {
+        id: 6,
+        title: "Imperial Velvet Milestone Birthday",
+        category: "birthday",
+        status: "past",
+        isUpcoming: false,
+        isPast: true,
+        isDestination: false,
+        location: "London, UK",
+        date: "December 2025",
+        guests: "150 Guests",
+        tagline: "Deep Plum & Brass",
+        description: "A spectacular 40th birthday dinner inside an industrial brick conservatory, styled with velvet drapes and golden accents.",
+        image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=6"
+      },
+      {
+        id: 7,
+        title: "Provence Lavender Vineyard Vow Renewal",
+        category: "anniversary",
+        status: "past",
+        isUpcoming: false,
+        isPast: true,
+        isDestination: true,
+        location: "Provence, France",
+        date: "July 2025",
+        guests: "90 Guests",
+        tagline: "Rustic French Romance",
+        description: "A silver anniversary tribute set within private lavender fields, featuring rustic wooden tablescapes and organic local wines.",
+        image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=7"
+      },
+      {
+        id: 8,
+        title: "Amalfi Coast Private Chef Tasting Panel",
+        category: "anniversary",
+        status: "upcoming",
+        isUpcoming: true,
+        isPast: false,
+        isDestination: true,
+        location: "Positano, Italy",
+        date: "September 2026",
+        guests: "50 Guests",
+        tagline: "Luxury Maritime Escape",
+        description: "A golden anniversary weekend tribute spanning a private cliffside villa dinner and a luxury catamaran tour of Capri.",
+        image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=8",
+        ticketDate: { month: "SEP", day: "05", year: "2026" }
+      },
+      {
+        id: 9,
+        title: "Emerald Forest Botanical Soirée",
+        category: "birthday",
+        status: "upcoming",
+        isUpcoming: true,
+        isPast: false,
+        isDestination: false,
+        location: "Munich, Germany",
+        date: "June 2026",
+        guests: "110 Guests",
+        tagline: "Intimate Wooded Luxury",
+        description: "An enchanting outdoor woodland birthday banquet, lit by thousands of floating candles and styled with forest moss.",
+        image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=9",
+        ticketDate: { month: "JUN", day: "22", year: "2026" }
+      },
+      {
+        id: 10,
+        title: "Grand Habsburg Palace Ball",
+        category: "corporate",
+        status: "past",
+        isUpcoming: false,
+        isPast: true,
+        isDestination: true,
+        location: "Vienna, Austria",
+        date: "January 2026",
+        guests: "300 Guests",
+        tagline: "Historical Waltz",
+        description: "A corporate charity ball recreating classical Viennese grandeur, showcasing full chamber symphonies and operatic performances.",
+        image: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=10"
+      },
+      {
+        id: 11,
+        title: "Royal Chateau de Tourreau Celebration",
+        category: "wedding",
+        status: "past",
+        isUpcoming: false,
+        isPast: true,
+        isDestination: true,
+        location: "Provence, France",
+        date: "August 2025",
+        guests: "220 Guests",
+        tagline: "Classic European Majesty",
+        description: "An exquisite multi-day estate wedding utilizing baroque gates, lavender rows, and water fountains to frame a romantic outdoor dinner.",
+        image: "https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=11"
+      },
+      {
+        id: 12,
+        title: "Cosmopolitan Skyline Milestone",
+        category: "birthday",
+        status: "past",
+        isUpcoming: false,
+        isPast: true,
+        isDestination: false,
+        location: "New York, USA",
+        date: "March 2026",
+        guests: "130 Guests",
+        tagline: "Monochrome Heights",
+        description: "A luxury black-and-white themed birthday soirée on a premium Manhattan rooftop, overlooking the iconic Empire State Building.",
+        image: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=800",
+        detailsLink: "event-details.html?id=12"
+      }
+    ];
+
+    // Pagination & Filter state variables
+    let currentCategory = "all";
+    let currentStatus = "all";
+    let currentSearch = "";
+    let currentPage = 1;
+    const itemsPerPage = 6;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderUpcomingTickets();
+      filterAndRenderPortfolio();
+      setupEventListeners();
+    });
+
+    /**
+     * Renders Upcoming masterclasses as highly customized luxury stubs
+     */
+    function renderUpcomingTickets() {
+      const container = document.getElementById("upcomingContainer");
+      if (!container) return;
+
+      const upcomingItems = EVENTS_DATABASE.filter(event => event.isUpcoming);
+
+      if (upcomingItems.length === 0) {
+        container.innerHTML = `
+          <div class="col-12 text-center py-4">
+            <p class="sans-font text-muted">All current season showcases are fully booked. Check back soon for autumn schedules.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = upcomingItems.map(event => {
+        const t = event.ticketDate || { month: "TBD", day: "XX", year: "2026" };
+        return `
+          <div class="col-12 reveal-slide-up">
+            <div class="ticket-card-lux">
+              <div class="ticket-date-block">
+                <span class="ticket-month">${t.month}</span>
+                <span class="ticket-day">${t.day}</span>
+                <span class="ticket-year">${t.year}</span>
+              </div>
+              <div class="ticket-body">
+                <div>
+                  <span class="subtitle-sans text-luxury mb-1 d-block" style="font-size: 0.65rem;">${event.location.toUpperCase()} — ${event.guests.toUpperCase()}</span>
+                  <h4 class="serif-font mb-2" style="font-weight: 300;">${event.title}</h4>
+                  <p class="sans-font text-secondary mb-0 fs-8 max-width-600">${event.description}</p>
+                </div>
+                <div>
+                  <button class="btn btn-luxury btn-luxury-primary py-2 px-4 fs-8 cursor-pointer text-nowrap" onclick="bookTicketInquiry('${event.title}', '${event.category}')">
+                    Inquire Access
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    /**
+     * Dynamic Filter & Pagination calculation
+     */
+    function filterAndRenderPortfolio() {
+      const grid = document.getElementById("portfolioGrid");
+      const paginationContainer = document.getElementById("portfolioPagination");
+      const counterLabel = document.getElementById("portfolioCounter");
+      if (!grid) return;
+
+      // Filter dataset
+      const filtered = EVENTS_DATABASE.filter(event => {
+        // Category filter
+        const matchCategory = currentCategory === "all" || event.category === currentCategory;
+
+        // Status filter
+        let matchStatus = true;
+        if (currentStatus === "upcoming") {
+          matchStatus = event.isUpcoming;
+        } else if (currentStatus === "past") {
+          matchStatus = event.isPast;
+        } else if (currentStatus === "destination") {
+          matchStatus = event.isDestination;
+        }
+
+        // Search text filter
+        const searchText = currentSearch.toLowerCase().trim();
+        const matchSearch = searchText === "" || 
+                            event.title.toLowerCase().includes(searchText) || 
+                            event.location.toLowerCase().includes(searchText) || 
+                            event.tagline.toLowerCase().includes(searchText);
+
+        return matchCategory && matchStatus && matchSearch;
+      });
+
+      // Total pages calculation
+      const totalItems = filtered.length;
+      const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+
+      // Correct page index bounds
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+      if (currentPage < 1) {
+        currentPage = 1;
+      }
+
+      // Slice active page elements
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+      const pageItems = filtered.slice(startIndex, endIndex);
+
+      // Render Counter UI
+      if (totalItems === 0) {
+        counterLabel.innerHTML = "No masterworks match your filters.";
+      } else {
+        counterLabel.innerHTML = `Showing <strong>${startIndex + 1} - ${endIndex}</strong> of <strong>${totalItems}</strong> Masterpieces`;
+      }
+
+      // Add fade animation out
+      grid.classList.add("is-switching");
+
+      setTimeout(() => {
+        if (pageItems.length === 0) {
+          grid.innerHTML = `
+            <div class="col-12 text-center py-5">
+              <span class="crest fs-3 text-muted d-block mb-3">❈</span>
+              <p class="serif-font text-secondary fs-5 mb-2">No matching masterpieces found.</p>
+              <p class="sans-font text-muted fs-8">Refine your search criteria or reset filter tabs to reveal other celebrations.</p>
+              <button class="btn btn-luxury btn-luxury-primary py-2 px-4 mt-3 fs-8" onclick="resetFilters()">Reset Active Filters</button>
+            </div>
+          `;
+        } else {
+          grid.innerHTML = pageItems.map(event => {
+            const catLabel = event.category.charAt(0).toUpperCase() + event.category.slice(1);
+            return `
+              <div class="col-md-6 col-lg-4 reveal-slide-up">
+                <div class="card-luxury p-0 border-0 h-100 shadow-sm" style="overflow: hidden; border: 1px solid rgba(var(--color-rose-gold-rgb), 0.1) !important;">
+                  <div class="card-luxury-img" style="height: 250px; position: relative;">
+                    <img loading="lazy" src="${event.image}" alt="${event.title}" class="h-100 w-100 object-fit-cover transition-smooth">
+                    <span class="position-absolute top-3 right-3 bg-white border px-2 py-1 fs-9 subtitle-sans text-uppercase text-luxury" style="border-color: rgba(var(--color-rose-gold-rgb), 0.2) !important;">
+                      ${catLabel}
+                    </span>
+                  </div>
+                  <div class="p-4 bg-white d-flex flex-column justify-content-between flex-grow-1">
+                    <div>
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="subtitle-sans text-luxury" style="font-size: 0.65rem;">${event.location.toUpperCase()}</span>
+                        <span class="sans-font text-muted fs-8 opacity-75">${event.date}</span>
+                      </div>
+                      <h4 class="serif-font text-primary mb-2" style="font-size: 1.25rem; font-weight: 300;">${event.title}</h4>
+                      <p class="sans-font text-secondary fs-8 mb-4 leading-relaxed line-clamp-3">${event.description}</p>
+                    </div>
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center" style="border-color: rgba(var(--color-rose-gold-rgb), 0.08) !important;">
+                      <span class="sans-font text-muted fs-8">${event.guests}</span>
+                      <a href="${event.detailsLink}" class="btn-luxury-link py-1" style="font-size: 0.75rem;">Explore Study</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join("");
+        }
+
+        // Render Pagination numbers
+        renderPaginationUI(totalPages);
+
+        // Remove switching opacity lock
+        grid.classList.remove("is-switching");
+
+        // Reactivate scroll reveal animations for new cards
+        if (typeof initScrollReveal === "function") {
+          initScrollReveal();
+        }
+      }, 150);
+    }
+
+    /**
+     * Builds standard numbers and handles next/prev status
+     */
+    function renderPaginationUI(totalPages) {
+      const container = document.getElementById("portfolioPagination");
+      if (!container) return;
+
+      if (totalPages <= 1) {
+        container.innerHTML = "";
+        return;
+      }
+
+      let html = "";
+
+      // Previous button
+      html += `
+        <button class="pagination-btn-lux ${currentPage === 1 ? 'disabled' : ''}" onclick="changePage(${currentPage - 1})" aria-label="Previous Page">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+      `;
+
+      // Number keys
+      for (let i = 1; i <= totalPages; i++) {
+        html += `
+          <button class="pagination-btn-lux ${currentPage === i ? 'active' : ''}" onclick="changePage(${i})">
+            ${i}
+          </button>
+        `;
+      }
+
+      // Next button
+      html += `
+        <button class="pagination-btn-lux ${currentPage === totalPages ? 'disabled' : ''}" onclick="changePage(${currentPage + 1})" aria-label="Next Page">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    function changePage(pageIndex) {
+      currentPage = pageIndex;
+      filterAndRenderPortfolio();
+      
+      // Smoothly scroll down to portfolio anchor so they see the top of the grid
+      const anchor = document.getElementById("archive-section");
+      if (anchor) {
+        anchor.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function resetFilters() {
+      currentCategory = "all";
+      currentStatus = "all";
+      currentSearch = "";
+      currentPage = 1;
+
+      // Update Form elements
+      document.getElementById("portfolioSearch").value = "";
+      document.getElementById("portfolioStatusSelect").value = "all";
+
+      // Reset pill active classes
+      const pills = document.querySelectorAll(".filter-btn-pill");
+      pills.forEach(p => p.classList.remove("active"));
+      const allPill = document.querySelector('.filter-btn-pill[data-category="all"]');
+      if (allPill) allPill.classList.add("active");
+
+      filterAndRenderPortfolio();
+    }
+
+    /**
+     * Hook events from Search bars and Dropdowns
+     */
+    function setupEventListeners() {
+      // 1. Search text input
+      const searchBox = document.getElementById("portfolioSearch");
+      if (searchBox) {
+        searchBox.addEventListener("input", (e) => {
+          currentSearch = e.target.value;
+          currentPage = 1; // reset to page 1 upon searching
+          filterAndRenderPortfolio();
+        });
+      }
+
+      // 2. Status selection dropdown
+      const statusSelect = document.getElementById("portfolioStatusSelect");
+      if (statusSelect) {
+        statusSelect.addEventListener("change", (e) => {
+          currentStatus = e.target.value;
+          currentPage = 1;
+          filterAndRenderPortfolio();
+        });
+      }
+
+      // 3. Category Horizontal Pills
+      const categoryContainer = document.getElementById("categoryTabsContainer");
+      if (categoryContainer) {
+        categoryContainer.addEventListener("click", (e) => {
+          const btn = e.target.closest(".filter-btn-pill");
+          if (!btn) return;
+
+          // Toggle active visual states
+          const siblings = categoryContainer.querySelectorAll(".filter-btn-pill");
+          siblings.forEach(s => s.classList.remove("active"));
+          btn.classList.add("active");
+
+          currentCategory = btn.getAttribute("data-category");
+          currentPage = 1;
+          filterAndRenderPortfolio();
+        });
+      }
+    }
+
+    /**
+     * High-end action coupling: clicking an upcoming ticket pass
+     * pre-selects the form options and scrolls down smoothly.
+     */
+    function bookTicketInquiry(eventTitle, eventCategory) {
+      const inqSubject = document.getElementById("inqSubject");
+      const inqCategory = document.getElementById("inqCategory");
+      const formAnchor = document.getElementById("event-consultation");
+
+      if (inqSubject) {
+        inqSubject.value = `Access Request: ${eventTitle}`;
+        // trigger label float if required
+        const parent = inqSubject.closest(".form-luxury-group");
+        if (parent) parent.classList.add("form-luxury-floating-active");
+      }
+
+      if (inqCategory) {
+        // match category values
+        if (eventCategory === "wedding") inqCategory.value = "wedding";
+        else if (eventCategory === "corporate") inqCategory.value = "corporate";
+        else if (eventCategory === "birthday") inqCategory.value = "birthday";
+        else if (eventCategory === "anniversary") inqCategory.value = "anniversary";
+        else inqCategory.value = "ticket";
+      }
+
+      if (formAnchor) {
+        formAnchor.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  </script>
+
+  <!-- Theme & Interactions script -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
