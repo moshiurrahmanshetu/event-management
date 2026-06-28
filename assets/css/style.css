@@ -251,6 +251,9 @@ p, .sans-font {
   color: var(--text-primary) !important;
   border: 1px solid var(--border-color-solid);
 }
+.text-white-important{
+  color: white !important;
+}
 
 .btn-luxury-outline::before {
   content: '';

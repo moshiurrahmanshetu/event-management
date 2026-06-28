@@ -162,7 +162,7 @@ function initLuxuryCursor() {
     mouseY = e.clientY;
     
     // Snap inner active dot instantly
-    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
   });
 
   // Smooth frame loop for outer follower circle lag
@@ -171,7 +171,7 @@ function initLuxuryCursor() {
     circleX += (mouseX - circleX) * ease;
     circleY += (mouseY - circleY) * ease;
     
-    circle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0)`;
+    circle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0) translate(-50%, -50%)`;
     requestAnimationFrame(updateFollower);
   }
   requestAnimationFrame(updateFollower);
