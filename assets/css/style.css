@@ -113,6 +113,10 @@ body {
   background: var(--color-rose-gold-hover);
 }
 
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1400px;
+    padding: 0 30px;
+  }
 /* ==========================================================================
    3. Typography System
    ========================================================================== */
@@ -2366,4 +2370,9 @@ p, .sans-font {
 }
 
 
+@media screen and (min-width: 992px) and (max-width: 1150px){
+    .container, .container-lg, .container-md, .container-sm {
+        max-width: 1200px;
+    }
+}
 
