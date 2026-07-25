@@ -1439,8 +1439,8 @@ li{
   opacity: 1;
   transform: translateY(0);
 }
-.caption-btn a{
-  margin-bottom: 10px;
+.caption-btn .btn-luxury{
+  margin-bottom: 17px;
 }
 .carousel-luxury .carousel-indicators {
   z-index: 3;
