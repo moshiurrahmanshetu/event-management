@@ -92,7 +92,9 @@ body {
   line-height: 1.7;
   font-weight: 400;
 }
-
+.text-muted {
+  color: rgba(207, 108, 108, 0.75) !important;
+}
 ::selection {
   background-color: var(--color-rose-gold);
   color: #FFFFFF;
@@ -854,6 +856,7 @@ li{
 .mobile-nav-list li a{
   color: #000;
   text-decoration: none;
+  font-size: 18px;
 }
 .megamenu-panel {
   position: absolute;
