@@ -73,7 +73,7 @@ Description: Global Design System, Color Variables, Typography, Buttons, Cards,
   --text-light: #121826;
   
   --border-color: rgba(var(--color-rose-gold-rgb), 0.15);
-  --border-color-solid: #232B40;
+  --border-color-solid: #63284ffa;
   
   --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
@@ -491,7 +491,7 @@ li{
   position: absolute;
   inset: 0;
   background-color: rgba(var(--color-navy-rgb), 0.6);
-  opacity: 0;
+  opacity: 1;
   transition: var(--transition-smooth);
   display: flex;
   flex-direction: column;
@@ -499,10 +499,6 @@ li{
   align-items: center;
   padding: 20px;
   text-align: center;
-}
-
-.card-luxury-img:hover .overlay-content {
-  opacity: 1;
 }
 
 .card-luxury-img .overlay-inner {
@@ -1117,7 +1113,9 @@ li{
 .navbar-toggler:hover .navbar-toggler-custom-icon .line-2 {
   width: 100%;
 }
-
+.navbar-toggler{
+  background: #eceae7;
+}
 /* Full Screen Luxury Search Overlay */
 .search-overlay {
   position: fixed;
